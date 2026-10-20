@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clove C2 · annotated cutaway</title>
+<style>
+  :root{
+    --bg:#EFE8D8; --ink:#1C211D; --ochre:#B9832A; --forest:#2A3A2E;
+    --muted:#7A7468; --line:rgba(28,33,29,.14); --card:rgba(255,251,244,.92);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  main{max-width:1180px;margin:0 auto;padding:36px 28px 64px}
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:18px;flex-wrap:wrap}
+  .titles h1{font:600 18px/1.2 "Fraunces",Georgia,serif;margin:0}
+  .titles h1 span{color:var(--muted);font-weight:500;font-size:14px;margin-left:8px}
+  .titles p{margin:6px 0 0;color:var(--muted);max-width:54ch}
+  .meta{font:12px/1.4 ui-monospace,monospace;color:var(--muted);text-align:right}
+  .meta b{color:var(--ink);font-weight:500}
+  .stage{
+    position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+    box-shadow:0 0 0 1px var(--line),0 28px 50px -36px rgba(0,0,0,.4);
+    background:var(--bg);
+  }
+  .stage canvas{display:block;width:100%!important;height:100%!important}
+  .ann-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
+  .ann-leaders{position:absolute;inset:0;overflow:visible}
+  .ann{
+    position:absolute;left:0;top:0;pointer-events:auto;border:0;background:transparent;
+    padding:0;cursor:pointer;text-align:left;opacity:0;visibility:hidden;
+    will-change:transform,opacity;
+  }
+  .ann.is-on{visibility:visible}
+  .ann-dot{
+    position:absolute;width:8px;height:8px;border-radius:50%;
+    background:var(--ochre);box-shadow:0 0 0 3px rgba(185,131,42,.18);
+    top:50%;
+  }
+  .ann-card{
+    display:block;padding:9px 12px 10px;width:200px;
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    box-shadow:0 12px 28px -20px rgba(0,0,0,.5);backdrop-filter:blur(8px);
+  }
+  /* left column: card to the right of dock; right column: card to the left */
+  .ann-card strong{display:block;font:600 12.5px/1.25 Georgia,"Fraunces",serif;color:var(--ink);letter-spacing:.01em}
+  .ann-card em{display:block;margin-top:3px;font:400 11px/1.4 system-ui,sans-serif;color:var(--muted);font-style:normal}
+  .ann.is-focus .ann-card{border-color:rgba(185,131,42,.5);box-shadow:0 0 0 1px rgba(185,131,42,.2),0 12px 28px -16px rgba(0,0,0,.45)}
+  .ann.is-focus .ann-dot{background:var(--forest)}
+  .ann-side-left .ann-dot{left:0;transform:translate(-50%,-50%)}
+  .ann-side-right .ann-dot{right:0;left:auto;transform:translate(50%,-50%)}
+  .ann-side-left .ann-card{margin-left:12px}
+  .ann-side-right .ann-card{margin-right:12px}
+  .leader{fill:none;stroke:rgba(28,33,29,.32);stroke-width:1.15;opacity:0}
+  .leader.is-on{opacity:1}
+
+  .rail{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px}
+  .chapters{display:flex;flex-wrap:wrap;gap:8px}
+  .chapters button{
+    appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink);
+    border-radius:999px;padding:8px 14px;font:500 13px/1 system-ui;cursor:pointer;
+  }
+  .chapters button[aria-current="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .chapters button:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+  .blurb{color:var(--muted);font-size:13px;min-height:1.3em}
+  .sliders{display:grid;grid-template-columns:1fr 1fr auto;gap:16px;align-items:end}
+  label.sl{display:grid;gap:6px;font:12px ui-monospace,monospace;color:var(--muted)}
+  label.sl input{width:100%;accent-color:var(--ink)}
+  .tog{
+    display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+    border-radius:999px;padding:8px 14px;background:transparent;cursor:pointer;font:500 13px system-ui;color:var(--ink);
+  }
+  .tog[aria-pressed="true"]{background:var(--forest);color:#F4F0E6;border-color:var(--forest)}
+  .keys{margin-top:14px;display:flex;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:12.5px}
+  kbd{font:11px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;color:var(--ink)}
+  .ban{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  .ban strong{color:var(--ink);font-weight:600}
+  body.capture main{padding:0;max-width:none}
+  body.capture header,body.capture .rail,body.capture .keys,body.capture .ban{display:none!important}
+  body.capture .stage{width:1280px;height:720px;border-radius:0;box-shadow:none}
+  @media (max-width:720px){.sliders{grid-template-columns:1fr}.meta{text-align:left}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="titles">
+      <h1>Clove C2 <span>· annotated cutaway</span></h1>
+      <p>Quiet hand grinder — conical burrs, stepless brass collar. Chapters cut and explode the assembly; labels dock to the margins so they do not stack on the product.</p>
+    </div>
+    <div class="meta">method <b>M4 · Three.js</b><br>style <b>I · cutaway</b><br>product <b>fictional</b></div>
+  </header>
+
+  <div class="stage" id="stage"></div>
+
+  <div class="rail">
+    <div>
+      <div class="chapters" id="chapters" role="tablist" aria-label="Cutaway chapters"></div>
+      <div class="blurb" id="blurb"></div>
+    </div>
+    <div class="sliders">
+      <label class="sl">Cut <span id="cutVal">0.00</span>
+        <input id="cut" type="range" min="0" max="1" step="0.01" value="0" aria-label="Section cut amount">
+      </label>
+      <label class="sl">Explode <span id="expVal">0.00</span>
+        <input id="explode" type="range" min="0" max="1" step="0.01" value="0" aria-label="Exploded view amount">
+      </label>
+      <button type="button" class="tog" id="auto" aria-pressed="false">Auto-tour</button>
+    </div>
+  </div>
+
+  <div class="keys">
+    <span><kbd>1</kbd>–<kbd>4</kbd> chapters</span>
+    <span><kbd>A</kbd> auto-tour</span>
+    <span>Drag orbit · scroll zoom</span>
+    <span>Click a label to focus that part</span>
+  </div>
+
+  <p class="ban"><strong>Ban list (empty):</strong> neon HUD, particles, bloom, cyber grid, FPS watermark, purple-blue AI gradient, glassmorphism flex.</p>
+</main>
+
+<script type="module">
+import { createCutaway, CHAPTERS } from './scene.js';
+
+const q = new URLSearchParams(location.search);
+const capture = q.has('capture');
+if (capture) document.body.classList.add('capture');
+
+const stage = document.getElementById('stage');
+const api = createCutaway(stage, {
+  width: capture ? 1280 : stage.clientWidth,
+  height: capture ? 720 : stage.clientHeight,
+  pixelRatio: capture ? 1 : undefined,
+});
+window.Cutaway = api;
+
+const chaptersEl = document.getElementById('chapters');
+const blurb = document.getElementById('blurb');
+const cut = document.getElementById('cut');
+const explode = document.getElementById('explode');
+const cutVal = document.getElementById('cutVal');
+const expVal = document.getElementById('expVal');
+const autoBtn = document.getElementById('auto');
+
+CHAPTERS.forEach((ch, i) => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = `${i + 1} · ${ch.label}`;
+  b.dataset.id = ch.id;
+  b.setAttribute('role', 'tab');
+  b.addEventListener('click', () => select(ch.id));
+  chaptersEl.appendChild(b);
+});
+
+function syncChrome() {
+  const st = api.getState();
+  for (const b of chaptersEl.querySelectorAll('button')) {
+    b.setAttribute('aria-current', b.dataset.id === st.chapter ? 'true' : 'false');
+  }
+  const ch = CHAPTERS.find((c) => c.id === st.chapter);
+  blurb.textContent = ch ? ch.blurb : '';
+  cut.value = st.cut;
+  explode.value = st.explode;
+  cutVal.textContent = st.cut.toFixed(2);
+  expVal.textContent = st.explode.toFixed(2);
+  autoBtn.setAttribute('aria-pressed', String(st.autoplay));
+}
+
+function select(id) {
+  api.setChapter(id, false);
+  syncChrome();
+}
+
+cut.addEventListener('input', () => {
+  api.setCut(cut.value);
+  cutVal.textContent = (+cut.value).toFixed(2);
+});
+explode.addEventListener('input', () => {
+  api.setExplode(explode.value);
+  expVal.textContent = (+explode.value).toFixed(2);
+});
+autoBtn.addEventListener('click', () => {
+  const on = autoBtn.getAttribute('aria-pressed') !== 'true';
+  api.setAutoplay(on);
+  syncChrome();
+});
+
+addEventListener('keydown', (e) => {
+  if (e.target.matches('input,textarea')) return;
+  if (e.key >= '1' && e.key <= '4') select(CHAPTERS[+e.key - 1].id);
+  if (e.key === 'a' || e.key === 'A') {
+    const on = autoBtn.getAttribute('aria-pressed') !== 'true';
+    api.setAutoplay(on);
+    syncChrome();
+  }
+});
+
+const ro = new ResizeObserver(() => {
+  if (capture) return;
+  api.resize(stage.clientWidth, stage.clientHeight);
+});
+ro.observe(stage);
+
+if (q.has('chapter')) api.setChapter(q.get('chapter'), true);
+syncChrome();
+setInterval(syncChrome, 400);
+
+// Deep-link still for reduced-motion users already handled in scene.
+</script>
+</body>
+</html>

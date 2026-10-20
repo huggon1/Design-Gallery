@@ -1775,7 +1775,7 @@
 
       <div class="room-compass" role="status" aria-live="polite">
         <span>SANCTUARY STAGE</span>
-        <b id="compass-index">I / VIII — 连续变形发布短片</b>
+        <b id="compass-index">I / X — 连续变形发布短片</b>
       </div>
 
       <div class="top-meta-right">
@@ -1844,11 +1844,17 @@
             <div class="exhibit-scene reel-scene" data-scene="2" id="three-ink-linework">
               <iframe class="reel-frame" title="三种墨水线稿" data-src="assets/three-ink-linework/v1/index.html"></iframe>
             </div>
+            <div class="exhibit-scene reel-scene" data-scene="3" id="gsap-framecheck-cards">
+              <iframe class="reel-frame" title="GSAP 帧检卡片联播" data-src="assets/gsap-framecheck-cards/v1/index.html"></iframe>
+            </div>
+            <div class="exhibit-scene reel-scene" data-scene="4" id="annotated-3d-cutaway">
+              <iframe class="reel-frame" title="可标注三维剖解" data-src="assets/annotated-3d-cutaway/v1/index.html"></iframe>
+            </div>
 
             <!-- ============================================================
-                 展品 IV：动态封面（三态并排总览 / 01 静态 / 02 缓慢流动 / 03 指针响应 + 配色与流速控制）
+                 展品 VI：动态封面（三态并排总览 / 01 静态 / 02 缓慢流动 / 03 指针响应 + 配色与流速控制）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="3" id="living-cover">
+            <div class="exhibit-scene" data-scene="5" id="living-cover">
               <div class="stage-toolbar">
                 <div class="scheme-switcher" role="group" aria-label="动态封面方案切换">
                   <button class="scheme-tab" data-cover-view="triptych" aria-pressed="true">三态并排对比</button>
@@ -1936,7 +1942,7 @@
             <!-- ============================================================
                  展品 II：图像对比（方案1:滑动分割 / 方案2:并排全画幅 / 方案3:按住切换）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="4" id="image-compare">
+            <div class="exhibit-scene" data-scene="6" id="image-compare">
               <div class="stage-toolbar">
                 <div class="scheme-switcher" role="group" aria-label="图像对比方案切换">
                   <button class="scheme-tab" data-cmp-mode="slider" aria-pressed="true">方案 A · 滑动分割</button>
@@ -1976,7 +1982,7 @@
             <!-- ============================================================
                  展品 III：拖动排序（100% 忠实保留原版展品 DOM、视觉、抬起浮层、虚线占位、零闪烁 FLIP 动画与完整交互）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="5" id="reorder-list">
+            <div class="exhibit-scene" data-scene="7" id="reorder-list">
               <p class="sr-only-help" id="keyboard-help">按空格键提起，上下方向键移动，回车放下，Esc 取消。</p>
               <div class="reorder-stage-body">
                 <section class="board" aria-label="阅读顺序">
@@ -2022,7 +2028,7 @@
             <!-- ============================================================
                  展品 IV：任务进度（5 条完整参考 + 点击展开三阶段步骤详情 + 故障模拟开关 + 单项断点重试）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="6" id="agent-progress">
+            <div class="exhibit-scene" data-scene="8" id="agent-progress">
               <div class="stage-toolbar">
                 <div class="scheme-switcher" role="group" aria-label="任务进度运行模式切换">
                   <button class="scheme-tab" data-agent-mode="fault" aria-pressed="true">方案 A · 模拟第 03 条超时中断（测试断点续传）</button>
@@ -2062,7 +2068,7 @@
             <!-- ============================================================
                  展品 V：移除确认（方案 A 弹窗确认 vs 方案 B 原地胶囊变形 双栏对比/单独切换 + 故障模拟 & 延迟）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="7" id="remove-experience">
+            <div class="exhibit-scene" data-scene="9" id="remove-experience">
               <div class="stage-toolbar">
                 <div class="scheme-switcher" role="group" aria-label="移除确认方案视图切换">
                   <button class="scheme-tab" data-morph-view="both" aria-pressed="true">A / B 双方案同台对比</button>
@@ -2131,7 +2137,7 @@
         <button class="step-btn" id="next-room" aria-label="下一件作品">→</button>
       </div>
 
-      <div class="filmstrip-rail" role="tablist" aria-label="八件馆藏作品切换轨">
+      <div class="filmstrip-rail" role="tablist" aria-label="十件馆藏作品切换轨">
         <button class="rail-node" role="tab" data-idx="0" aria-selected="true">
           <span class="rail-roman">I</span>
           <span class="rail-meta"><strong>连续变形发布短片</strong><span>PUBLISH → END CARD</span></span>
@@ -2146,28 +2152,36 @@
         </button>
         <button class="rail-node" role="tab" data-idx="3" aria-selected="false">
           <span class="rail-roman">IV</span>
-          <span class="rail-meta"><strong>动态封面</strong><span>3 MOTION MODES</span></span>
+          <span class="rail-meta"><strong>GSAP 帧检卡片联播</strong><span>CASCADE · FRAME GATES</span></span>
         </button>
         <button class="rail-node" role="tab" data-idx="4" aria-selected="false">
           <span class="rail-roman">V</span>
-          <span class="rail-meta"><strong>图像对比</strong><span>SLIDE · SIDE · HOLD</span></span>
+          <span class="rail-meta"><strong>可标注三维剖解</strong><span>CLOVE · CUT · EXPLODE</span></span>
         </button>
         <button class="rail-node" role="tab" data-idx="5" aria-selected="false">
           <span class="rail-roman">VI</span>
-          <span class="rail-meta"><strong>拖动排序</strong><span>DRAG · KEY · UNDO</span></span>
+          <span class="rail-meta"><strong>动态封面</strong><span>3 MOTION MODES</span></span>
         </button>
         <button class="rail-node" role="tab" data-idx="6" aria-selected="false">
           <span class="rail-roman">VII</span>
-          <span class="rail-meta"><strong>任务进度</strong><span>3-STAGE &amp; RETRY</span></span>
+          <span class="rail-meta"><strong>图像对比</strong><span>SLIDE · SIDE · HOLD</span></span>
         </button>
         <button class="rail-node" role="tab" data-idx="7" aria-selected="false">
           <span class="rail-roman">VIII</span>
+          <span class="rail-meta"><strong>拖动排序</strong><span>DRAG · KEY · UNDO</span></span>
+        </button>
+        <button class="rail-node" role="tab" data-idx="8" aria-selected="false">
+          <span class="rail-roman">IX</span>
+          <span class="rail-meta"><strong>任务进度</strong><span>3-STAGE &amp; RETRY</span></span>
+        </button>
+        <button class="rail-node" role="tab" data-idx="9" aria-selected="false">
+          <span class="rail-roman">X</span>
           <span class="rail-meta"><strong>移除确认</strong><span>MODAL VS MORPH</span></span>
         </button>
       </div>
 
       <div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.12em">
-        8 COLLECTED WORKS · MULTI-SCHEME STAGE
+        10 COLLECTED WORKS · MULTI-SCHEME STAGE
       </div>
     </footer>
   </div>
@@ -2238,10 +2252,50 @@
         accent: '#b7c9dc'
       },
       {
-        slug: 'living-cover',
+        slug: 'gsap-framecheck-cards',
         roman: 'IV',
+        ghost: 'CASCADE',
+        kicker: 'EXHIBIT IV // TIMELINE & FRAME GATES',
+        cn: 'GSAP 帧检卡片联播',
+        en: 'GSAP Framecheck Cards',
+        statement: '同一条安静发布故事做成 GSAP 卡片级联：焦点卡、回执与卫星信息并行，Playwright 帧检锁住时序。暖纸、绿与赭石。',
+        schemesDesc: '空格播放或暂停，时间线可 scrub。同一条安静发布故事，适合对照 seek(t) 同题材短片。',
+        bezel: 'SPECIMEN 09 // GSAP CASCADE · FRAMECHECKS · 24s',
+        hint: '空格播放 · 可 scrub',
+        date: '2026.10.20 · v1',
+        refHtml: 'GSAP timeline · Playwright 帧检',
+        mech: 'GSAP timeline + Playwright frame gates · 适用于编排讲解与验收演示',
+        bg0: '#13110e',
+        bg1: '#1a2820',
+        auraA: 'rgba(31, 61, 47, 0.58)',
+        auraB: 'rgba(185, 131, 42, 0.38)',
+        accent: '#e0b15a'
+      },
+      {
+        slug: 'annotated-3d-cutaway',
+        roman: 'V',
+        ghost: 'CLOVE',
+        kicker: 'EXHIBIT V // LIVE THREE.JS CUTAWAY',
+        cn: '可标注三维剖解',
+        en: 'Annotated 3D Cutaway',
+        statement: '虚构手摇磨豆机 Clove C2：绕转、剖面、爆炸与结构标签；剖切滑条连续扫过壳体。纸台哑光，暖胡桃与黄铜。',
+        schemesDesc: '拖拽绕转查看，章节切到剖面与爆炸，剖切与爆炸滑条可连续拖动。',
+        bezel: 'SPECIMEN 10 // CLOVE C2 · SECTION · EXPLODE',
+        hint: '拖拽绕转 · 章节切换 · 连续拖 Cut / Explode',
+        date: '2026.10.20 · v1',
+        refHtml: 'Three.js · clipping plane',
+        mech: 'Three.js + clipping plane · 适用于硬件结构讲解',
+        bg0: '#120f0c',
+        bg1: '#2c2218',
+        auraA: 'rgba(92, 58, 32, 0.55)',
+        auraB: 'rgba(176, 140, 78, 0.32)',
+        accent: '#d7b56a'
+      },
+      {
+        slug: 'living-cover',
+        roman: 'VI',
         ghost: 'RESONANCE',
-        kicker: 'EXHIBIT IV // MATERIAL & MOTION',
+        kicker: 'EXHIBIT VI // MATERIAL & MOTION',
         cn: '动态封面',
         en: 'Living Shader Cover',
         statement: '同一张声音艺术展封面，分别呈现「静态印刷」、「自动流动」与「随指针变化」三种材质状态。配色与流动速度实时可调，适合音乐专辑封面与展览主视觉。',
@@ -2258,9 +2312,9 @@
       },
       {
         slug: 'image-compare',
-        roman: 'V',
+        roman: 'VII',
         ghost: 'BOTANICA',
-        kicker: 'EXHIBIT V // OPTICAL INSPECTION',
+        kicker: 'EXHIBIT VII // OPTICAL INSPECTION',
         cn: '图像对比',
         en: 'Optical Image Comparison',
         statement: '比较同一张原创植物展海报改版前后的两个版本，在一个展示台内完整提供「滑动分割」、「并排全画幅」与「按住瞬时切换」三种审阅方案。',
@@ -2277,9 +2331,9 @@
       },
       {
         slug: 'reorder-list',
-        roman: 'VI',
+        roman: 'VIII',
         ghost: 'SEQUENCE',
-        kicker: 'EXHIBIT VI // KINETIC ORDER',
+        kicker: 'EXHIBIT VIII // KINETIC ORDER',
         cn: '拖动排序',
         en: 'Tactile Reorder Queue',
         statement: '调整 6 条设计参考的阅读顺序，松手后通过 FLIP 几何插值平滑落位并支持多步撤销。适合播放队列、参考清单与作品集编排。',
@@ -2296,9 +2350,9 @@
       },
       {
         slug: 'agent-progress',
-        roman: 'VII',
+        roman: 'IX',
         ghost: 'TELEMETRY',
-        kicker: 'EXHIBIT VII // ASYNC PIPELINE',
+        kicker: 'EXHIBIT IX // ASYNC PIPELINE',
         cn: '任务进度',
         en: 'Agent Progress & Recovery',
         statement: '批量整理 5 条设计参考，点击任意条目可展开「提取摘要 → 识别特点 → 保存笔记」三阶段详情。局部异常时保留已完成成果，支持从失败断点处单独续传。',
@@ -2315,9 +2369,9 @@
       },
       {
         slug: 'remove-experience',
-        roman: 'VIII',
+        roman: 'X',
         ghost: 'CLOSURE',
-        kicker: 'EXHIBIT VIII // MICRO-ERGONOMICS',
+        kicker: 'EXHIBIT X // MICRO-ERGONOMICS',
         cn: '移除确认',
         en: 'Modal vs. Inline Confirm Morph',
         statement: '同一组模拟收藏，分别用「方案 A 传统弹窗确认」与「方案 B 原地胶囊变形确认」完成移除。可体验取消、故障重试与撤销恢复，适合收藏夹与队列管理。',
@@ -2349,7 +2403,7 @@
 
       document.getElementById('ghost-roman').textContent = ex.roman;
       document.getElementById('ghost-word').textContent = ex.ghost;
-      document.getElementById('compass-index').textContent = `${ex.roman} / VIII — ${ex.cn}`;
+      document.getElementById('compass-index').textContent = `${ex.roman} / X — ${ex.cn}`;
       document.getElementById('wing-kicker').textContent = ex.kicker;
       document.getElementById('wing-title-cn').textContent = ex.cn;
       document.getElementById('wing-title-en').textContent = ex.en;

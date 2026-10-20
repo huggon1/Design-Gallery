@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact sheet · gsap-framecheck-cards</title>
+<style>
+  @font-face{font-family:'Reel Geist';src:url(fonts/Geist.ttf) format('truetype');font-weight:100 900}
+  @font-face{font-family:'Reel Mono';src:url(fonts/GeistMono.ttf) format('truetype');font-weight:100 900}
+  @font-face{font-family:'Reel Fraunces';src:url(fonts/Fraunces.ttf) format('truetype');font-weight:100 900}
+  :root{--paper:#E9E2D1;--ink:#1C211D;--green:#1F3D2F;--muted:#6F6B5E;--line:rgba(28,33,29,.14)}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:'Reel Geist',system-ui,sans-serif}
+  main{max-width:1280px;margin:0 auto;padding:36px 24px 64px}
+  header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+  h1{font-size:16px;margin:0;font-weight:600} h1 span{color:var(--muted);font-weight:450}
+  a{color:var(--green);font-size:14px;text-decoration:none;border-bottom:1px solid rgba(31,61,47,.3)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .cell{background:#EFE8D8;border-radius:10px;overflow:hidden;border:1px solid var(--line);position:relative}
+  .thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden}
+  .thumb .host{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0;pointer-events:none}
+  .label{font-family:'Reel Mono',monospace;font-size:11px;padding:8px 10px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+  .label b{color:var(--ink);font-weight:500}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Contact sheet <span>· 0.5 s beats · 24s cascade</span></h1>
+    <a href="index.html">← Player</a>
+  </header>
+  <div class="grid" id="grid"></div>
+</main>
+<script src="vendor/gsap.min.js"></script>
+<script src="reel.js"></script>
+<script>
+(function () {
+  const D = 24, BEAT = 0.5;
+  // Snap transitional moments to composed stills
+  const snaps = { 18.5: 19.4, 19: 20.2 };
+  const times = [];
+  for (let t = 0; t <= D + 1e-9; t += BEAT) times.push(+t.toFixed(3));
+  const grid = document.getElementById('grid');
+  const scale = 220 / 1280;
+
+  function build() {
+    times.forEach((raw) => {
+      const t = snaps[raw] ?? raw;
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      const thumb = document.createElement('div');
+      thumb.className = 'thumb';
+      const host = document.createElement('div');
+      host.className = 'host';
+      thumb.appendChild(host);
+      const label = document.createElement('div');
+      label.className = 'label';
+      const reel = Reel.create(host);
+      reel.seek(t);
+      host.style.transform = `scale(${scale})`;
+      label.innerHTML = `<b>${raw.toFixed(1)}s</b><span>${reel.sceneAt(t)}</span>`;
+      cell.append(thumb, label);
+      grid.appendChild(cell);
+    });
+    document.body.dataset.ready = '1';
+  }
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(build);
+})();
+</script>
+</body>
+</html>
