@@ -441,6 +441,22 @@
       pointer-events: auto;
     }
 
+    .exhibit-scene.reel-scene {
+      padding: 0;
+    }
+
+    .reel-frame {
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+      border: 0;
+      background: #efe8d8;
+    }
+
+    .reel-frame:focus {
+      outline: none;
+    }
+
     /* 展示台通用顶部工具栏（用于方案切换、参数调节、重置） */
     .stage-toolbar {
       display: flex;
@@ -1660,16 +1676,20 @@
     }
 
     .filmstrip-rail {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
+      display: flex;
+      gap: 8px;
+      min-width: 0;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scrollbar-width: thin;
     }
 
     .rail-node {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 13px;
+      flex: 1 0 auto;
+      padding: 8px 12px;
       border-radius: 10px;
       border: 1px solid transparent;
       background: rgba(255, 255, 255, 0.025);
@@ -1702,6 +1722,7 @@
       display: block;
       font-size: 12.5px;
       font-weight: 500;
+      white-space: nowrap;
     }
 
     .rail-meta span {
@@ -1719,7 +1740,8 @@
       .reorder-stage-body, .agent-stage-body, .morph-stage-body[data-view="both"], .cover-stage-body[data-view="triptych"] {
         grid-template-columns: 1fr;
       }
-      .filmstrip-rail { grid-template-columns: 1fr 1fr; }
+      .filmstrip-rail { flex-wrap: wrap; overflow: visible; }
+      .rail-node { flex: 1 1 calc(50% - 8px); }
     }
   </style>
 </head>
@@ -1740,7 +1762,7 @@
   <!-- 3. 超巨幅背投衬线水印 -->
   <div class="backdrop-monument" aria-hidden="true">
     <span class="ghost-roman" id="ghost-roman">I</span>
-    <span class="ghost-word" id="ghost-word">RESONANCE</span>
+    <span class="ghost-word" id="ghost-word">MORPH</span>
   </div>
 
   <!-- 4. 画廊主舞台外框 -->
@@ -1753,7 +1775,7 @@
 
       <div class="room-compass" role="status" aria-live="polite">
         <span>SANCTUARY STAGE</span>
-        <b id="compass-index">I / V — 动态封面</b>
+        <b id="compass-index">I / VIII — 连续变形发布短片</b>
       </div>
 
       <div class="top-meta-right">
@@ -1766,32 +1788,32 @@
       <!-- 左侧：精炼策展铭牌与馆藏档案 -->
       <aside class="curatorial-wing" aria-label="当前展品策展说明">
         <div class="wing-top">
-          <div class="wing-kicker" id="wing-kicker">EXHIBIT I // MATERIAL &amp; MOTION</div>
+          <div class="wing-kicker" id="wing-kicker">EXHIBIT I // CODE-DRIVEN FRAMES</div>
           <h1 class="wing-title">
-            <span id="wing-title-cn">动态封面</span>
-            <em id="wing-title-en">Living Shader Cover</em>
+            <span id="wing-title-cn">连续变形发布短片</span>
+            <em id="wing-title-en">seek(t) Morph Reel</em>
           </h1>
           <p class="wing-statement" id="wing-statement">
-            同一张声音艺术展封面，分别呈现「静态印刷」、「自动流动」与「随指针变化」三种材质状态。配色与流动速度实时可调，适合音乐专辑封面与展览主视觉。
+            Tideline 2.4 的界面沿同一物件连续变形：Publish、进度环、对勾、精确指标，再到结尾卡片。暖纸、绿与赭石，适合产品发布短片。
           </p>
           <div class="wing-variants-note">
             <strong>STAGE SCHEMES · 展台内含方案</strong>
-            <span id="wing-schemes-desc">支持「三态并排总览」或切换单独聚焦「01 静态」、「02 缓慢流动」、「03 指针响应」，并内置暮色/苔绿/暖焰 3 套光谱与流速控制。</span>
+            <span id="wing-schemes-desc">展示台即播放器：空格播放或暂停，方括号跳到上一拍或下一拍，左右方向键逐帧。接触印样可看每一拍的静帧。</span>
           </div>
         </div>
 
         <div class="wing-provenance">
           <div class="prov-item">
             <span class="prov-label">COLLECTED</span>
-            <span class="prov-value" id="prov-date">2026.10.15 · v1</span>
+            <span class="prov-value" id="prov-date">2026.10.20 · v1</span>
           </div>
           <div class="prov-item">
             <span class="prov-label">REFERENCE</span>
-            <span class="prov-value" id="prov-ref"><a href="https://23rd.dev/" target="_blank" rel="noreferrer">23rd ↗</a></span>
+            <span class="prov-value" id="prov-ref">代码驱动帧 · seek(t)</span>
           </div>
           <div class="prov-item full">
             <span class="prov-label">ARCHITECTURE &amp; SCENARIO</span>
-            <span class="prov-value" id="prov-mech">WebGL GLSL 实时片元着色器 · 适用于展览主视觉与专辑封面</span>
+            <span class="prov-value" id="prov-mech">DOM / SVG 连续变形 · 适用于产品发布短片</span>
           </div>
         </div>
       </aside>
@@ -1804,19 +1826,29 @@
           <div class="monolith-bezel">
             <div class="bezel-left">
               <span class="bezel-live-dot">LIVE INTERACTIVE STAGE</span>
-              <span id="bezel-code">SPECIMEN 01 // 3 MOTION SCHEMES &amp; 3 CHROMA PALETTES</span>
+              <span id="bezel-code">SPECIMEN 06 // SEEK(T) UI MORPH · 20s</span>
             </div>
             <div class="bezel-left">
-              <span id="bezel-hint">直接在展示台内切换对比不同设计方案</span>
+              <span id="bezel-hint">空格播放 · [ ] 跳拍 · 方向键逐帧</span>
             </div>
           </div>
 
           <div class="monolith-canvas-slot">
 
+            <div class="exhibit-scene reel-scene active" data-scene="0" id="seek-t-morph-reel">
+              <iframe class="reel-frame" title="连续变形发布短片" data-src="assets/seek-t-morph-reel/v1/index.html" src="assets/seek-t-morph-reel/v1/index.html"></iframe>
+            </div>
+            <div class="exhibit-scene reel-scene" data-scene="1" id="editorial-kinetic-type">
+              <iframe class="reel-frame" title="编辑式动能字体" data-src="assets/editorial-kinetic-type/v1/index.html"></iframe>
+            </div>
+            <div class="exhibit-scene reel-scene" data-scene="2" id="three-ink-linework">
+              <iframe class="reel-frame" title="三种墨水线稿" data-src="assets/three-ink-linework/v1/index.html"></iframe>
+            </div>
+
             <!-- ============================================================
-                 展品 I：动态封面（三态并排总览 / 01 静态 / 02 缓慢流动 / 03 指针响应 + 配色与流速控制）
+                 展品 IV：动态封面（三态并排总览 / 01 静态 / 02 缓慢流动 / 03 指针响应 + 配色与流速控制）
                  ============================================================ -->
-            <div class="exhibit-scene active" data-scene="0" id="living-cover">
+            <div class="exhibit-scene" data-scene="3" id="living-cover">
               <div class="stage-toolbar">
                 <div class="scheme-switcher" role="group" aria-label="动态封面方案切换">
                   <button class="scheme-tab" data-cover-view="triptych" aria-pressed="true">三态并排对比</button>
@@ -1904,7 +1936,7 @@
             <!-- ============================================================
                  展品 II：图像对比（方案1:滑动分割 / 方案2:并排全画幅 / 方案3:按住切换）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="1" id="image-compare">
+            <div class="exhibit-scene" data-scene="4" id="image-compare">
               <div class="stage-toolbar">
                 <div class="scheme-switcher" role="group" aria-label="图像对比方案切换">
                   <button class="scheme-tab" data-cmp-mode="slider" aria-pressed="true">方案 A · 滑动分割</button>
@@ -1944,7 +1976,7 @@
             <!-- ============================================================
                  展品 III：拖动排序（100% 忠实保留原版展品 DOM、视觉、抬起浮层、虚线占位、零闪烁 FLIP 动画与完整交互）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="2" id="reorder-list">
+            <div class="exhibit-scene" data-scene="5" id="reorder-list">
               <p class="sr-only-help" id="keyboard-help">按空格键提起，上下方向键移动，回车放下，Esc 取消。</p>
               <div class="reorder-stage-body">
                 <section class="board" aria-label="阅读顺序">
@@ -1990,7 +2022,7 @@
             <!-- ============================================================
                  展品 IV：任务进度（5 条完整参考 + 点击展开三阶段步骤详情 + 故障模拟开关 + 单项断点重试）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="3" id="agent-progress">
+            <div class="exhibit-scene" data-scene="6" id="agent-progress">
               <div class="stage-toolbar">
                 <div class="scheme-switcher" role="group" aria-label="任务进度运行模式切换">
                   <button class="scheme-tab" data-agent-mode="fault" aria-pressed="true">方案 A · 模拟第 03 条超时中断（测试断点续传）</button>
@@ -2030,7 +2062,7 @@
             <!-- ============================================================
                  展品 V：移除确认（方案 A 弹窗确认 vs 方案 B 原地胶囊变形 双栏对比/单独切换 + 故障模拟 & 延迟）
                  ============================================================ -->
-            <div class="exhibit-scene" data-scene="4" id="remove-experience">
+            <div class="exhibit-scene" data-scene="7" id="remove-experience">
               <div class="stage-toolbar">
                 <div class="scheme-switcher" role="group" aria-label="移除确认方案视图切换">
                   <button class="scheme-tab" data-morph-view="both" aria-pressed="true">A / B 双方案同台对比</button>
@@ -2099,31 +2131,43 @@
         <button class="step-btn" id="next-room" aria-label="下一件作品">→</button>
       </div>
 
-      <div class="filmstrip-rail" role="tablist" aria-label="五件馆藏作品切换轨">
+      <div class="filmstrip-rail" role="tablist" aria-label="八件馆藏作品切换轨">
         <button class="rail-node" role="tab" data-idx="0" aria-selected="true">
           <span class="rail-roman">I</span>
-          <span class="rail-meta"><strong>动态封面</strong><span>3 MOTION MODES</span></span>
+          <span class="rail-meta"><strong>连续变形发布短片</strong><span>PUBLISH → END CARD</span></span>
         </button>
         <button class="rail-node" role="tab" data-idx="1" aria-selected="false">
           <span class="rail-roman">II</span>
-          <span class="rail-meta"><strong>图像对比</strong><span>SLIDE · SIDE · HOLD</span></span>
+          <span class="rail-meta"><strong>编辑式动能字体</strong><span>TYPE AS STRUCTURE</span></span>
         </button>
         <button class="rail-node" role="tab" data-idx="2" aria-selected="false">
           <span class="rail-roman">III</span>
-          <span class="rail-meta"><strong>拖动排序</strong><span>DRAG · KEY · UNDO</span></span>
+          <span class="rail-meta"><strong>三种墨水线稿</strong><span>PAPER · PRINT · LIGHT</span></span>
         </button>
         <button class="rail-node" role="tab" data-idx="3" aria-selected="false">
           <span class="rail-roman">IV</span>
-          <span class="rail-meta"><strong>任务进度</strong><span>3-STAGE &amp; RETRY</span></span>
+          <span class="rail-meta"><strong>动态封面</strong><span>3 MOTION MODES</span></span>
         </button>
         <button class="rail-node" role="tab" data-idx="4" aria-selected="false">
           <span class="rail-roman">V</span>
+          <span class="rail-meta"><strong>图像对比</strong><span>SLIDE · SIDE · HOLD</span></span>
+        </button>
+        <button class="rail-node" role="tab" data-idx="5" aria-selected="false">
+          <span class="rail-roman">VI</span>
+          <span class="rail-meta"><strong>拖动排序</strong><span>DRAG · KEY · UNDO</span></span>
+        </button>
+        <button class="rail-node" role="tab" data-idx="6" aria-selected="false">
+          <span class="rail-roman">VII</span>
+          <span class="rail-meta"><strong>任务进度</strong><span>3-STAGE &amp; RETRY</span></span>
+        </button>
+        <button class="rail-node" role="tab" data-idx="7" aria-selected="false">
+          <span class="rail-roman">VIII</span>
           <span class="rail-meta"><strong>移除确认</strong><span>MODAL VS MORPH</span></span>
         </button>
       </div>
 
       <div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.12em">
-        5 COLLECTED WORKS · MULTI-SCHEME STAGE
+        8 COLLECTED WORKS · MULTI-SCHEME STAGE
       </div>
     </footer>
   </div>
@@ -2134,10 +2178,70 @@
     // ==========================================================
     const EXHIBITS = [
       {
-        slug: 'living-cover',
+        slug: 'seek-t-morph-reel',
         roman: 'I',
+        ghost: 'MORPH',
+        kicker: 'EXHIBIT I // CODE-DRIVEN FRAMES',
+        cn: '连续变形发布短片',
+        en: 'seek(t) Morph Reel',
+        statement: 'Tideline 2.4 的界面沿同一物件连续变形：Publish、进度环、对勾、10,799 req/s、标签栏，再到 p99 42ms 与部署 1.8s，最后收到结尾卡片。暖纸、绿与赭石，适合产品发布短片。',
+        schemesDesc: '展示台即播放器：空格播放或暂停，方括号跳到上一拍或下一拍，左右方向键逐帧。接触印样可看每一拍的静帧。',
+        bezel: 'SPECIMEN 06 // SEEK(T) UI MORPH · 20s',
+        hint: '空格播放 · [ ] 跳拍 · 方向键逐帧',
+        date: '2026.10.20 · v1',
+        refHtml: '代码驱动帧 · seek(t)',
+        mech: 'DOM / SVG 连续变形 · 适用于产品发布短片',
+        bg0: '#12110e',
+        bg1: '#1c2a22',
+        auraA: 'rgba(31, 61, 47, 0.55)',
+        auraB: 'rgba(185, 131, 42, 0.32)',
+        accent: '#e0b15a'
+      },
+      {
+        slug: 'editorial-kinetic-type',
+        roman: 'II',
+        ghost: 'HOUSE',
+        kicker: 'EXHIBIT II // CODE-DRIVEN FRAMES',
+        cn: '编辑式动能字体',
+        en: 'Editorial Kinetic Type',
+        statement: '字被当成可以走进的建筑：字重落地成地面，两个词相倚而立，间隙里长出房间。骨色纸、墨与酒红，适合品牌片头，也可演示编辑式排印。',
+        schemesDesc: '展示台即播放器：空格播放或暂停，方括号在句子的段落之间跳转，左右方向键逐帧。',
+        bezel: 'SPECIMEN 07 // EDITORIAL KINETIC TYPE · 18s',
+        hint: '空格播放 · [ ] 跳段 · 方向键逐帧',
+        date: '2026.10.20 · v1',
+        refHtml: '代码驱动帧 · seek(t)',
+        mech: 'Canvas 2D 排印 · 适用于品牌片头与字体方法演示',
+        bg0: '#110e0c',
+        bg1: '#2a1814',
+        auraA: 'rgba(140, 43, 31, 0.42)',
+        auraB: 'rgba(238, 233, 223, 0.14)',
+        accent: '#e3a090'
+      },
+      {
+        slug: 'three-ink-linework',
+        roman: 'III',
+        ghost: 'VESSEL',
+        kicker: 'EXHIBIT III // CODE-DRIVEN FRAMES',
+        cn: '三种墨水线稿',
+        en: 'Three Ink Linework',
+        statement: '同一只器皿，几何不换，只换画法：纸上铅笔、蓝图、再变成光。适合品牌线稿与方法演示。',
+        schemesDesc: '展示台即播放器：空格播放或暂停，方括号在纸、蓝图与光之间跳转，左右方向键逐帧。',
+        bezel: 'SPECIMEN 08 // ONE VESSEL · THREE INKS · 18s',
+        hint: '空格播放 · [ ] 跳段 · 方向键逐帧',
+        date: '2026.10.20 · v1',
+        refHtml: '代码驱动帧 · seek(t)',
+        mech: 'Canvas 2D 线稿 · 适用于同一几何的画法对照',
+        bg0: '#0c1016',
+        bg1: '#1a2740',
+        auraA: 'rgba(35, 65, 107, 0.5)',
+        auraB: 'rgba(203, 221, 212, 0.22)',
+        accent: '#b7c9dc'
+      },
+      {
+        slug: 'living-cover',
+        roman: 'IV',
         ghost: 'RESONANCE',
-        kicker: 'EXHIBIT I // MATERIAL & MOTION',
+        kicker: 'EXHIBIT IV // MATERIAL & MOTION',
         cn: '动态封面',
         en: 'Living Shader Cover',
         statement: '同一张声音艺术展封面，分别呈现「静态印刷」、「自动流动」与「随指针变化」三种材质状态。配色与流动速度实时可调，适合音乐专辑封面与展览主视觉。',
@@ -2154,9 +2258,9 @@
       },
       {
         slug: 'image-compare',
-        roman: 'II',
+        roman: 'V',
         ghost: 'BOTANICA',
-        kicker: 'EXHIBIT II // OPTICAL INSPECTION',
+        kicker: 'EXHIBIT V // OPTICAL INSPECTION',
         cn: '图像对比',
         en: 'Optical Image Comparison',
         statement: '比较同一张原创植物展海报改版前后的两个版本，在一个展示台内完整提供「滑动分割」、「并排全画幅」与「按住瞬时切换」三种审阅方案。',
@@ -2173,9 +2277,9 @@
       },
       {
         slug: 'reorder-list',
-        roman: 'III',
+        roman: 'VI',
         ghost: 'SEQUENCE',
-        kicker: 'EXHIBIT III // KINETIC ORDER',
+        kicker: 'EXHIBIT VI // KINETIC ORDER',
         cn: '拖动排序',
         en: 'Tactile Reorder Queue',
         statement: '调整 6 条设计参考的阅读顺序，松手后通过 FLIP 几何插值平滑落位并支持多步撤销。适合播放队列、参考清单与作品集编排。',
@@ -2192,9 +2296,9 @@
       },
       {
         slug: 'agent-progress',
-        roman: 'IV',
+        roman: 'VII',
         ghost: 'TELEMETRY',
-        kicker: 'EXHIBIT IV // ASYNC PIPELINE',
+        kicker: 'EXHIBIT VII // ASYNC PIPELINE',
         cn: '任务进度',
         en: 'Agent Progress & Recovery',
         statement: '批量整理 5 条设计参考，点击任意条目可展开「提取摘要 → 识别特点 → 保存笔记」三阶段详情。局部异常时保留已完成成果，支持从失败断点处单独续传。',
@@ -2211,9 +2315,9 @@
       },
       {
         slug: 'remove-experience',
-        roman: 'V',
+        roman: 'VIII',
         ghost: 'CLOSURE',
-        kicker: 'EXHIBIT V // MICRO-ERGONOMICS',
+        kicker: 'EXHIBIT VIII // MICRO-ERGONOMICS',
         cn: '移除确认',
         en: 'Modal vs. Inline Confirm Morph',
         statement: '同一组模拟收藏，分别用「方案 A 传统弹窗确认」与「方案 B 原地胶囊变形确认」完成移除。可体验取消、故障重试与撤销恢复，适合收藏夹与队列管理。',
@@ -2245,19 +2349,30 @@
 
       document.getElementById('ghost-roman').textContent = ex.roman;
       document.getElementById('ghost-word').textContent = ex.ghost;
-      document.getElementById('compass-index').textContent = `${ex.roman} / V — ${ex.cn}`;
+      document.getElementById('compass-index').textContent = `${ex.roman} / VIII — ${ex.cn}`;
       document.getElementById('wing-kicker').textContent = ex.kicker;
       document.getElementById('wing-title-cn').textContent = ex.cn;
       document.getElementById('wing-title-en').textContent = ex.en;
       document.getElementById('wing-statement').textContent = ex.statement;
       document.getElementById('wing-schemes-desc').textContent = ex.schemesDesc;
       document.getElementById('bezel-code').textContent = ex.bezel;
+      document.getElementById('bezel-hint').textContent = ex.hint || '直接在展示台内切换对比不同设计方案';
       document.getElementById('prov-date').textContent = ex.date;
       document.getElementById('prov-ref').innerHTML = ex.refHtml;
       document.getElementById('prov-mech').textContent = ex.mech;
 
       document.querySelectorAll('.exhibit-scene').forEach((scene, i) => {
         scene.classList.toggle('active', i === activeIndex);
+      });
+
+      document.querySelectorAll('.reel-frame').forEach(frame => {
+        const on = frame.closest('.exhibit-scene').classList.contains('active');
+        if (on) {
+          if (frame.getAttribute('src') !== frame.dataset.src) frame.src = frame.dataset.src;
+          frame.focus({ preventScroll: true });
+        } else if (frame.hasAttribute('src')) {
+          frame.removeAttribute('src');
+        }
       });
 
       document.querySelectorAll('.rail-node').forEach((node, i) => {
@@ -2431,10 +2546,11 @@
       paletteSelect.addEventListener('change', () => {
         pal = paletteSelect.value;
         const p = palettes[pal];
-        EXHIBITS[0].auraA = p.auraA;
-        EXHIBITS[0].auraB = p.auraB;
-        EXHIBITS[0].accent = p.accent;
-        if (activeIndex === 0) activateExhibit(0, false);
+        const cover = EXHIBITS.find(item => item.slug === 'living-cover');
+        cover.auraA = p.auraA;
+        cover.auraB = p.auraB;
+        cover.accent = p.accent;
+        if (EXHIBITS[activeIndex].slug === 'living-cover') activateExhibit(activeIndex, false);
       });
 
       speedInput.addEventListener('input', () => {

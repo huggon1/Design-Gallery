@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab reel</title>
+<style>
+  :root{--bg:#EEE9DF;--ink:#15130F;--accent:#8C2B1F;--muted:#7A7468;--line:rgba(21,19,15,.14)}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  main{max-width:1180px;margin:0 auto;padding:40px 28px 56px}
+  header{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:22px}
+  h1{font-size:17px;font-weight:600;margin:0}
+  h1 span{color:var(--muted);font-weight:450}
+  header a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  .frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 30px 60px -40px rgba(0,0,0,.45)}
+  .frame canvas{position:absolute;left:0;top:0;transform-origin:0 0}
+  .controls{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;margin-top:18px}
+  button.play{width:44px;height:44px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);cursor:pointer;display:grid;place-items:center}
+  button.play svg{width:16px;height:16px}
+  button.play:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  input[type=range]{width:100%;accent-color:var(--ink)}
+  .tc{font:13px ui-monospace,monospace;font-variant-numeric:tabular-nums;text-align:right;min-width:200px;color:var(--muted)}
+  .tc b{color:var(--ink);font-weight:500}
+  .scene{display:block;color:var(--ink)}
+  .keys{margin-top:16px;font-size:13px;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}
+  kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px}
+  body.capture main{padding:0;max-width:none}
+  body.capture header,body.capture .controls,body.capture .keys{display:none}
+  body.capture .frame{width:1280px;height:720px;border-radius:0;box-shadow:none}
+  @media (max-width:640px){.controls{grid-template-columns:auto 1fr}.tc{grid-column:1/-1;text-align:left}}
+</style>
+</head>
+<body>
+<main>
+  <header><h1 id="title"></h1><a href="../../../#editorial-kinetic-type" target="_top">← 画廊</a></header>
+  <div class="frame" id="frame"></div>
+  <div class="controls">
+    <button class="play" id="play" aria-label="Play" aria-pressed="false"></button>
+    <input id="scrub" type="range" min="0" step="0.001" value="0" aria-label="Scrub timeline">
+    <div class="tc"><b id="time">00.00</b> / <span id="dur"></span><span class="scene" id="scene"></span></div>
+  </div>
+  <div class="keys"><span><kbd>Space</kbd> play / pause</span><span><kbd>[</kbd> <kbd>]</kbd> previous / next cue</span><span><kbd>←</kbd> <kbd>→</kbd> one frame</span><span><kbd>?t=</kbd> freeze a moment</span></div>
+</main>
+<script src="reel.js"></script>
+<script>
+(function () {
+  const q = new URLSearchParams(location.search), capture = q.has('capture');
+  if (capture) document.body.classList.add('capture');
+  const M = Reel.meta, root = document.documentElement.style;
+  for (const k of ['bg','ink','accent','muted']) root.setProperty('--' + k, M[k]);
+  document.title = M.title; document.getElementById('title').innerHTML = M.title + ' <span>· ' + M.sub + '</span>';
+  const frame = document.getElementById('frame');
+  const reel = Reel.create(frame, capture ? 1 : 2);
+  const D = reel.DURATION, FPS = 60, cues = reel.cues;
+  const playBtn = document.getElementById('play'), scrub = document.getElementById('scrub');
+  const timeEl = document.getElementById('time'), sceneEl = document.getElementById('scene');
+  scrub.max = D; document.getElementById('dur').textContent = D.toFixed(2);
+  const ICON_PLAY = '<svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>';
+  const ICON_PAUSE = '<svg viewBox="0 0 16 16"><rect x="3.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/><rect x="9.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/></svg>';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let t = q.has('t') ? +q.get('t') : (reduced ? reel.STILL : 0), playing = false, last = 0;
+  function fit() { reel.canvas.style.transform = `scale(${capture ? 1 : frame.clientWidth / reel.W})`; }
+  function render() {
+    reel.seek(t); scrub.value = t;
+    timeEl.textContent = t.toFixed(2).padStart(5, '0'); sceneEl.textContent = reel.sceneAt(t);
+  }
+  function setPlaying(p) {
+    playing = p; playBtn.innerHTML = p ? ICON_PAUSE : ICON_PLAY;
+    playBtn.setAttribute('aria-label', p ? 'Pause' : 'Play'); playBtn.setAttribute('aria-pressed', String(p));
+    if (p) { if (t >= D) t = 0; last = performance.now(); requestAnimationFrame(tick); }
+  }
+  function tick(now) {
+    if (!playing) return;
+    t = Math.min(D, t + (now - last) / 1000); last = now; render();   // the clock only advances t; the picture is seek(t)
+    if (t >= D) setPlaying(false); else requestAnimationFrame(tick);
+  }
+  const go = v => { setPlaying(false); t = Math.max(0, Math.min(D, v)); render(); };
+  playBtn.addEventListener('click', () => setPlaying(!playing));
+  scrub.addEventListener('input', () => go(+scrub.value));
+  addEventListener('keydown', e => {
+    if (e.key === ' ' && e.target !== playBtn) { e.preventDefault(); setPlaying(!playing); }
+    else if (e.key === ']') go(cues.find(c => c > t + 1e-3) ?? D);
+    else if (e.key === '[') go([...cues].reverse().find(c => c < t - 1e-3) ?? 0);
+    else if (e.key === 'ArrowRight' && e.target !== scrub) go(t + 1 / FPS);
+    else if (e.key === 'ArrowLeft' && e.target !== scrub) go(t - 1 / FPS);
+  });
+  new ResizeObserver(fit).observe(frame);
+  window.reel = { seek: v => { go(v); return t; }, hash: () => reel.hash(), get t() { return t; }, D, cues };
+  fit(); setPlaying(false);
+  reel.ready.then(() => { render(); document.body.dataset.ready = '1';
+    if (!reduced && !capture && !q.has('t')) setPlaying(true); });
+})();
+</script>
+</body>
+</html>

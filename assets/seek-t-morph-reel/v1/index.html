@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>seek(t) morph reel · Tideline 2.4</title>
+<style>
+  @font-face{font-family:'UI Geist';src:url(fonts/Geist.ttf) format('truetype');font-weight:100 900}
+  @font-face{font-family:'UI Mono';src:url(fonts/GeistMono.ttf) format('truetype');font-weight:100 900}
+  :root{--paper:#E9E2D1;--ink:#1C211D;--green:#1F3D2F;--ochre:#B9832A;--muted:#6F6B5E;--line:rgba(28,33,29,.14)}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:'UI Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  main{max-width:1180px;margin:0 auto;padding:40px 28px 56px}
+  header{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:22px}
+  h1{font-size:17px;font-weight:600;margin:0;letter-spacing:-.01em}
+  h1 span{color:var(--muted);font-weight:450}
+  header a{color:var(--green);font-size:14px;text-decoration:none;border-bottom:1px solid rgba(31,61,47,.3)}
+  .head-links{display:flex;gap:18px;align-items:baseline;flex-shrink:0}
+  .frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#EFE8D8;
+    box-shadow:0 0 0 1px var(--line),0 30px 60px -36px rgba(31,61,47,.45)}
+  .controls{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;margin-top:18px}
+  button.play{width:44px;height:44px;border-radius:50%;border:0;background:var(--green);color:#F9F5EC;cursor:pointer;display:grid;place-items:center}
+  button.play:focus-visible{outline:2px solid var(--ochre);outline-offset:3px}
+  input[type=range]:focus{outline:none}
+  input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(185,131,42,.35)}
+  button.play svg{width:16px;height:16px}
+  .scrub{position:relative;height:44px;display:flex;align-items:center}
+  .ticks{position:absolute;left:0;right:0;top:50%;height:12px;transform:translateY(-50%);pointer-events:none;
+    background:repeating-linear-gradient(90deg,rgba(28,33,29,.18) 0 1px,transparent 1px calc(100%/20));}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;margin:0;position:relative;cursor:pointer}
+  input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(90deg,var(--green) 0 var(--p,0%),rgba(28,33,29,.16) var(--p,0%) 100%)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#F9F5EC;border:2px solid var(--green);margin-top:-6.5px;box-shadow:0 2px 6px rgba(31,61,47,.25)}
+  input[type=range]::-moz-range-track{height:3px;background:rgba(28,33,29,.16)}
+  input[type=range]::-moz-range-progress{height:3px;background:var(--green)}
+  input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#F9F5EC;border:2px solid var(--green)}
+  .tc{font-family:'UI Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;text-align:right;min-width:210px;color:var(--muted)}
+  .tc b{color:var(--ink);font-weight:500}
+  .scene{display:block;font-family:'UI Geist';font-size:13px;color:var(--ink);margin-top:2px}
+  .keys{margin-top:16px;font-size:13px;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}
+  kbd{font-family:'UI Mono',monospace;font-size:12px;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;background:#F3EDE0;color:var(--ink)}
+  body.capture{background:#EFE8D8}
+  body.capture main{padding:0;max-width:none}
+  body.capture header,body.capture .controls,body.capture .keys{display:none}
+  body.capture .frame{width:1280px;height:720px;border-radius:0;box-shadow:none}
+  @media (max-width:640px){.controls{grid-template-columns:auto 1fr}.tc{grid-column:1/-1;text-align:left}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>seek(t) morph reel <span>· one object, twenty seconds, 120 BPM</span></h1>
+    <div class="head-links">
+      <a href="../../../#seek-t-morph-reel" target="_top">← 画廊</a>
+      <a href="contact-sheet.html">Contact sheet →</a>
+    </div>
+  </header>
+  <div class="frame" id="frame"></div>
+  <div class="controls">
+    <button class="play" id="play" aria-label="Play" aria-pressed="false"></button>
+    <div class="scrub"><div class="ticks"></div><input id="scrub" type="range" min="0" max="20" step="0.001" value="0" aria-label="Scrub timeline"></div>
+    <div class="tc" aria-live="off"><b id="time">00.00</b> / 20.00 · beat <b id="beat">00</b>/40<span class="scene" id="scene"></span></div>
+  </div>
+  <div class="keys"><span><kbd>Space</kbd> play / pause</span><span><kbd>[</kbd> <kbd>]</kbd> previous / next beat</span><span><kbd>←</kbd> <kbd>→</kbd> one frame</span></div>
+</main>
+<script src="reel.js"></script>
+<script>
+(function () {
+  const q = new URLSearchParams(location.search);
+  const capture = q.has('capture');
+  if (capture) document.body.classList.add('capture');
+  const frame = document.getElementById('frame');
+  const reel = Reel.create(frame);
+  const D = reel.DURATION, BEAT = reel.BEAT, FPS = 60;
+  const playBtn = document.getElementById('play'), scrub = document.getElementById('scrub');
+  const timeEl = document.getElementById('time'), beatEl = document.getElementById('beat'), sceneEl = document.getElementById('scene');
+  const ICON_PLAY = '<svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>';
+  const ICON_PAUSE = '<svg viewBox="0 0 16 16"><rect x="3.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/><rect x="9.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/></svg>';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let t = q.has('t') ? +q.get('t') : (reduced ? D : 0), playing = false, last = 0;
+
+  function fit() {
+    const s = capture ? 1 : frame.clientWidth / reel.W;
+    reel.stage.style.transform = `scale(${s})`;
+  }
+  function render() {
+    reel.seek(t);
+    scrub.value = t; scrub.style.setProperty('--p', (t / D * 100) + '%');
+    timeEl.textContent = t.toFixed(2).padStart(5, '0');
+    beatEl.textContent = String(Math.min(40, Math.floor(t / BEAT + 1e-6))).padStart(2, '0');
+    sceneEl.textContent = reel.sceneAt(t);
+  }
+  function setPlaying(p) {
+    playing = p;
+    playBtn.innerHTML = p ? ICON_PAUSE : ICON_PLAY;
+    playBtn.setAttribute('aria-label', p ? 'Pause' : 'Play');
+    playBtn.setAttribute('aria-pressed', String(p));
+    if (p) { if (t >= D) t = 0; last = performance.now(); requestAnimationFrame(tick); }
+  }
+  function tick(now) {
+    if (!playing) return;
+    t = Math.min(D, t + (now - last) / 1000); last = now;   // the clock only advances t; the frame is seek(t)
+    render();
+    if (t >= D) setPlaying(false); else requestAnimationFrame(tick);
+  }
+  const go = v => { setPlaying(false); t = Math.max(0, Math.min(D, v)); render(); };
+
+  playBtn.addEventListener('click', () => setPlaying(!playing));
+  scrub.addEventListener('input', () => go(+scrub.value));
+  addEventListener('keydown', e => {
+    if (e.key === ' ' && e.target !== playBtn) { e.preventDefault(); setPlaying(!playing); }
+    else if (e.key === ']') go((Math.floor(t / BEAT + 1e-6) + 1) * BEAT);
+    else if (e.key === '[') go((Math.ceil(t / BEAT - 1e-6) - 1) * BEAT);
+    else if (e.key === 'ArrowRight' && e.target !== scrub) go(t + 1 / FPS);
+    else if (e.key === 'ArrowLeft' && e.target !== scrub) go(t - 1 / FPS);
+  });
+  new ResizeObserver(fit).observe(frame);
+
+  window.reel = { seek: v => { go(v); return reel.stage.dataset.t; }, get t() { return t; }, get playing() { return playing; }, reduced, D, BEAT };
+  fit(); setPlaying(false); render();
+  document.fonts.ready.then(() => { reel.remeasure(); render(); document.body.dataset.ready = '1';
+    if (!reduced && !capture && !q.has('t')) setPlaying(true); });
+})();
+</script>
+</body>
+</html>

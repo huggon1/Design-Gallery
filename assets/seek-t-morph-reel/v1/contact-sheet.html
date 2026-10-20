@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact sheet · seek(t) morph reel</title>
+<style>
+  @font-face{font-family:'UI Geist';src:url(fonts/Geist.ttf) format('truetype');font-weight:100 900}
+  @font-face{font-family:'UI Mono';src:url(fonts/GeistMono.ttf) format('truetype');font-weight:100 900}
+  *{box-sizing:border-box}
+  body{margin:0;background:#E9E2D1;color:#1C211D;font-family:'UI Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  main{width:1720px;margin:0 auto;padding:44px 40px 56px}
+  header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:26px}
+  h1{font-size:20px;margin:0;font-weight:600;letter-spacing:-.01em}
+  h1 span{color:#6F6B5E;font-weight:450}
+  .legend{font-family:'UI Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6F6B5E}
+  .legend a{color:#1F3D2F;text-decoration:none;border-bottom:1px solid rgba(31,61,47,.35);letter-spacing:0;text-transform:none;font-family:'UI Geist',system-ui,sans-serif;font-size:14px}
+  .grid{display:grid;grid-template-columns:repeat(4,400px);gap:28px 20px}
+  figure{margin:0}
+  .cell{position:relative;width:400px;height:225px;border-radius:8px;overflow:hidden;box-shadow:0 0 0 1px rgba(28,33,29,.14),0 14px 26px -20px rgba(31,61,47,.5)}
+  figcaption{display:flex;justify-content:space-between;margin-top:9px;font-size:13px;gap:8px}
+  figcaption .tc{font-family:'UI Mono',monospace;font-variant-numeric:tabular-nums;color:#6F6B5E;flex:0 0 auto}
+  figure.key .cell{box-shadow:0 0 0 2px #B9832A,0 14px 26px -20px rgba(31,61,47,.5)}
+</style>
+</head>
+<body>
+<main>
+  <header><h1>Contact sheet <span>· still at every beat · 120 BPM · 0–20 s</span></h1><div class="legend">Ochre frame = scene change · <a href="index.html">← Player</a> · <a href="../../../#seek-t-morph-reel" target="_top">画廊</a></div></header>
+  <div class="grid" id="grid"></div>
+</main>
+<script src="reel.js"></script>
+<script>
+  const grid = document.getElementById('grid'), reels = [];
+  const KEY = new Set([0, 2, 5, 6, 9, 11, 13, 14, 19, 21, 24, 28, 32, 34]);
+  const BEATS = Math.round(Reel.DURATION / Reel.BEAT);
+  for (let b = 0; b <= BEATS; b++) {
+    const raw = b * Reel.BEAT;
+    const t = Reel.sheetAt(raw);
+    const fig = document.createElement('figure'); if (KEY.has(b)) fig.className = 'key';
+    fig.innerHTML = `<div class="cell"></div><figcaption><span>${Reel.sceneAt(t)}</span><span class="tc">b${String(b).padStart(2,'0')} · ${raw.toFixed(1)}s</span></figcaption>`;
+    grid.appendChild(fig);
+    const r = Reel.create(fig.querySelector('.cell'));
+    r.stage.style.transform = `scale(${400 / Reel.W})`;
+    reels.push([r, t]);
+  }
+  const draw = () => reels.forEach(([r, t]) => r.seek(t));
+  draw();
+  document.fonts.ready.then(() => { reels.forEach(([r]) => r.remeasure()); draw(); document.body.dataset.ready = '1'; });
+</script>
+</body>
+</html>
