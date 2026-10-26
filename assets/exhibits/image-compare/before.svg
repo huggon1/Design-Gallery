@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">
+<defs><pattern id="lines" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M0 0v6" stroke="#6c7062" stroke-opacity=".04"/></pattern></defs>
+<rect width="1000" height="700" fill="#f1eadf"/><rect width="1000" height="700" fill="url(#lines)"/>
+<path d="M30 35h940M30 665h940" stroke="#6c7062" stroke-opacity=".28"/>
+<g fill="#6c7062" font-family="Arial,sans-serif"><text x="45" y="69" font-size="13" letter-spacing="3">FIELD NOTES / EXHIBITION 026</text><text x="945" y="69" font-size="13" text-anchor="end">SHANGHAI</text></g>
+<g transform="translate(695 338)"><circle r="194" fill="#dddccb"/>
+<path d="M-10 200C-5 100 35 0 80-150M-8 169C-120 130-176 37-142-40C-32 2 0 64-8 169M29 50C126 69 175 8 167-61C76-56 46-8 29 50M65-103C-14-108-57-163-36-213C49-198 73-151 65-103" fill="#959e84" stroke="#6c7062" stroke-width="2"/>
+<path d="M-10 168-138-34M28 51 161-57M65-105-34-207" fill="none" stroke="#f1eadf" stroke-opacity=".55"/></g>
+<g fill="#6c7062" font-family="Georgia,serif"><text x="43" y="225" font-size="54" letter-spacing="-4">A quieter</text><text x="43" y="290" font-size="54" font-style="italic" letter-spacing="-3">kind of wild.</text></g>
+<g fill="#6c7062" font-family="Arial,'PingFang SC',sans-serif"><text x="48" y="352" font-size="18" letter-spacing="3">在城市里，重新发现自然。</text>
+<text x="48" y="438" font-size="16">植物、纸张与日常观察</text><text x="48" y="468" font-size="16">一场关于慢下来观看的展览</text>
+<text x="48" y="550" font-size="18" letter-spacing="-1">10.18 — 11.02</text><text x="48" y="582" font-size="14">10:00–18:00 / GREENHOUSE STUDIO</text>
+<text x="48" y="642" font-size="12" letter-spacing="2">ART DIRECTION STUDY · ORIGINAL VECTOR ARTWORK</text><text x="945" y="642" font-size="12" text-anchor="end">FIELD / 01</text></g></svg>
