@@ -3278,12 +3278,15 @@
   <script>
     (() => {
       const stage = document.getElementById('monolith-frame');
+      const root = document.documentElement;
+      if (!stage || !root) return;
       let pending = false;
       let previous = '';
       function report() {
         pending = false;
+        if (!stage.isConnected || !root.isConnected) return;
         const ex = EXHIBITS[activeIndex];
-        const styles = getComputedStyle(document.documentElement);
+        const styles = getComputedStyle(root);
         const payload = {
           type: 'gallery:stage', slug: ex.slug,
           height: Math.ceil(stage.getBoundingClientRect().height),
@@ -3303,8 +3306,14 @@
         pending = true;
         requestAnimationFrame(report);
       }
-      new ResizeObserver(scheduleReport).observe(stage);
-      new MutationObserver(scheduleReport).observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+      const resizeObserver = new ResizeObserver(scheduleReport);
+      const themeObserver = new MutationObserver(scheduleReport);
+      resizeObserver.observe(stage);
+      themeObserver.observe(root, { attributes: true, attributeFilter: ['style'] });
+      window.addEventListener('pagehide', () => {
+        resizeObserver.disconnect();
+        themeObserver.disconnect();
+      }, { once: true });
       window.addEventListener('hashchange', scheduleReport);
       window.addEventListener('resize', scheduleReport);
       window.addEventListener('load', scheduleReport);
