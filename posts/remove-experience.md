@@ -1,15 +1,22 @@
 ---
 title: 移除确认
 collected_at: 2026-10-13
-version: v2
+domain: web
+category: interaction
+theme: remove-experience
+cases: ["remove-experience"]
 preview: ../assets/remove-experience/v2/preview.png
-entry: ../index.html#/work/remove-experience?from=hall
+entry: ../index.html#/web/topic/remove-experience?case=remove-experience
 ---
 
 # 移除确认
 
-![移除确认](../assets/remove-experience/v2/preview.png)
+网页 / 控件与交互
 
-[体验](../index.html#/work/remove-experience?from=hall)
+![收藏列表移除](../assets/remove-experience/v2/preview.png)
 
-同一组模拟收藏，分别用弹窗和原地确认完成移除。可体验取消、重试与撤销，适合收藏、队列等可恢复的操作。交互参考 [Arc UI 的 Confirm morph](https://uiarc.dev/components/confirm-morph)，页面代码与图形由设计实验室独立制作。
+[体验](../index.html#/web/topic/remove-experience?case=remove-experience)
+
+同一组模拟收藏，分别以弹窗与原地胶囊变形完成移除。原有展示台保留双方案对照、单独查看、响应延迟、失败重试和撤销，适合观察决定、等待与结果怎样留在条目附近。
+
+收录 2026-10-13 · v2 · [参考 Arc UI](https://uiarc.dev/components/confirm-morph)

@@ -1,15 +1,22 @@
 ---
 title: 图像对比
 collected_at: 2026-10-15
-version: v1
+domain: web
+category: information
+theme: image-compare
+cases: ["image-compare"]
 preview: ../assets/image-compare/v1/preview.png
-entry: ../index.html#/work/image-compare?from=hall
+entry: ../index.html#/web/topic/image-compare?case=image-compare
 ---
 
 # 图像对比
 
-![图像对比](../assets/image-compare/v1/preview.png)
+网页 / 信息与空间
 
-[体验](../index.html#/work/image-compare?from=hall)
+![原创植物展海报](../assets/image-compare/v1/preview.png)
 
-比较同一张原创海报的两个版本，支持滑动、并排和按住切换。适合设计改版、修图和生成结果对比。交互参考 [Bencho 的 Image compare](https://bencho.dev/)。
+[体验](../index.html#/web/topic/image-compare?case=image-compare)
+
+比较同一张原创植物展海报的两个排版版本。滑动分割用于对齐观察，并排全画幅保留整体构图，按住切换让细微差别出现在同一位置。适合设计改版、修图与生成结果审阅。
+
+收录 2026-10-15 · v1 · [参考 Bencho](https://bencho.dev/)

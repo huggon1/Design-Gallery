@@ -1,15 +1,22 @@
 ---
 title: 任务进度
 collected_at: 2026-10-15
-version: v1
+domain: web
+category: feedback
+theme: agent-progress
+cases: ["agent-progress"]
 preview: ../assets/agent-progress/v1/preview.png
-entry: ../index.html#/work/agent-progress?from=hall
+entry: ../index.html#/web/topic/agent-progress?case=agent-progress
 ---
 
 # 任务进度
 
-![任务进度](../assets/agent-progress/v1/preview.png)
+网页 / 动效与反馈
 
-[体验](../index.html#/work/agent-progress?from=hall)
+![逐项整理与恢复](../assets/agent-progress/v1/preview.png)
 
-整理五条模拟参考，查看每项任务的进度，并重试失败项。适合批量导入、内容整理等需要逐项反馈的任务。交互参考 [Beautiful UI 的 Task Rows 与 Tool Chips](https://beautifului.dev/)。
+[体验](../index.html#/web/topic/agent-progress?case=agent-progress)
+
+逐项整理五条模拟参考，将当前阶段、完成与中断放在各自条目附近。展开后查看阶段细节，失败项可单独重试，也可切换顺畅情境，适合批量导入与内容整理中的进度反馈。
+
+收录 2026-10-15 · v1 · [参考 Beautiful UI](https://beautifului.dev/)
