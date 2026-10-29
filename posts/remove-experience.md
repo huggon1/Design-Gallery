@@ -11,7 +11,7 @@ entry: ../index.html#/web/topic/remove-experience?case=remove-experience
 
 # 移除确认
 
-Web / 控件与交互
+网页 / 控件与交互
 
 ![收藏列表移除](../assets/remove-experience/v2/preview.png)
 

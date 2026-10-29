@@ -1,7 +1,8 @@
 export const DOMAINS = [
-  {id:'web',title:'Web',english:'INTERFACE / SPACE / RESPONSE',roman:'I',description:'从控件的触感，到信息与空间的呈现。',categories:[{id:'visual',title:'视觉与版式'},{id:'interaction',title:'控件与交互'},{id:'feedback',title:'动效与反馈'},{id:'information',title:'信息与空间'}]},
+  {id:'web',title:'网页',english:'INTERFACE / SPACE / RESPONSE',roman:'I',description:'从控件的触感，到信息与空间的呈现。',categories:[{id:'visual',title:'视觉与版式'},{id:'interaction',title:'控件与交互'},{id:'feedback',title:'动效与反馈'},{id:'information',title:'信息与空间'}]},
   {id:'video',title:'视频',english:'TYPE / FORM / NARRATIVE',roman:'II',description:'让文字、图形与界面，在时间里组成一段表达。',categories:[{id:'interface',title:'界面与信息'},{id:'type',title:'文字与节奏'},{id:'drawing',title:'图形与材质'}]},
-  {id:'game',title:'游戏',english:'ART / CAMERA / FEEL',roman:'III',description:'收集画风、镜头、动作与声音构成的小场景。',categories:[]}
+  {id:'game',title:'游戏',english:'ART / CAMERA / FEEL',roman:'III',description:'收集画风、镜头、动作与声音构成的小场景。',categories:[]},
+  {id:'mobile',title:'手机应用',english:'TOUCH / NAVIGATION / FEEDBACK',roman:'IV',description:'探索触控、导航与手机界面的表现和体验。',categories:[]}
 ];
 const embedded=(id,title,date,description,reference,source,extra={})=>({id,title,date,description,reference,source,version:id==='remove-experience'?'v2':'v1',entry:`exhibit.html#${id}`,embedSlug:id,preview:`assets/previews/${id}.jpg`,...extra});
 const reel=(id,title,description,extra={})=>({id,title,date:'2026-10-20',version:'v1',description,reference:'设计实验室',source:`assets/${id}/v1/index.html`,entry:`assets/${id}/v1/index.html`,preview:`assets/${id}/v1/preview.png`,...extra});

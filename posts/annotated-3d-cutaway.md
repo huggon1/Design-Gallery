@@ -11,7 +11,7 @@ entry: ../index.html#/web/topic/annotated-3d-cutaway?case=annotated-3d-cutaway
 
 # 可标注三维剖解
 
-Web / 信息与空间
+网页 / 信息与空间
 
 ![Clove C2 手摇磨豆机](../assets/annotated-3d-cutaway/v1/preview.png)
 

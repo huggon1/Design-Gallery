@@ -11,7 +11,7 @@ entry: ../index.html#/web/topic/reorder-list?case=reorder-list
 
 # 拖动排序
 
-Web / 控件与交互
+网页 / 控件与交互
 
 ![参考清单排序](../assets/reorder-list/v1/preview.png)
 

@@ -11,7 +11,7 @@ entry: ../index.html#/web/topic/agent-progress?case=agent-progress
 
 # 任务进度
 
-Web / 动效与反馈
+网页 / 动效与反馈
 
 ![逐项整理与恢复](../assets/agent-progress/v1/preview.png)
 

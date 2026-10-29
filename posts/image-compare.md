@@ -11,7 +11,7 @@ entry: ../index.html#/web/topic/image-compare?case=image-compare
 
 # 图像对比
 
-Web / 信息与空间
+网页 / 信息与空间
 
 ![原创植物展海报](../assets/image-compare/v1/preview.png)
 

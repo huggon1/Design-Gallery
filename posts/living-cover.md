@@ -11,7 +11,7 @@ entry: ../index.html#/web/topic/living-cover?case=living-cover
 
 # 动态封面
 
-Web / 视觉与版式
+网页 / 视觉与版式
 
 ![声音艺术展封面](../assets/living-cover/v1/preview.png)
 
