@@ -1,22 +1,16 @@
 ---
-title: 拖动排序
-collected_at: 2026-10-15
-domain: web
-category: interaction
-theme: reorder-list
-cases: ["reorder-list"]
-preview: ../assets/reorder-list/v1/preview.png
-entry: ../index.html#/web/topic/reorder-list?case=reorder-list
+title: "列表条目的拖动排序"
+collected_at: "2026-10-15"
+version: "v1"
+preview: "../assets/previews/reorder-list.jpg"
+entry: "../index.html#/exhibit/reorder-list"
+tags: ["列表","拖动排序","撤销"]
 ---
 
-# 拖动排序
+# 列表条目的拖动排序
 
-网页 / 控件与交互
+![列表条目的拖动排序](../assets/previews/reorder-list.jpg)
 
-![参考清单排序](../assets/reorder-list/v1/preview.png)
+[打开作品](../index.html#/exhibit/reorder-list)
 
-[体验](../index.html#/web/topic/reorder-list?case=reorder-list)
-
-调整六条设计参考的顺序，拿起、让位与落下都有可见反馈，操作后可撤销。保留指针拖动、行内方向按钮和键盘排序，适合播放队列、参考清单与作品编排。
-
-收录 2026-10-15 · v1 · [参考 Bencho](https://bencho.dev/)
+[参考 Bencho](https://bencho.dev/)

@@ -1,17 +1,14 @@
 ---
-title: 连续变形发布短片
-collected_at: 2026-10-20
-version: v1
-domain: video
-category: interface
-theme: product-launch
-case: seek-t-morph-reel
-preview: ../assets/seek-t-morph-reel/v1/preview.png
-entry: ../index.html#/video/topic/product-launch?case=seek-t-morph-reel
+title: "产品发布的连续变形短片"
+collected_at: "2026-10-20"
+version: "v1"
+preview: "../assets/seek-t-morph-reel/v1/preview.png"
+entry: "../index.html#/exhibit/seek-t-morph-reel"
+tags: ["发布短片","连续变形","动态图形"]
 ---
 
-# 连续变形发布短片
+# 产品发布的连续变形短片
 
-此案例归入[把发布信息变成短片](product-launch.md)主题。
+![产品发布的连续变形短片](../assets/seek-t-morph-reel/v1/preview.png)
 
-[体验连续变形](../index.html#/video/topic/product-launch?case=seek-t-morph-reel)
+[打开作品](../index.html#/exhibit/seek-t-morph-reel)
