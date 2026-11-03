@@ -1,53 +1,165 @@
-import {DOMAINS,THEMES,CASES,caseById,themeDate,sortedThemes,legacyCollection} from './catalog.mjs';
+import {EXHIBITS,exhibitById,sortedExhibits,matchesExhibit,normalize} from './catalog.mjs';
+import {resolveRoute,catalogUrl,exhibitUrl} from './routes.mjs';
 
-const main=document.querySelector('#main');
-const domainBy=id=>DOMAINS.find(domain=>domain.id===id);
-const themeBy=id=>THEMES.find(theme=>theme.id===id);
-const categoryBy=(domain,id)=>domain.categories.find(category=>category.id===id);
-const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-const date=value=>value.replaceAll('-','.');
-const caseCount=list=>list.reduce((sum,theme)=>sum+theme.cases.length,0);
-const caseWords=sample=>[sample.title,sample.originalTitle,sample.english,sample.description,sample.reference].filter(Boolean).join(' ').toLowerCase();
-const matches=(theme,q)=>!q||[theme.title,theme.english,...theme.cases.map(caseWords)].join(' ').toLowerCase().includes(q);
-let currentKey='',activeCase=null,listing=null,stageTimer,stageCleanup=()=>{};
-const scrolls=new Map();
-function save(key,value){try{sessionStorage.setItem('gallery-v2-'+key,value);}catch{}}
-function read(key,fallback){try{return sessionStorage.getItem('gallery-v2-'+key)||fallback;}catch{return fallback;}}
-function routeUrl(path,params=new URLSearchParams()){const query=params.toString();return '#'+path+(query?'?'+query:'');}
-function parse(){const raw=location.hash.startsWith('#/')?location.hash.slice(1):'/';const url=new URL(raw,location.href);return {path:url.pathname,params:url.searchParams,key:raw};}
-function defaultTheme(){const s=document.documentElement.style;s.setProperty('--accent','#edbb95');s.setProperty('--glow-a','rgba(170,101,135,.17)');s.setProperty('--glow-b','rgba(219,149,95,.07)');}
-function preview(sample,eager=false){return `<div class="preview ${sample.embedSlug?'':'native-preview'}"><img src="${esc(sample.preview)}" alt="${esc(sample.originalTitle||sample.title)}预览" width="960" height="613" ${eager?'fetchpriority="high"':'loading="lazy"'} decoding="async"></div>`;}
-function cleanFilters(path,params){const clean=new URLSearchParams();const domain=domainBy(path.slice(1));if(params.get('q')?.trim())clean.set('q',params.get('q'));if(domain&&categoryBy(domain,params.get('cat')))clean.set('cat',params.get('cat'));if(path==='/all'&&domainBy(params.get('domain')))clean.set('domain',params.get('domain'));if(path==='/all'&&legacyCollection[params.get('collection')])clean.set('collection',params.get('collection'));return clean;}
-function returnContext(domain,params){const fallback='/'+domain.id;const from=params.get('from')||read('last-'+domain.id,fallback);try{const url=new URL(from,location.href);if(url.origin===location.origin&&['/','/all','/'+domain.id].includes(url.pathname))return routeUrl(url.pathname,cleanFilters(url.pathname,url.searchParams));}catch{}return '#'+fallback;}
-function filterThemes(path,params){const domain=domainBy(path.slice(1)),q=(params.get('q')||'').trim().toLowerCase(),legacy=legacyCollection[params.get('collection')];return sortedThemes.filter(theme=>(!domain||theme.domain===domain.id)&&(!params.get('domain')||theme.domain===params.get('domain'))&&(!params.get('cat')||theme.category===params.get('cat'))&&(!legacy||theme.cases.some(sample=>legacy.includes(sample.id)))&&matches(theme,q));}
-function themeLink(theme,from,query=''){const p=new URLSearchParams({from:from.slice(1)});const q=query.trim().toLowerCase();const matching=q&&theme.cases.find(sample=>caseWords(sample).includes(q));if(matching)p.set('case',matching.id);return routeUrl('/'+theme.domain+'/topic/'+theme.id,p);}
-function card(theme,from,query='',eager=false){const domain=domainBy(theme.domain);return `<a class="work-card" data-theme="${theme.id}" href="${esc(themeLink(theme,from,query))}">${preview(theme.cases[0],eager)}<div class="work-card-title"><h3>${esc(theme.title)}</h3><span class="roman">${theme.cases.length>1?String(theme.cases.length).padStart(2,'0'):'↗'}</span></div><div class="work-meta"><span>${categoryBy(domain,theme.category).title} · ${theme.cases.length} 个案例</span><time>${date(themeDate(theme))}</time></div><p class="case-names">${theme.cases.map(sample=>esc(sample.title)).join(' / ')}</p></a>`;}
-function breadcrumb(parts){return `<nav class="breadcrumb" aria-label="当前位置">${parts.map(([title,url],index)=>`${index?'<span class="slash">/</span>':''}${url?`<a href="${esc(url)}">${esc(title)}</a>`:`<span aria-current="page">${esc(title)}</span>`}`).join('')}</nav>`;}
-function home(){
-  const populated=DOMAINS.filter(domain=>THEMES.some(theme=>theme.domain===domain.id));
-  const pending=DOMAINS.filter(domain=>!THEMES.some(theme=>theme.domain===domain.id));
-  return `<section class="hall" aria-labelledby="home-title"><div class="hall-heading"><div><div class="eyebrow">THE COLLECTION</div><h1 id="home-title">大厅</h1></div><span class="count">${THEMES.length} THEMES / ${CASES.length} CASES</span></div><p class="hall-intro">从一个创作领域出发，寻找值得带走的表现与体验。</p><div class="room-grid">${populated.map(domain=>{
-    const list=sortedThemes.filter(theme=>theme.domain===domain.id);
-    const covers=domain.id==='web'?[caseById('living-cover'),caseById('annotated-3d-cutaway')]:domain.id==='video'?[caseById('editorial-kinetic-type'),caseById('seek-t-morph-reel')]:list.slice(0,2).map(theme=>theme.cases[0]);
-    return `<a class="room-card" data-domain="${domain.id}" href="#/${domain.id}"><div class="domain-card-heading"><span class="room-index">${domain.roman}</span><div><div class="eyebrow">${domain.english}</div><h2>${domain.title}</h2></div></div><p>${domain.description}</p><div class="room-art" aria-hidden="true">${covers.map(sample=>preview(sample,true)).join('')}</div><div class="room-tail"><span>进入${domain.title} <span aria-hidden="true">↗</span></span><small>${list.length} 个主题 / ${caseCount(list)} 个案例</small></div></a>`;
-  }).join('')}</div>${pending.map(domain=>`<a class="pending-domain" data-domain="${domain.id}" href="#/${domain.id}"><div><span class="roman">${domain.roman}</span><strong>${domain.title}</strong><span>${domain.description}</span></div><span>首件作品待收录 ↗</span></a>`).join('')}<div class="collection-note"><span>一个主题可以从一个案例开始，新的做法逐渐在这里相遇。</span><a class="text-link" href="#/all">搜索全部馆藏 ↗</a></div></section>`;
+const main = document.querySelector('#main');
+const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+let route, stageCleanup = () => {}, currentKey = '';
+const scrolls = new Map();
+const legacyNative = new Set(['gsap-framecheck-cards','seek-t-morph-reel','editorial-kinetic-type','three-ink-linework','annotated-3d-cutaway']);
+function store(key,value) { try { sessionStorage.setItem('gallery-flat-'+key,String(value)); } catch {} }
+function read(key) { try { return sessionStorage.getItem('gallery-flat-'+key); } catch { return null; } }
+function rememberScroll() {
+  if (currentKey) { scrolls.set(currentKey,scrollY); store('scroll-'+currentKey,scrollY); }
 }
-function filterHref(key,value){const p=new URLSearchParams(listing.params);value?p.set(key,value):p.delete(key);return routeUrl(listing.path,p);}
-function domainPage(domain,params){listing={path:'/'+domain.id,params:cleanFilters('/'+domain.id,params),domain};const own=THEMES.filter(theme=>theme.domain===domain.id);save('last-'+domain.id,routeUrl(listing.path,listing.params).slice(1));if(!own.length)return `${breadcrumb([['大厅','#/'],[domain.title]])}<section class="room-heading"><div class="eyebrow">${domain.english}</div><h1>${domain.title}</h1><p>${domain.description}</p></section><section class="pending-empty"><span class="roman">${domain.roman}</span><h2>等待第一件${domain.title}作品</h2><p>从复刻中挑选一个表现点，做成独立小样，验收后收录在这里。</p><a class="text-link" href="#/">← 返回大厅</a></section>`;return `${breadcrumb([['大厅','#/'],[domain.title]])}<section class="domain-heading"><div class="room-heading"><div class="eyebrow">${domain.english}</div><h1>${domain.title}</h1><p>${domain.description}</p></div><span class="count">${own.length} THEMES / ${caseCount(own)} CASES</span></section><div class="domain-layout"><aside class="category-sidebar"><div class="eyebrow">表现类别</div><nav class="category-nav" aria-label="表现类别"><a href="${filterHref('cat','')}" data-filter="cat" data-value="" ${!listing.params.get('cat')?'aria-current="page"':''}><span>全部主题</span><span>${own.length}</span></a>${domain.categories.map(category=>`<a href="${filterHref('cat',category.id)}" data-filter="cat" data-value="${category.id}" ${listing.params.get('cat')===category.id?'aria-current="page"':''}><span>${category.title}</span><span>${own.filter(theme=>theme.category===category.id).length}</span></a>`).join('')}</nav></aside><section class="domain-content" aria-labelledby="catalog-title"><div class="catalog-toolbar"><h2 id="catalog-title">${categoryBy(domain,listing.params.get('cat'))?.title||'全部主题'}</h2>${searchBox()}</div>${resultShell()}</section></div>`;}
-function searchBox(){return `<label class="archive-search"><span aria-hidden="true">⌕</span><input id="search" type="search" autocomplete="off" aria-label="搜索主题或案例" placeholder="搜索主题、案例或表现" value="${esc(listing.params.get('q')||'')}"></label>`;}
-function resultShell(){return `<div class="results-meta"><span id="result-count" role="status"></span><span id="active-query"></span></div><div id="catalog-results"></div><div class="empty-state" id="empty-state" hidden><p>这个条件下还没有主题。</p><button id="clear-search" type="button">清空搜索</button></div>`;}
-function archive(params){listing={path:'/all',params:cleanFilters('/all',params),domain:null};return `${breadcrumb([['大厅','#/'],['搜索馆藏']])}<section class="room-heading"><div class="eyebrow">THE COMPLETE COLLECTION</div><h1>搜索馆藏</h1><p>按领域查看匹配主题，打开后进入对应的实际案例。</p></section><div class="archive-toolbar"><nav class="filter-links" aria-label="搜索领域"><a href="${filterHref('domain','')}" data-filter="domain" data-value="" ${!listing.params.get('domain')?'aria-current="page"':''}>全部领域</a>${DOMAINS.filter(domain=>THEMES.some(theme=>theme.domain===domain.id)).map(domain=>`<a href="${filterHref('domain',domain.id)}" data-filter="domain" data-value="${domain.id}" ${listing.params.get('domain')===domain.id?'aria-current="page"':''}>${domain.title}</a>`).join('')}</nav>${searchBox()}</div>${listing.params.get('collection')?`<div class="legacy-note">原${listing.params.get('collection')==='visual'?'视觉与材质':'操作与反馈'}分区 <a class="text-link" href="${filterHref('collection','')}">查看全部主题 ↗</a></div>`:''}${resultShell()}`;}
-function updateResults(){if(!listing||!document.querySelector('#catalog-results'))return;const list=filterThemes(listing.path,listing.params),q=listing.params.get('q')||'',from=routeUrl(listing.path,listing.params);document.querySelector('#result-count').textContent=`${list.length} 个主题 · ${caseCount(list)} 个案例`;document.querySelector('#active-query').textContent=q?'搜索：'+q:'最新收录 ↓';document.querySelector('#empty-state').hidden=!!list.length;document.querySelector('#catalog-results').innerHTML=listing.domain?`<div class="work-grid">${list.map(theme=>card(theme,from,q)).join('')}</div>`:DOMAINS.map(domain=>{const matches=list.filter(theme=>theme.domain===domain.id);return matches.length?`<section class="search-domain"><div class="hall-section-heading"><h2>${domain.title}</h2><span class="count">${matches.length} 个主题 / ${caseCount(matches)} 个案例</span></div><div class="work-grid">${matches.map(theme=>card(theme,from,q)).join('')}</div></section>`:'';}).join('');main.querySelectorAll('[data-filter]').forEach(link=>link.href=filterHref(link.dataset.filter,link.dataset.value));}
-function themePage(theme,params){const domain=domainBy(theme.domain),sample=theme.cases.find(item=>item.id===params.get('case'))||theme.cases[0],back=returnContext(domain,params);activeCase=sample;return `${breadcrumb([['大厅','#/'],[domain.title,back],[categoryBy(domain,theme.category).title,routeUrl('/'+domain.id,new URLSearchParams({cat:theme.category}))],[theme.title]])}<section aria-labelledby="work-title"><div class="work-heading"><div><div class="eyebrow">${domain.title} / ${categoryBy(domain,theme.category).title}</div><h1 id="work-title">${esc(theme.title)}</h1><p class="english">${esc(theme.english)}</p></div><span class="count">${theme.cases.length} ${theme.cases.length===1?'CASE':'CASES'}</span></div>${theme.cases.length>1?`<nav class="case-switcher" aria-label="案例选择">${theme.cases.map((item,index)=>{const next=new URLSearchParams(params);next.set('case',item.id);return `<a href="${routeUrl('/'+domain.id+'/topic/'+theme.id,next)}" data-case="${item.id}" ${item.id===sample.id?'aria-current="page"':''}><span>0${index+1}</span>${esc(item.title)}</a>`;}).join('')}</nav>`:''}<div class="stage-shell" id="stage-shell" aria-busy="true"><div class="stage-status" id="stage-status" role="status"><span class="loading-dot" aria-hidden="true"></span><span id="stage-message">正在打开${esc(sample.title)}…</span><button id="retry-stage" hidden type="button">重新载入</button></div><iframe id="exhibit-frame" title="${esc(sample.originalTitle||sample.title)}展示台" src="${esc(sample.entry)}" referrerpolicy="no-referrer"></iframe></div><div class="work-description"><p>${esc(sample.description)}</p><div class="provenance"><div>收录 ${date(sample.date)} · ${sample.version}</div><a href="${esc(sample.source)}" target="_blank" rel="noreferrer">参考 ${esc(sample.reference)} ↗</a></div></div><a class="text-link theme-back" id="back-link" href="${esc(back)}">← 返回${back.startsWith('#/all')?'搜索馆藏':back==='#/'?'大厅':domain.title+'主题'}</a></section>`;}
-function setStageHeight(frame,height){if(frame.isConnected&&Number.isFinite(height)&&height>=100&&height<=15000)frame.style.height=Math.ceil(height)+'px';}
-function configureStage(sample){const frame=document.querySelector('#exhibit-frame');const ready=()=>{if(activeCase?.id!==sample.id||!frame.isConnected)return;clearTimeout(stageTimer);document.querySelector('#stage-status').hidden=true;document.querySelector('#stage-shell').setAttribute('aria-busy','false');};const fail=()=>{if(activeCase?.id!==sample.id||!frame.isConnected)return;clearTimeout(stageTimer);document.querySelector('#stage-message').textContent='展台暂时未能加载，请重新载入。';document.querySelector('#retry-stage').hidden=false;};let observer;const onLoad=()=>{if(activeCase?.id!==sample.id||!frame.isConnected)return;try{const doc=frame.contentDocument;if(!doc)return fail();let content;if(sample.embedSlug){const style=doc.createElement('style');style.textContent='.reorder-inspector{display:none!important}.reorder-stage-body{grid-template-columns:minmax(0,1fr)!important}';doc.head.append(style);content=doc.querySelector('#monolith-frame');if(!doc.getElementById(sample.embedSlug)?.classList.contains('active'))return fail();}else{if(!doc.querySelector('#frame,#stage'))return fail();const style=doc.createElement('style');style.textContent='main>header,.ban,.note{display:none!important}main{padding:24px!important}';doc.head.append(style);content=doc.querySelector('main')||doc.body;}if(!content)return fail();const fit=()=>setStageHeight(frame,content.getBoundingClientRect().height);observer?.disconnect();observer=new ResizeObserver(fit);observer.observe(content);fit();ready();}catch{fail();}};frame.addEventListener('load',onLoad);frame.addEventListener('error',fail);document.querySelector('#retry-stage').addEventListener('click',()=>{document.querySelector('#stage-message').textContent='正在重新载入…';document.querySelector('#retry-stage').hidden=true;clearTimeout(stageTimer);stageTimer=setTimeout(fail,12000);frame.src=sample.entry;});stageTimer=setTimeout(fail,12000);stageCleanup=()=>{observer?.disconnect();frame.removeEventListener('load',onLoad);frame.removeEventListener('error',fail);};}
-function rememberScroll(){if(currentKey){scrolls.set(currentKey,scrollY);save('scroll-'+currentKey,String(scrollY));}}
-function legacyRoute(path,params){if(path.startsWith('/work/')){const sample=caseById(path.split('/')[2]);if(!sample)return null;const p=new URLSearchParams({case:sample.id});const from=params.get('from');if(from==='all'){const back=new URLSearchParams();if(params.get('q'))back.set('q',params.get('q'));p.set('from',routeUrl('/all',back).slice(1));}else if(legacyCollection[from])p.set('from','/all?collection='+from);else p.set('from','/');return routeUrl('/'+sample.domain+'/topic/'+sample.themeId,p);}if(path.startsWith('/room/')&&legacyCollection[path.split('/')[2]])return '#/all?collection='+path.split('/')[2];if(path==='/'&&legacyCollection[params.get('section')])return '#/all?collection='+params.get('section');return null;}
-function render(){stageCleanup();stageCleanup=()=>{};clearTimeout(stageTimer);activeCase=null;listing=null;defaultTheme();let {path,params,key}=parse();const direct=location.hash.slice(1);if(!location.hash.startsWith('#/')&&caseById(direct)){const sample=caseById(direct);history.replaceState(null,'',routeUrl('/'+sample.domain+'/topic/'+sample.themeId,new URLSearchParams({case:sample.id})));({path,params,key}=parse());}const legacy=legacyRoute(path,params);if(legacy){history.replaceState(null,'',legacy);({path,params,key}=parse());}const parts=path.split('/').filter(Boolean),domain=domainBy(parts[0]);let html,title='大厅';if(path==='/')html=home();else if(path==='/all'){html=archive(params);title='搜索馆藏';}else if(domain&&parts.length===1){html=domainPage(domain,params);title=domain.title;}else if(domain&&parts[1]==='topic'&&parts.length===3){const theme=themeBy(parts[2]);if(theme?.domain===domain.id){if(params.has('case')&&!theme.cases.some(sample=>sample.id===params.get('case'))){params.delete('case');key=path+(params.size?'?'+params:'');history.replaceState(null,'','#'+key);}html=themePage(theme,params);title=theme.title;}}if(!html){html='<div class="not-found"><div class="eyebrow">THEME NOT FOUND</div><h1>这条路径还没有主题。</h1><p>从大厅继续浏览。</p><a href="#/" class="text-link">返回大厅 →</a></div>';title='主题待创建';}if(listing){const valid=routeUrl(listing.path,listing.params);if(valid!=='#'+key){history.replaceState(null,'',valid);key=valid.slice(1);}}main.innerHTML=html;currentKey=key;document.title=`${title} · 设计画廊`;document.querySelectorAll('[data-nav]').forEach(link=>link.dataset.nav===(path==='/all'?'all':domain?.id)?link.setAttribute('aria-current','page'):link.removeAttribute('aria-current'));if(listing){updateResults();const input=document.querySelector('#search');if(input){input.addEventListener('input',()=>{input.value.trim()?listing.params.set('q',input.value):listing.params.delete('q');const next=routeUrl(listing.path,listing.params);history.replaceState(null,'',next);currentKey=next.slice(1);if(listing.domain)save('last-'+listing.domain.id,currentKey);updateResults();});document.querySelector('#clear-search').addEventListener('click',()=>{input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));input.focus();});}}if(activeCase)configureStage(activeCase);document.querySelector('#announcement').textContent=`${title}已打开`;const saved=scrolls.get(key)??Number(read('scroll-'+key,'0'));requestAnimationFrame(()=>window.scrollTo({top:Number.isFinite(saved)?saved:0,behavior:'instant'}));}
-window.addEventListener('message',event=>{const frame=document.querySelector('#exhibit-frame');if(!frame||event.source!==frame.contentWindow||event.origin!==location.origin||!activeCase?.embedSlug)return;const data=event.data;if(data?.type!=='gallery:stage'||data.slug!==activeCase.embedSlug)return;setStageHeight(frame,Number(data.height));if(data.accent&&CSS.supports('color',data.accent))document.documentElement.style.setProperty('--accent',data.accent);for(const [field,name] of [['auraA','--glow-a'],['auraB','--glow-b']])if(data[field]&&CSS.supports('color',data[field]))document.documentElement.style.setProperty(name,data[field]);});
-document.addEventListener('click',event=>{const link=event.target.closest('a');if(link?.hash?.startsWith('#/'))rememberScroll();});
-document.querySelector('.skip-link').addEventListener('click',event=>{event.preventDefault();main.focus();main.scrollIntoView();});
-window.addEventListener('hashchange',()=>{render();main.focus({preventScroll:true});});window.addEventListener('beforeunload',rememberScroll);
-window.addEventListener('keydown',event=>{if(event.key==='/'&&!event.metaKey&&!event.ctrlKey&&!event.altKey&&!document.activeElement.matches('input,textarea,select,[contenteditable]')){const search=document.querySelector('#search');if(search){event.preventDefault();search.focus();}}});
-document.querySelector('#footer-count').textContent=`${THEMES.length} THEMES / ${CASES.length} CASES ↗`;
+function resetAccent() {
+  const style = document.documentElement.style;
+  style.setProperty('--accent','#edbb95');
+  style.setProperty('--glow-a','rgba(170,101,135,.17)');
+  style.setProperty('--glow-b','rgba(219,149,95,.07)');
+}
+function tags(exhibit) {
+  return (exhibit.tags ?? []).length ? `<div class="tags" aria-label="标签">${exhibit.tags.map(tag => `<a class="tag" href="${escape(catalogUrl('',tag))}">${escape(tag)}</a>`).join('')}</div>` : '';
+}
+function card(exhibit,index) {
+  return `<article class="work-card" data-exhibit="${escape(exhibit.id)}"><a class="work-card-link" href="${escape(exhibitUrl(exhibit.id,route.url))}"><div class="preview ${exhibit.embedSlug ? '' : 'native-preview'}"><img src="${escape(exhibit.preview)}" alt="${escape(exhibit.title)}预览" width="960" height="613" ${index < 3 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div><div class="work-card-title"><h2>${escape(exhibit.title)}</h2><span aria-hidden="true">↗</span></div></a>${tags(exhibit)}</article>`;
+}
+function catalogPage() {
+  return `<section aria-labelledby="catalog-title"><div class="collection-heading"><div><div class="eyebrow">THE COLLECTION</div><h1 id="catalog-title">设计方案</h1><p>收集具体的设计方案，随时打开、操作和借用。</p></div><span class="count">${EXHIBITS.length} 件展品</span></div><div class="catalog-toolbar"><div id="result-count" role="status" aria-live="polite"></div><label class="archive-search"><span aria-hidden="true">⌕</span><input id="search" type="search" autocomplete="off" aria-label="搜索展品" placeholder="搜索标题或标签" value="${escape(route.query)}"></label></div><div id="active-filter"></div><div class="work-grid" id="catalog-results"></div><div class="empty-state" id="empty-state" hidden><p>还没有匹配的展品。</p><button class="text-link" id="clear-search" type="button">清空条件</button></div></section>`;
+}
+function updateResults() {
+  const list = sortedExhibits.filter(exhibit => matchesExhibit(exhibit,route.query) && (!route.tag || (exhibit.tags ?? []).some(tag => normalize(tag) === normalize(route.tag))));
+  document.querySelector('#catalog-results').innerHTML = list.map(card).join('');
+  document.querySelector('#result-count').textContent = route.query || route.tag ? `${list.length} 件匹配展品` : '全部展品 · 最新收录 ↓';
+  document.querySelector('#empty-state').hidden = list.length > 0;
+  document.querySelector('#active-filter').innerHTML = route.tag ? `<div class="active-filter"><span>标签：${escape(route.tag)}</span><a class="text-link" href="${escape(catalogUrl(route.query))}" aria-label="清除标签筛选">清除 ×</a></div>` : '';
+}
+function exhibitPage(exhibit) {
+  return `<nav class="breadcrumb" aria-label="当前位置"><a id="back-link" href="${escape(route.back)}">← 全部展品</a></nav><section aria-labelledby="work-title"><div class="work-heading"><h1 id="work-title">${escape(exhibit.title)}</h1>${tags(exhibit)}</div><div class="stage-shell" id="stage-shell" aria-busy="true"><div class="stage-status" id="stage-status" role="status"><span class="loading-dot" aria-hidden="true"></span><span id="stage-message">正在打开作品…</span><button id="retry-stage" type="button" hidden>重新载入</button></div><iframe id="exhibit-frame" title="${escape(exhibit.title)}展示台" src="${escape(exhibit.entry)}" referrerpolicy="no-referrer"></iframe></div>${exhibit.description ? `<p class="work-description">${escape(exhibit.description)}</p>` : ''}${exhibit.reference ? `<div class="provenance"><a href="${escape(exhibit.reference.url)}" target="_blank" rel="noreferrer">参考 ${escape(exhibit.reference.title)} ↗</a></div>` : ''}</section>`;
+}
+function configureStage(exhibit) {
+  const frame = document.querySelector('#exhibit-frame'), status = document.querySelector('#stage-status');
+  let observer, timer, disposed = false;
+  const fail = () => {
+    if (disposed) return;
+    clearTimeout(timer);
+    status.hidden = false;
+    document.querySelector('#stage-message').textContent = '展台暂时未能加载，请重新载入。';
+    document.querySelector('#retry-stage').hidden = false;
+    document.querySelector('#stage-shell').setAttribute('aria-busy','false');
+  };
+  const onLoad = () => {
+    if (disposed) return;
+    try {
+      const doc = frame.contentDocument;
+      if (!doc?.body || doc.title === 'Error response') return fail();
+      let content;
+      if (exhibit.embedSlug) {
+        if (!doc.getElementById(exhibit.embedSlug)?.classList.contains('active')) return fail();
+        const style = doc.createElement('style');
+        style.textContent = '.reorder-inspector{display:none!important}.reorder-stage-body{grid-template-columns:minmax(0,1fr)!important}';
+        doc.head.append(style);
+        content = doc.querySelector('#monolith-frame');
+      } else {
+        if (legacyNative.has(exhibit.id)) {
+          if (!doc.querySelector('#frame,#stage')) return fail();
+          const style = doc.createElement('style');
+          style.textContent = 'main>header,.ban,.note{display:none!important}main{padding:24px!important}';
+          doc.head.append(style);
+        }
+        content = doc.querySelector('main') ?? doc.body;
+      }
+      if (!content) return fail();
+      const fit = () => {
+        if (disposed) return;
+        const height = Math.ceil(content.getBoundingClientRect().height);
+        if (Number.isFinite(height) && height >= 100 && height <= 15000 && frame.style.height !== height+'px') frame.style.height = height+'px';
+      };
+      observer?.disconnect();
+      observer = new ResizeObserver(fit);
+      observer.observe(content);
+      fit();
+      clearTimeout(timer);
+      status.hidden = true;
+      document.querySelector('#stage-shell').setAttribute('aria-busy','false');
+    } catch { fail(); }
+  };
+  const startTimer = () => { clearTimeout(timer); timer = setTimeout(fail,12000); };
+  const retry = () => {
+    observer?.disconnect();
+    document.querySelector('#stage-message').textContent = '正在重新载入…';
+    document.querySelector('#retry-stage').hidden = true;
+    document.querySelector('#stage-shell').setAttribute('aria-busy','true');
+    startTimer();
+    frame.src = exhibit.entry;
+  };
+  frame.addEventListener('load',onLoad);
+  frame.addEventListener('error',fail);
+  document.querySelector('#retry-stage').addEventListener('click',retry);
+  startTimer();
+  stageCleanup = () => { disposed = true; clearTimeout(timer); observer?.disconnect(); frame.removeEventListener('load',onLoad); frame.removeEventListener('error',fail); };
+}
+function render() {
+  stageCleanup();
+  stageCleanup = () => {};
+  resetAccent();
+  route = resolveRoute(location.hash);
+  if (route.url !== location.hash && route.kind !== 'missing') history.replaceState(null,'',route.url);
+  currentKey = route.url;
+  let title = '设计方案';
+  if (route.kind === 'catalog') {
+    main.innerHTML = catalogPage();
+    updateResults();
+    const input = document.querySelector('#search');
+    input.addEventListener('input',() => {
+      route.query = input.value.trim();
+      route.url = catalogUrl(route.query,route.tag);
+      history.replaceState(null,'',route.url);
+      currentKey = route.url;
+      updateResults();
+    });
+    document.querySelector('#clear-search').addEventListener('click',() => {
+      route.query = route.tag = '';
+      route.url = catalogUrl();
+      history.replaceState(null,'',route.url);
+      currentKey = route.url;
+      input.value = '';
+      updateResults();
+      input.focus();
+    });
+  } else if (route.kind === 'exhibit') {
+    const exhibit = exhibitById(route.id);
+    title = exhibit.title;
+    main.innerHTML = exhibitPage(exhibit);
+    configureStage(exhibit);
+  } else {
+    title = '展品待收录';
+    main.innerHTML = '<section class="empty-state"><h1>这件展品还未收录</h1><a class="text-link" href="#/">返回全部展品 →</a></section>';
+  }
+  document.title = `${title} · 设计画廊`;
+  document.querySelector('#announcement').textContent = `${title}已打开`;
+  const saved = scrolls.get(currentKey) ?? Number(read('scroll-'+currentKey) ?? 0);
+  requestAnimationFrame(() => window.scrollTo({top:Number.isFinite(saved) ? saved : 0,behavior:'instant'}));
+}
+window.addEventListener('message',event => {
+  const frame = document.querySelector('#exhibit-frame'), exhibit = route.kind === 'exhibit' && exhibitById(route.id);
+  if (!frame || event.source !== frame.contentWindow || event.origin !== location.origin || !exhibit?.embedSlug) return;
+  const data = event.data;
+  if (data?.type !== 'gallery:stage' || data.slug !== exhibit.embedSlug) return;
+  const height = Number(data.height);
+  if (Number.isFinite(height) && height >= 100 && height <= 15000) frame.style.height = Math.ceil(height)+'px';
+  for (const [field,name] of [['accent','--accent'],['auraA','--glow-a'],['auraB','--glow-b']]) {
+    if (data[field] && CSS.supports('color',data[field])) document.documentElement.style.setProperty(name,data[field]);
+  }
+});
+document.addEventListener('click',event => { if (event.target.closest('a')?.hash?.startsWith('#/')) rememberScroll(); });
+document.querySelector('.skip-link').addEventListener('click',event => { event.preventDefault(); main.focus(); main.scrollIntoView(); });
+window.addEventListener('hashchange',() => { render(); main.focus({preventScroll:true}); });
+window.addEventListener('beforeunload',rememberScroll);
+window.addEventListener('keydown',event => {
+  if (event.key === '/' && !event.metaKey && !event.ctrlKey && !event.altKey && !document.activeElement.matches('input,textarea,select,[contenteditable]')) {
+    const search = document.querySelector('#search');
+    if (search) { event.preventDefault(); search.focus(); }
+  }
+});
+document.querySelector('#footer-count').textContent = `${EXHIBITS.length} 件展品 ↗`;
 render();

@@ -1,17 +1,14 @@
 ---
-title: GSAP 帧检卡片联播
-collected_at: 2026-10-20
-version: v1
-domain: video
-category: interface
-theme: product-launch
-case: gsap-framecheck-cards
-preview: ../assets/gsap-framecheck-cards/v1/preview.png
-entry: ../index.html#/video/topic/product-launch?case=gsap-framecheck-cards
+title: "产品发布的卡片级联短片"
+collected_at: "2026-10-20"
+version: "v1"
+preview: "../assets/gsap-framecheck-cards/v1/preview.png"
+entry: "../index.html#/exhibit/gsap-framecheck-cards"
+tags: ["发布短片","卡片","GSAP"]
 ---
 
-# GSAP 帧检卡片联播
+# 产品发布的卡片级联短片
 
-此案例归入[把发布信息变成短片](product-launch.md)主题。
+![产品发布的卡片级联短片](../assets/gsap-framecheck-cards/v1/preview.png)
 
-[体验卡片级联](../index.html#/video/topic/product-launch?case=gsap-framecheck-cards)
+[打开作品](../index.html#/exhibit/gsap-framecheck-cards)
