@@ -1,0 +1,492 @@
+[
+  {
+    "frame": 0,
+    "duration": 0.04,
+    "worldRootX": 161.0,
+    "head": [
+      173,
+      116
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 0
+  },
+  {
+    "frame": 1,
+    "duration": 0.04,
+    "worldRootX": 170.0,
+    "head": [
+      180,
+      110
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 2
+  },
+  {
+    "frame": 2,
+    "duration": 0.04,
+    "worldRootX": 184.0,
+    "head": [
+      191,
+      111
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 5
+  },
+  {
+    "frame": 3,
+    "duration": 0.04,
+    "worldRootX": 197.0,
+    "head": [
+      200,
+      111
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 9
+  },
+  {
+    "frame": 4,
+    "duration": 0.04,
+    "worldRootX": 223.0,
+    "head": [
+      216,
+      112
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 19
+  },
+  {
+    "frame": 5,
+    "duration": 0.04,
+    "worldRootX": 238.0,
+    "head": [
+      225,
+      115
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 25
+  },
+  {
+    "frame": 6,
+    "duration": 0.04,
+    "worldRootX": 243.0,
+    "head": [
+      226,
+      118
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 29
+  },
+  {
+    "frame": 7,
+    "duration": 0.04,
+    "worldRootX": 259.0,
+    "head": [
+      231,
+      120
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 40
+  },
+  {
+    "frame": 8,
+    "duration": 0.04,
+    "worldRootX": 275.0,
+    "head": [
+      235,
+      112
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 52
+  },
+  {
+    "frame": 9,
+    "duration": 0.04,
+    "worldRootX": 290.0,
+    "head": [
+      241,
+      111
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 61
+  },
+  {
+    "frame": 10,
+    "duration": 0.04,
+    "worldRootX": 308.0,
+    "head": [
+      249,
+      109
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 71
+  },
+  {
+    "frame": 11,
+    "duration": 0.04,
+    "worldRootX": 321.0,
+    "head": [
+      253,
+      110
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 80
+  },
+  {
+    "frame": 12,
+    "duration": 0.04,
+    "worldRootX": 340.0,
+    "head": [
+      257,
+      112
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 95
+  },
+  {
+    "frame": 13,
+    "duration": 0.04,
+    "worldRootX": 364.0,
+    "head": [
+      265,
+      113
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 111
+  },
+  {
+    "frame": 14,
+    "duration": 0.04,
+    "worldRootX": 369.0,
+    "head": [
+      265,
+      114
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 116
+  },
+  {
+    "frame": 15,
+    "duration": 0.04,
+    "worldRootX": 380.0,
+    "head": [
+      264,
+      119
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 128
+  },
+  {
+    "frame": 16,
+    "duration": 0.04,
+    "worldRootX": 399.0,
+    "head": [
+      260,
+      119
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 151
+  },
+  {
+    "frame": 17,
+    "duration": 0.04,
+    "worldRootX": 414.0,
+    "head": [
+      263,
+      113
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 163
+  },
+  {
+    "frame": 18,
+    "duration": 0.04,
+    "worldRootX": 420.0,
+    "head": [
+      264,
+      113
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 168
+  },
+  {
+    "frame": 19,
+    "duration": 0.04,
+    "worldRootX": 435.0,
+    "head": [
+      265,
+      111
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 182
+  },
+  {
+    "frame": 20,
+    "duration": 0.04,
+    "worldRootX": 463.0,
+    "head": [
+      269,
+      111
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 206
+  },
+  {
+    "frame": 21,
+    "duration": 0.04,
+    "worldRootX": 477.0,
+    "head": [
+      271,
+      112
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 218
+  },
+  {
+    "frame": 22,
+    "duration": 0.04,
+    "worldRootX": 491.0,
+    "head": [
+      272,
+      113
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 231
+  },
+  {
+    "frame": 23,
+    "duration": 0.04,
+    "worldRootX": 503.0,
+    "head": [
+      272,
+      117
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 243
+  },
+  {
+    "frame": 24,
+    "duration": 0.04,
+    "worldRootX": 522.0,
+    "head": [
+      265,
+      117
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 269
+  },
+  {
+    "frame": 25,
+    "duration": 0.04,
+    "worldRootX": 528.0,
+    "head": [
+      265,
+      118
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 275
+  },
+  {
+    "frame": 26,
+    "duration": 0.04,
+    "worldRootX": 541.0,
+    "head": [
+      265,
+      113
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 288
+  },
+  {
+    "frame": 27,
+    "duration": 0.04,
+    "worldRootX": 555.0,
+    "head": [
+      267,
+      110
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 300
+  },
+  {
+    "frame": 28,
+    "duration": 0.04,
+    "worldRootX": 585.0,
+    "head": [
+      272,
+      111
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 325
+  },
+  {
+    "frame": 29,
+    "duration": 0.04,
+    "worldRootX": 591.0,
+    "head": [
+      272,
+      111
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 331
+  },
+  {
+    "frame": 30,
+    "duration": 0.04,
+    "worldRootX": 609.0,
+    "head": [
+      275,
+      113
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 346
+  },
+  {
+    "frame": 31,
+    "duration": 0.04,
+    "worldRootX": 622.0,
+    "head": [
+      275,
+      114
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 359
+  },
+  {
+    "frame": 32,
+    "duration": 0.04,
+    "worldRootX": 639.0,
+    "head": [
+      267,
+      123
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 384
+  },
+  {
+    "frame": 33,
+    "duration": 0.04,
+    "worldRootX": 650.0,
+    "head": [
+      265,
+      119
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 397
+  },
+  {
+    "frame": 34,
+    "duration": 0.04,
+    "worldRootX": 665.0,
+    "head": [
+      267,
+      114
+    ],
+    "anchor": [
+      64,
+      128
+    ],
+    "offset": 410
+  }
+]

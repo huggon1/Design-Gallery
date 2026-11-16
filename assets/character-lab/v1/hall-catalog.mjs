@@ -121,6 +121,46 @@ export const EXHIBITS={
         "./exhibits/celeste/README.md"
       ]
     ]
+  },
+  "dead-cells": {
+    "category": "side",
+    "work": "character-actions",
+    "name": "死亡细胞",
+    "path": "./exhibits/dead-cells/scene.mjs",
+    "keys": [
+      [
+        "W A S D",
+        "方向"
+      ],
+      [
+        "Space / K",
+        "跳跃"
+      ],
+      [
+        "L",
+        "翻滚"
+      ],
+      [
+        "S + Space",
+        "下落"
+      ],
+      [
+        "J",
+        "挥刀"
+      ]
+    ],
+    "touch": {
+      "jump": "跳",
+      "dash": "滚",
+      "attack": "斩"
+    },
+    "source": "角色帧与音效来自死亡细胞社区移植素材。控制、动画时长和头部烟雾为本实验重建。",
+    "links": [
+      [
+        "参考与制作",
+        "./exhibits/dead-cells/README.md"
+      ]
+    ]
   }
 };
 export const WORKS={
