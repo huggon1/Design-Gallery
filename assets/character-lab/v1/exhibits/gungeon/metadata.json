@@ -1,0 +1,102 @@
+{
+  "id": "gungeon",
+  "name": "Enter the Gungeon · Marine",
+  "category": "top",
+  "path": "./exhibits/gungeon/scene.mjs",
+  "sections": [
+    {
+      "id": "move-aim",
+      "label": "走位与瞄准"
+    },
+    {
+      "id": "sidearm",
+      "label": "射击与换弹"
+    },
+    {
+      "id": "roll-lane",
+      "label": "翻滚弹线"
+    }
+  ],
+  "keys": [
+    [
+      "WASD",
+      "走位"
+    ],
+    [
+      "鼠标",
+      "瞄准"
+    ],
+    [
+      "左键 / J",
+      "射击"
+    ],
+    [
+      "Space / L / 右键",
+      "翻滚"
+    ],
+    [
+      "U",
+      "换弹"
+    ],
+    [
+      "方向键",
+      "四向瞄准射击"
+    ]
+  ],
+  "bindings": {
+    "Space": "dash",
+    "KeyK": "dash",
+    "KeyL": "dash",
+    "KeyJ": "attack",
+    "KeyU": "reload",
+    "ArrowUp": "fireUp",
+    "ArrowDown": "fireDown",
+    "ArrowLeft": "fireLeft",
+    "ArrowRight": "fireRight"
+  },
+  "inputMode": "four-way",
+  "touch": {
+    "attack": "射",
+    "dash": "滚",
+    "reload": "弹"
+  },
+  "source": "ETGMod 原作资源导出：Marine 4帧待机、6帧移动、9帧翻滚；原 Marine Sidearm、手套、护甲损失与头盔脱落，原枪械挂点。时序与身体持枪挂点为重建。",
+  "links": [
+    [
+      "角色动作查看器",
+      "./exhibits/gungeon/character-review.html"
+    ],
+    [
+      "原帧导出来源",
+      "https://modworkshop.net/mod/17528"
+    ],
+    [
+      "TSR Marine 156473",
+      "https://www.spriters-resource.com/pc_computer/enterthegungeon/asset/156473/"
+    ],
+    [
+      "官方连续实机",
+      "https://store.steampowered.com/app/311690/"
+    ],
+    [
+      "设计师翻滚说明",
+      "https://blog.playstation.com/2016/04/05/how-to-get-started-in-enter-the-gungeon-on-ps4/"
+    ]
+  ],
+  "readiness": "ready_for_review",
+  "knownDifferences": [
+    "原帧导出包为2016年版本；与当前发行版的逐像素一致性待复核。",
+    "待机4fps、行走12fps、翻滚九帧边界和56px位移曲线为重建；固定Marine输入实录逐帧校准待补。",
+    "角色持枪挂点和后坐、换弹摆幅为重建；枪械握点、掉匣点与抛壳点来自原JSON。",
+    "头盔脱落使用原作12帧，20fps与抛掷轨道为重建。",
+    "连续参考为官方更新预告，片中角色与装备和Marine初始配置有差异。",
+    "房间、木靶、慢弹线、碎片与合成短音服务于本次动作观察。",
+    "受击保护1.1秒；生命降至1后恢复6点，供连续观察。",
+    "原作图像用于本地研究，公开收录素材范围由父聊天核对。"
+  ],
+  "characterReview": "character-review.html",
+  "harness": "harness.html",
+  "runtimeDependencies": "all relative to exhibits/gungeon",
+  "updatedAt": "2026-11-16T20:40:49.781049+08:00",
+  "comparison": "comparison.html"
+}

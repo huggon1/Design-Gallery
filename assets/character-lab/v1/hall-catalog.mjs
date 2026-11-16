@@ -263,6 +263,55 @@ export const EXHIBITS={
         "./exhibits/brotato/README.md"
       ]
     ]
+  },
+  "gungeon": {
+    "category": "top",
+    "work": "topdown-actions",
+    "name": "挺进地牢",
+    "keys": [
+      [
+        "W A S D",
+        "移动"
+      ],
+      [
+        "鼠标",
+        "瞄准"
+      ],
+      [
+        "J / 左键",
+        "射击"
+      ],
+      [
+        "Space / L",
+        "翻滚"
+      ],
+      [
+        "K / U",
+        "换弹"
+      ]
+    ],
+    "bindings": {
+      "Space": "dash",
+      "KeyK": "reload",
+      "KeyU": "reload"
+    },
+    "inputMode": "aim",
+    "mouse": {
+      "left": "attack"
+    },
+    "touch": {
+      "attack": "射",
+      "dash": "滚",
+      "reload": "弹"
+    },
+    "source": "Marine 原始方向帧、九帧翻滚与独立初始手枪。翻滚时间、位移、枪械挂点与声音按参考重建。",
+    "path": "./exhibits/gungeon/scene.mjs",
+    "links": [
+      [
+        "参考与制作",
+        "./exhibits/gungeon/README.md"
+      ]
+    ]
   }
 };
 export const WORKS={
