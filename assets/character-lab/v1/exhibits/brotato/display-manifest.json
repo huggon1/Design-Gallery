@@ -1,0 +1,20 @@
+{
+  "game": "brotato",
+  "collected": "2026-11-16",
+  "files": {
+    "README.md": "edff11b07d4c49e4d414e8773b3104b129cccf77d633c6cb3f10189ad3f5de8e",
+    "assets/base.png": "dda1dfa5e572bee927702bd56c941789064f5fbfcaf19e1259b68bac6718924f",
+    "assets/base_no_legs.png": "e1e2557858ad24db36817309c2d7881e9808801b1b5ec59b34a2921c67a36729",
+    "assets/legs.png": "62515c03227f81fdb32be436e0db9bb9da88d79f2410c23fc8d98c8b891240a6",
+    "assets/pistol-native.png": "a1ee9c18211f42809a1543f53fffa8ec4525323562959510447c40042a9a6699",
+    "assets/pistol.png": "2ac27381c7a46e93964764baf81154dfdcf47f47dfcadc4183d68ba3a82a2930",
+    "assets/well_rounded.png": "5666cfd38fc3a077c8ce236bba90831872284129724abb6830089bf7b25b0be9",
+    "assets/well_rounded_eyes.png": "e22f96ba668b2b63965f7c6f0209e791c46eee68a4098bd4413d702ed566c0de",
+    "assets/well_rounded_mouth.png": "ee627ca56bbcec2a7c4493c97f8438f7f90a9abae69d209aaabc34f091d325fa",
+    "character.mjs": "c351d787942075721a43bd6d1c9034b550cc7766a1903b97a7da2099137522a2",
+    "metadata.json": "9f489fc566237ced67a001d79d29e56697663ce742728dbd61bf473019dc9ffc",
+    "motion.mjs": "21e450eb037e23acddd8c4b740d824c63f0e7c023b612da13889153abae6cade",
+    "scene.mjs": "3395d73b81fcd955787cfb7e77b7b2b3cb126e5cf92f32160db3844ab631d09b",
+    "verification.png": "7277415f9fbf850c3f9a0f086a014a3d1c3602d758160ac81615233bbf095cc8"
+  }
+}

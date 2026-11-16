@@ -1,0 +1,72 @@
+{
+  "id": "brotato",
+  "name": "Brotato · 走位与自动攻击",
+  "category": "top",
+  "sections": [
+    {
+      "id": "arena",
+      "label": "走位与追踪"
+    },
+    {
+      "id": "targets",
+      "label": "单枪与目标"
+    }
+  ],
+  "keys": [
+    {
+      "keys": "WASD / 方向键",
+      "label": "全向走位"
+    },
+    {
+      "keys": "自动",
+      "label": "选敌与射击"
+    }
+  ],
+  "bindings": {
+    "move": [
+      "KeyW",
+      "KeyA",
+      "KeyS",
+      "KeyD",
+      "ArrowUp",
+      "ArrowLeft",
+      "ArrowDown",
+      "ArrowRight"
+    ],
+    "attack": "auto",
+    "aim": "auto"
+  },
+  "touch": {
+    "move": true,
+    "actions": [],
+    "automaticAttack": true
+  },
+  "source": "Blobfish 官方 press kit：身体、眼睛、嘴；固定版本原生角色步态、脚与手枪；第1波全能者单手枪连续实录。",
+  "links": [
+    {
+      "label": "Blobfish 官方 press kit",
+      "url": "https://blobfishgames.notion.site/Brotato-cb88a14520ba4703ae9aed4ab438427c"
+    },
+    {
+      "label": "全能者＋手枪第1波实录 · 8秒起",
+      "url": "https://www.youtube.com/watch?v=UrgUJlDarBk&t=8s"
+    },
+    {
+      "label": "角色动作查看器",
+      "url": "./exhibits/brotato/character-review.html"
+    }
+  ],
+  "readiness": "ready_for_review",
+  "knownDifferences": [
+    "目标、慢追踪敌人、地面和短音为本样本重建。",
+    "练习场使用确定的1.2秒射击间隔；原生单武器冷却存在随机偏差。",
+    "生命最小保留1，供连续研究受击。",
+    "基础轨道来自固定版本资源；原作输入时刻与当前发布版本的逐帧一致性待实测。",
+    "原图用于本地研究；公开收录前由父聊天核对素材用途范围。",
+    "受击保护与练习对象恢复供连续观察，时长按样本配置。"
+  ],
+  "characterReview": "character-review.html",
+  "harness": "harness.html",
+  "runtimeDependencies": "all relative to exhibits/brotato",
+  "updatedAt": "2026-11-16T20:30:05.901247+08:00"
+}
