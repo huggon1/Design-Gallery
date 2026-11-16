@@ -1,0 +1,22 @@
+{
+  "game": "isaac",
+  "collected": "2026-11-16",
+  "files": {
+    "README.md": "ce7fb0ca3cbb07d7427afb69b5c7e1dc41c317ac581b77aa1c8e9e27e9e5c9de",
+    "assets/001.000_player.anm2": "d8fcf61361ae5fbec6c4b0ab3b48a70f541aa32da67bc941bcb48f5bd4cbe5df",
+    "assets/002.000_tear.anm2": "a625b5206200c9a87d4474c52d3ddcafc525ea23c7e3c37b8c8d7a1aeba5effd",
+    "assets/1000.012_tear poof_small.anm2": "f947186017f8f6402ffed4192460b6250127bff6fc1f86aa2a7693c95d13e126",
+    "assets/1000.012_tear poofa.anm2": "8b04465e99c2b7d6062b63dd88bbab259d30919bcc1dee63b3c2426e0ba774ba",
+    "assets/1000.013_tear poofb.anm2": "5f831bc802a3af14054132354f259f3bcfca1785776e42993b22dd74670b89a5",
+    "assets/animations.json": "98db877b9d233fc686d39e0dd5e512cb262eeb4778c808f81fbb70dbe5b5aec5",
+    "assets/bulletatlas.png": "4e742adf6eafc5978801a31573c4a5dfc5dcf5c78713aaf9f010dc06a7638102",
+    "assets/character_001_isaac.png": "0b2e616820b17f5780c34c57543281977ac1f4c1ac40e980a23e8492c1ec9006",
+    "assets/tears.json": "b53187e63e255c93fba75726815a764202b71ee40c2092823689e7d9e9dfb148",
+    "character.mjs": "28ee57aa31ba5064f49c2bd63d140355018bf245e168cf63f0ca0cdac1cdbbd2",
+    "metadata.json": "085cdfc3dcf56932dbcbc5eb6b8d09cffe76523424f48119b4cdbf38e7301978",
+    "physics.mjs": "ad71dfae38be96dbfe85496ba487d51fc1be09c10111220784be273efca073dc",
+    "scene.mjs": "20ac978de2c15feb7e7d5444bc06fa325181e47b2412659ff523719d8d72d6c7",
+    "tears.mjs": "f946392ddc3c554d97cd7bff8d8068305b62904c88714839690de768d9969740",
+    "verification.png": "1253712401026e89ab876d43f165426e5947f2eb8ace366f870668e12c464065"
+  }
+}

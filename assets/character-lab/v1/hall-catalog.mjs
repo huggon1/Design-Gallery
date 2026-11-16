@@ -312,6 +312,46 @@ export const EXHIBITS={
         "./exhibits/gungeon/README.md"
       ]
     ]
+  },
+  "isaac": {
+    "category": "top",
+    "work": "topdown-actions",
+    "name": "以撒的结合",
+    "keys": [
+      [
+        "W A S D",
+        "移动"
+      ],
+      [
+        "↑ ↓ ← → / I K J L",
+        "发射"
+      ]
+    ],
+    "bindings": {
+      "ArrowUp": "fireUp",
+      "ArrowDown": "fireDown",
+      "ArrowLeft": "fireLeft",
+      "ArrowRight": "fireRight",
+      "KeyI": "fireUp",
+      "KeyK": "fireDown",
+      "KeyJ": "fireLeft",
+      "KeyL": "fireRight",
+      "Space": null,
+      "ShiftLeft": null,
+      "ShiftRight": null
+    },
+    "inputMode": "four-way",
+    "touch": {
+      "fire": true
+    },
+    "source": "原始 PNG 与 ANM2 保留头身分向、眼部挂点、普通泪弹与水花。惯性、弹道和声音为本次重建。",
+    "path": "./exhibits/isaac/scene.mjs",
+    "links": [
+      [
+        "参考与制作",
+        "./exhibits/isaac/README.md"
+      ]
+    ]
   }
 };
 export const WORKS={

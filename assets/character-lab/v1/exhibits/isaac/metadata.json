@@ -1,0 +1,39 @@
+{
+  "id": "isaac",
+  "name": "以撒的结合 · 头身分向与普通泪弹",
+  "category": "top",
+  "sections": [
+    {"id": "room", "label": "绕石 · 四向发射"},
+    {"id": "range", "label": "弹道 · 起停与射程"},
+    {"id": "chase", "label": "慢追踪 · 移动发射"}
+  ],
+  "keys": [["W A S D", "移动"], ["↑ ↓ ← → / I K J L", "四向发射"]],
+  "bindings": {"ArrowUp":"fireUp","ArrowDown":"fireDown","ArrowLeft":"fireLeft","ArrowRight":"fireRight","KeyI":"fireUp","KeyK":"fireDown","KeyJ":"fireLeft","KeyL":"fireRight","Space":null,"ShiftLeft":null,"ShiftRight":null},
+  "inputMode": "four-way",
+  "touch": {"fire": true},
+  "source": "Rebirth 基础 Isaac。角色采用原始 PNG 与 ANM2 的分层、裁剪、pivot、镜像、眼部 Null 与帧序；普通泪弹、水花采用原始 BulletAtlas。惯性、弹道和命中参数为本次重建值。",
+  "links": [
+    ["动作与原帧", "./exhibits/isaac/character-review.html"],
+    ["原片对照", "./exhibits/isaac/comparison.html"],
+    ["独立练习场", "./exhibits/isaac/harness.html"],
+    ["制作记录", "./exhibits/isaac/README.md"],
+    ["正式版实机", "https://www.youtube.com/watch?v=EkHQn_D0exQ&t=25s"],
+    ["原图集", "https://www.spriters-resource.com/pc_computer/bindingofisaacrebirth/asset/64491/"]
+  ],
+  "readiness": "ready_for_review",
+  "characterAssets": "original_sprite_layers_and_anm2",
+  "knownDifferences": [
+    "加速、松键衰减、反向时间、发射间隔、泪弹速度、速度继承和重力使用明确的重建参数，等待原作带输入录像校准。",
+    "素材归档含后续扩展资源。本样本使用基础 Isaac 的共享 Walk/Head/Hit 与普通泪弹；Rebirth 安装文件版本字节核对待补。",
+    "泪弹选用原 ANM2 默认 RegularTear6，水花选用 small Poof。Rebirth 初始配置的实际选档、引擎缩放与颜色处理待原片进一步校准。",
+    "房间、石头、木靶、慢追踪木偶和木屑为本样本制作。",
+    "音效为 WebAudio 合成，原版音色和混音待后续制作。"
+  ],
+  "verification": {
+    "physics": "tests/physics.test.mjs",
+    "browser": "artifacts/browser-validation.json",
+    "recording": "artifacts/isaac-validation.webm",
+    "referencePlayback": "reference/retail-playback.webm",
+    "comparison": "artifacts/original-comparison.png"
+  }
+}
