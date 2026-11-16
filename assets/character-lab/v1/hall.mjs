@@ -94,13 +94,14 @@ function frame(timestamp){
   catch(error){closeScene();console.error(error);overlay.className='stage-overlay error';overlay.textContent='场景运行中断，请切换角色或刷新重试。';overlay.hidden=false;}
   raf=requestAnimationFrame(frame);
 }
+function unlockAudio(){if(!muted)transport.scene?.unlockAudio?.();}
 const keymap={KeyA:'left',ArrowLeft:'left',KeyD:'right',ArrowRight:'right',KeyW:'up',ArrowUp:'up',KeyS:'down',ArrowDown:'down',Space:'jump',KeyK:'jump',ShiftLeft:'dash',ShiftRight:'dash',KeyL:'dash',KeyJ:'attack',KeyC:'grab',KeyZ:'grab',KeyI:'special',KeyU:'reload'};
 const keyAction=code=>{const bindings=exhibits[currentId]?.bindings;return bindings&&Object.hasOwn(bindings,code)?bindings[code]:keymap[code];};
 on(document,'keydown',event=>{
   if(event.metaKey||event.ctrlKey||event.altKey||!ready)return;
   if(event.target!==canvas&&event.target!==document.body)return;
   const action=keyAction(event.code);
-  if(action){event.preventDefault();if(!transport.paused&&!event.repeat){input.hold(event.code,action);transport.scene?.unlockAudio?.();}}
+  if(action){event.preventDefault();if(!transport.paused&&!event.repeat){input.hold(event.code,action);unlockAudio();}}
   else if(!event.repeat&&event.code==='KeyR'){event.preventDefault();reset();}
   else if(!event.repeat&&event.code==='KeyP'){event.preventDefault();setPaused(!transport.paused);}
 });
@@ -111,7 +112,7 @@ function mouseAction(button){return exhibits[currentId]?.mouse?.[button===0?'lef
 function syncMouse(event){for(const [button,mask] of [[0,1],[2,2]]){const action=mouseAction(button);if(action&&(event.buttons&mask))input.hold(`mouse:${button}`,action);else input.release(`mouse:${button}`);}}
 on(canvas,'pointermove',event=>{if(ready&&!transport.paused&&exhibits[currentId]?.inputMode==='aim'){pointerAim(event);if(event.pointerType==='mouse')syncMouse(event);}});
 on(canvas,'pointerdown',event=>{
-  focusStage();transport.scene?.unlockAudio?.();if(!ready||transport.paused)return;
+  focusStage();unlockAudio();if(!ready||transport.paused)return;
   const exhibit=exhibits[currentId];let action=null;
   if(exhibit.inputMode==='tap')action='jump';
   else if(exhibit.inputMode==='aim'){
@@ -127,7 +128,7 @@ on(canvas,'pointerup',event=>{input.release(`canvas:${event.pointerId}`);if(even
 for(const name of ['pointercancel','lostpointercapture'])on(canvas,name,event=>{input.release(`canvas:${event.pointerId}`);if(!event.buttons){input.release('mouse:0');input.release('mouse:2');}});
 on(canvas,'contextmenu',event=>{if(exhibits[currentId]?.inputMode==='aim')event.preventDefault();});
 for(const b of $$('[data-hold]')){
-  on(b,'pointerdown',event=>{event.preventDefault();if(!ready||transport.paused)return;b.setPointerCapture(event.pointerId);input.hold(`pointer:${event.pointerId}`,b.dataset.hold);b.classList.add('is-held');transport.scene?.unlockAudio?.();});
+  on(b,'pointerdown',event=>{event.preventDefault();if(!ready||transport.paused)return;b.setPointerCapture(event.pointerId);input.hold(`pointer:${event.pointerId}`,b.dataset.hold);b.classList.add('is-held');unlockAudio();});
   const release=event=>{input.release(`pointer:${event.pointerId}`);b.classList.remove('is-held');};on(b,'pointerup',release);on(b,'pointercancel',release);on(b,'lostpointercapture',release);
 }
 on($('.exhibit-tabs'),'click',event=>{const button=event.target.closest('[data-exhibit]');if(button)navigate(button.dataset.exhibit);});
@@ -140,7 +141,7 @@ for(const b of $$('[data-command]'))on(b,'click',async()=>{
   if(command==='pause'){setPaused(!transport.paused);focusStage();}
   if(command==='speed'){transport.setSpeed(transport.speed===1?.5:1);b.textContent=`${transport.speed}×`;b.setAttribute('aria-pressed',String(transport.speed!==1));focusStage();}
   if(command==='debug'){debug=!debug;b.setAttribute('aria-pressed',String(debug));focusStage();}
-  if(command==='sound'){muted=!muted;transport.scene?.unlockAudio?.();transport.scene?.setMuted?.(muted);b.setAttribute('aria-label',muted?'开启声音':'关闭声音');b.title=muted?'开启声音':'关闭声音';b.setAttribute('aria-pressed',String(!muted));focusStage();}
+  if(command==='sound'){muted=!muted;unlockAudio();transport.scene?.setMuted?.(muted);b.setAttribute('aria-label',muted?'开启声音':'关闭声音');b.title=muted?'开启声音':'关闭声音';b.setAttribute('aria-pressed',String(!muted));focusStage();}
   if(command==='fullscreen'){try{if(document.fullscreenElement)await document.exitFullscreen();else await $('.hall').requestFullscreen();}catch{toast('当前窗口请使用浏览器全屏');}focusStage();}
   if(command==='link'){try{await navigator.clipboard.writeText(location.href.split('#')[0]+workHash(currentId,currentArea));toast('已复制展品链接');}catch{toast('请复制地址栏中的展品链接');}}
 });
