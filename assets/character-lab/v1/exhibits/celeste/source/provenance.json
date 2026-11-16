@@ -1,0 +1,26 @@
+{
+  "repository": "https://github.com/huggon1/eri",
+  "branch": "main",
+  "commit": "e177c9414a48ed13a98a7ad1563dcf1eff5ed75f",
+  "copiedAt": "2026-11-12",
+  "originalCheckout": "experiments/celeste-study/eri",
+  "filesSHA256": {
+    "renderer.js": "0740082fa6d5843e02e10f99a5480f5ac3f09e5c99b7eaef5677b394a4ba810f",
+    "holdables.js": "5b912880d3cb2eecb4c98c6aef292a1958ba52b7e2bf79577df98f0abc0c9127",
+    "THIRD-PARTY-NOTICES.md": "7092d6ee476781335bf4fea7cc3ba000d2c767055c449683cfbfa39bbf8fd0d8",
+    "rooms.js": "c09788303e4d17c8f111cdabbae535d44bb64019e0ba74f5f9d37031d81cbb98",
+    "jelly-art.js": "fe526da14a5cce7e844da4d0b407cc90a6de4bdf300631dc06aadec1abf6313d",
+    "audio.js": "3e034a53cc77653ebb8cd56dd291472b0850f2566c6fbc27ffc87e696efde479",
+    "physics.js": "59cc8d237f8866849de3413b6f3624da4f9cba93f056382e90f41f4fa88f2a9b",
+    "character.js": "6723f232e26c85196283e671423a2c5f72aee31ff9ebd778384fe619f40e770b"
+  },
+  "originalBundleSHA256": "70c99a4fdd6ab440deffec3aa4477c4fbfa8097e5a93917ba45ee7988ccaa4c0",
+  "adapterChanges": [
+    "neutral background and platform drawing",
+    "visible room bounds and recovery floor",
+    "gallery input and lifecycle bridge",
+    "continuous practice instead of course completion"
+  ],
+  "originalCharacterUnchanged": true,
+  "originalPhysicsUnchanged": true
+}
