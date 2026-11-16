@@ -16,3 +16,7 @@
 参考行为与本次练习场配置分别保留于源码和来源记录。
 
 
+
+## 发布资源
+
+本展品使用的26段动作与特效共175个源帧，按原RGBA像素重新装入一张无损图集。帧序、重复帧、fps、loopStart、wrapMode和position保持原值。图集与清单合计从20,358,175字节降至1,285,689字节。音频预载覆盖本展品实际触发的11段原声音，共909,796字节。逐帧校验见source/pixel-verification.json，来源哈希见source/asset-packing.json。

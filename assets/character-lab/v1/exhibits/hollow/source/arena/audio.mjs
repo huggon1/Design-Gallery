@@ -1,4 +1,4 @@
-const names=['hero_jump','hero_land_soft','hero_wall_jump','hero_wall_slide','hero_dash','hero_shade_dash_1','hero_shade_dash_2','hero_wings','hero_run_footsteps_stone','sword_2','sword_3','enemy_damage','sword_hit_reject','hero_damage_less_harsh_0','focus_health_charging','focus_health_heal','hero_fireball','hero_void_scream_spell','hero_quake_spell_prepare','hero_quake_spell_dash','hero_void_quake_impact'];
+const names=["hero_jump","hero_wings","hero_wall_jump","hero_land_soft","enemy_damage","hero_shade_dash_2","hero_shade_dash_1","hero_dash","sword_3","sword_2","hero_run_footsteps_stone"];
 export class ArenaAudio{
  constructor(){
   this.context=null;this.buffers=new Map();this.active=new Set();this.loops=new Map();this.enabled=true;this.volume=.7;this.ready=false;
