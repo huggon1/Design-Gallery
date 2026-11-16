@@ -233,6 +233,36 @@ export const EXHIBITS={
         "./exhibits/katana-zero/README.md"
       ]
     ]
+  },
+  "brotato": {
+    "category": "top",
+    "work": "topdown-actions",
+    "name": "土豆兄弟",
+    "keys": [
+      [
+        "W A S D",
+        "移动"
+      ],
+      [
+        "自动",
+        "瞄准与攻击"
+      ]
+    ],
+    "bindings": {
+      "KeyJ": null,
+      "KeyK": null,
+      "KeyL": null,
+      "Space": null
+    },
+    "touch": {},
+    "source": "全能者与手枪。原图层与原生压缩、双腿动画轨道；目标、射击节奏与音效为本次练习场配置。",
+    "path": "./exhibits/brotato/scene.mjs",
+    "links": [
+      [
+        "参考与制作",
+        "./exhibits/brotato/README.md"
+      ]
+    ]
   }
 };
 export const WORKS={
@@ -241,6 +271,12 @@ export const WORKS={
     "category": "side",
     "cover": "./assets/covers/character-actions.svg",
     "first": "terraria"
+  },
+  "topdown-actions": {
+    "title": "俯视移动与瞄准",
+    "category": "top",
+    "cover": "./assets/covers/topdown-actions.svg",
+    "first": "brotato"
   }
 };
 export const REVIEWED_GAMES=new Set(Object.keys(EXHIBITS));
