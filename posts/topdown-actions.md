@@ -4,7 +4,7 @@ collected_at: "2026-11-16"
 version: "v1"
 preview: "../assets/character-lab/v1/assets/covers/topdown-actions.svg"
 entry: "../index.html#/exhibit/topdown-actions"
-tags: ["游戏","俯视","角色动作","土豆兄弟"]
+tags: ["游戏","俯视","角色动作","土豆兄弟","挺进地牢"]
 ---
 
 # 俯视移动与瞄准
