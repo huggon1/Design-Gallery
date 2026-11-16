@@ -82,6 +82,45 @@ export const EXHIBITS={
         "./exhibits/hollow/README.md"
       ]
     ]
+  },
+  "celeste": {
+    "category": "side",
+    "work": "character-actions",
+    "name": "蔚蓝",
+    "path": "./exhibits/celeste/scene.mjs",
+    "keys": [
+      [
+        "W A S D",
+        "方向"
+      ],
+      [
+        "Space / K",
+        "跳跃"
+      ],
+      [
+        "L",
+        "冲刺"
+      ],
+      [
+        "J",
+        "抓墙"
+      ]
+    ],
+    "bindings": {
+      "KeyJ": "grab"
+    },
+    "touch": {
+      "jump": "跳",
+      "dash": "冲",
+      "grab": "抓"
+    },
+    "source": "角色、控制器、动画与音效来自 ERI 原版。展厅使用简洁背景和必要的平台、墙面。",
+    "links": [
+      [
+        "参考与制作",
+        "./exhibits/celeste/README.md"
+      ]
+    ]
   }
 };
 export const WORKS={
