@@ -1,0 +1,406 @@
+{
+  "version": 2,
+  "image": "yolk.png",
+  "cellSize": [
+    64,
+    64
+  ],
+  "anchor": [
+    32,
+    56
+  ],
+  "defaultFacing": "right",
+  "animations": {
+    "run": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "run_00",
+          "x": 0,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_01",
+          "x": 64,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_02",
+          "x": 128,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_03",
+          "x": 192,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_04",
+          "x": 256,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_05",
+          "x": 320,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_06",
+          "x": 384,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_07",
+          "x": 448,
+          "y": 0,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_08",
+          "x": 0,
+          "y": 64,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_09",
+          "x": 64,
+          "y": 64,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_10",
+          "x": 128,
+          "y": 64,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_11",
+          "x": 192,
+          "y": 64,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_12",
+          "x": 256,
+          "y": 64,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_13",
+          "x": 320,
+          "y": 64,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_14",
+          "x": 384,
+          "y": 64,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "run_15",
+          "x": 448,
+          "y": 64,
+          "w": 64,
+          "h": 64,
+          "durationMs": 33.333333333333336,
+          "anchor": [
+            32,
+            56
+          ]
+        }
+      ],
+      "source": "Consecutive video frames 25..40 from wason-sonico-2023-09-19.mp4 (0.833..1.333s). Video-derived palette/grid reconstruction; estimated root and loop boundary. Captured span 0.533s contains two vertical gait bobs (about 0.25-0.30s each). Original loop boundary is unknown; recording has irregular frame repeats."
+    },
+    "jump": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "jump_00",
+          "x": 0,
+          "y": 128,
+          "w": 64,
+          "h": 64,
+          "durationMs": 100,
+          "anchor": [
+            32,
+            56
+          ]
+        }
+      ],
+      "source": "Actual open-mouth airborne pose from video at 1.667s. Video-derived grid/palette reconstruction."
+    },
+    "fall": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "fall_00",
+          "x": 64,
+          "y": 128,
+          "w": 64,
+          "h": 64,
+          "durationMs": 100,
+          "anchor": [
+            32,
+            56
+          ]
+        }
+      ],
+      "source": "Actual free-fall pose after sliding off a block bottom, video at 4.400s. Source faces left; exported mirrored to face right."
+    },
+    "slide": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "slide_00",
+          "x": 128,
+          "y": 128,
+          "w": 64,
+          "h": 64,
+          "durationMs": 100,
+          "anchor": [
+            32,
+            56
+          ]
+        }
+      ],
+      "source": "Nitrome Wiki Leap_Day_Yolk_Slide_Slide.png, original 2x pixel image; default faces right."
+    },
+    "double": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "double_00",
+          "x": 192,
+          "y": 128,
+          "w": 64,
+          "h": 64,
+          "durationMs": 29.166666666666668,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "double_01",
+          "x": 256,
+          "y": 128,
+          "w": 64,
+          "h": 64,
+          "durationMs": 29.166666666666668,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "double_02",
+          "x": 320,
+          "y": 128,
+          "w": 64,
+          "h": 64,
+          "durationMs": 29.166666666666668,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "double_03",
+          "x": 384,
+          "y": 128,
+          "w": 64,
+          "h": 64,
+          "durationMs": 29.166666666666668,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "double_04",
+          "x": 448,
+          "y": 128,
+          "w": 64,
+          "h": 64,
+          "durationMs": 29.166666666666668,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "double_05",
+          "x": 0,
+          "y": 192,
+          "w": 64,
+          "h": 64,
+          "durationMs": 29.166666666666668,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "double_06",
+          "x": 64,
+          "y": 192,
+          "w": 64,
+          "h": 64,
+          "durationMs": 29.166666666666668,
+          "anchor": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "double_07",
+          "x": 128,
+          "y": 192,
+          "w": 64,
+          "h": 64,
+          "durationMs": 29.166666666666668,
+          "anchor": [
+            32,
+            56
+          ]
+        }
+      ],
+      "source": "Consecutive video frames 161..168 (5.367..5.600s). Actual rotating curled poses, no synthetic rotation. Video-derived grid/palette reconstruction; loop boundary estimated. Playback cycle revised to 0.2333s from Nitrome official speedrun 6.200..6.467s; phase estimate range 0.20..0.233s."
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_00",
+          "x": 192,
+          "y": 192,
+          "w": 64,
+          "h": 64,
+          "durationMs": 100,
+          "anchor": [
+            32,
+            56
+          ]
+        }
+      ],
+      "source": "Nitrome Wiki Leap_Day_Yolk_Death.png, original 2x pixel image."
+    },
+    "stand": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "stand_00",
+          "x": 256,
+          "y": 192,
+          "w": 64,
+          "h": 64,
+          "durationMs": 100,
+          "anchor": [
+            32,
+            56
+          ]
+        }
+      ],
+      "source": "Nitrome Wiki Leap_Day_Yolk_Run.png: actual run pose used as static fallback."
+    }
+  },
+  "notes": "Source poses are authentic. Run/jump/double are reconstructed from compressed video, preserving their actual shape while quantizing the source palette. Estimated alignment and loop boundaries are labeled. Durations are recording intervals, not original engine constants."
+}

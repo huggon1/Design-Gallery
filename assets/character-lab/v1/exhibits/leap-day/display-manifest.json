@@ -1,0 +1,21 @@
+{
+  "game": "leap-day",
+  "collected": "2026-11-16",
+  "files": {
+    "README.md": "7c64e36bbe1cf5686828c9ef22508553b0e93205ba3b760b73ba1f123982540b",
+    "assets/character/SOURCE.md": "795f2006760fc7c93064051a5b8473f9bbbd10ddb97dabacb212e82f541c60dc",
+    "assets/character/manifest.json": "e19ae748e9bc44216024a30504715017064de7f2f554aa4cc9e04be5a57e8312",
+    "assets/character/yolk.png": "a7e5d73af4d9fd727370b83d9dc4e862fb7aee6ee21937cd6ff347273a446d8e",
+    "assets/source/Leap_Day_Yolk.png": "aafcb57769a9a5b17742964465ba401f597753daa252448be24353856b0e5b46",
+    "assets/source/Leap_Day_Yolk_Death.png": "7c59e85735af437f9f1e5ee12d3c42dd91c23597d826c8d4c8a58f0accb9d3c4",
+    "assets/source/Leap_Day_Yolk_Double_Jump.png": "634e60faab80e4e49d5949e0ff4f1acf44a52324eaaf4b81fc215e58e3882750",
+    "assets/source/Leap_Day_Yolk_Run.png": "0e3f72b938d9612c0b585b21a4195d81583050d1b64f8973d47207b04804fb7d",
+    "assets/source/Leap_Day_Yolk_Slide.png": "eeac08379bb83aacbc2d3f959f870fe8dfa97577c882a03932f6f81478c01f22",
+    "assets/source/Leap_Day_Yolk_Slide_Slide.png": "5306925df8709dc6be8b2b4f602529390a3c41b63266e7d7741c95fe5c195917",
+    "assets/source/wiki-yolk-run.png": "0e3f72b938d9612c0b585b21a4195d81583050d1b64f8973d47207b04804fb7d",
+    "character.mjs": "dd51a5bd607bdbe45e711cf3462fc0d3c5ccf7a2c78544af719c602230883b33",
+    "physics.mjs": "a5db5c439e7a50781ce8295d9b9586bb2460d9e0010303ce06c70f56cb8074f9",
+    "scene.mjs": "0e5b05a9336fcae6884d2b9ab56840913e5043a5ac5448e955810515441231cd",
+    "verification.png": "a9c59c51efb3966c744f6d454491c02209d36c4764d0853d936ca9de7a84c451"
+  }
+}
