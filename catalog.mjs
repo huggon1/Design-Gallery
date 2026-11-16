@@ -1,5 +1,12 @@
 export const EXHIBITS = [
   {
+    id:"character-actions", title:"侧视角色动作",
+    date:'2026-11-16', version:'v1',
+    preview:"assets/character-lab/v1/assets/covers/character-actions.svg",
+    entry:"assets/character-lab/v1/index.html#/work/character-actions?game=terraria",
+    tags:["游戏","侧视","角色动作","泰拉瑞亚"]
+  },
+  {
     id:'gsap-framecheck-cards', title:'产品发布的卡片级联短片',
     date:'2026-10-20', version:'v1',
     preview:'assets/gsap-framecheck-cards/v1/preview.png',

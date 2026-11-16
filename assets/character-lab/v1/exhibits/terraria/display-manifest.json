@@ -1,0 +1,28 @@
+{
+  "game": "terraria",
+  "collected": "2026-11-16",
+  "files": {
+    "README.md": "9c4c23ca4a79f6b6f687388cce97213026a7f5f440109456f439f2952d43747e",
+    "assets/Player_0_0.png": "d0d357065732f2e311d5361f4dc2996fe45da02c3c83860ff2944275c9ff0c8f",
+    "assets/Player_0_1.png": "61fa14177685d2a9f012688ace576e7d9a7be7b63d4eff0381b1363aa477ac19",
+    "assets/Player_0_10.png": "6cbd574bca16d9f045fd776bb11ac4e7b67a3131b3ab2a327765bfaf079c837c",
+    "assets/Player_0_11.png": "3a182e7d2d8a2d2bfaa6ef671ee9d73627dfe5835ad2957fa7429803724b62e8",
+    "assets/Player_0_12.png": "292ede1aa379200a523b09eb6878516daba92aee00bc35dc707dd62ad4f4d3a4",
+    "assets/Player_0_13.png": "8d966a1c35edf4eafacb644cf818fa8fade5dccad9ac6d558362a3c506f512ca",
+    "assets/Player_0_2.png": "7096a0509ca92159741ae5effda558ad4eafee3c7a2ae89264096a1a2f0d03d9",
+    "assets/Player_0_3.png": "b437017c2ab2bc881eacd8754288db1befc9a2d61ce20b1084beb0c45779ee2d",
+    "assets/Player_0_4.png": "27cc89191dac990abafa4b864a1b96b73a436aa591863603f5d6ee912595c21f",
+    "assets/Player_0_5.png": "a32887a8ceae193d488b7bdd242f43c0d591c7bebb03c26a76a8b376aaba358a",
+    "assets/Player_0_6.png": "ce052cf4ed9d832cb62205c3839474ea44ced6f0755ed2c882471189337edbc4",
+    "assets/Player_0_7.png": "9b049618af74bb2752a0c132802ec0f52372ece709cd068f79c163030af0579c",
+    "assets/Player_0_8.png": "4fab41bef2e5fb48f5d4aa5fe2d5a00a45b3c19215b97c1e9ca22053d6dbefc1",
+    "assets/Player_0_9.png": "0c4c06bc6a66a1cdf7567a8532e1f91a034451d0bfd678438e3970408191996f",
+    "assets/Player_Hair_1.png": "64543e3281b92e4379d10ddbe2ef918359b599287df2228e96bdde9595b00d94",
+    "assets/Projectile_13.png": "ffd4c685d06000ea92c55de2bb4051a4e7aafce5b1ef9c58e50725669494d83a",
+    "character.mjs": "a31a256eb92aaa9ce445e759cbe8bde9ab8545750bb78afdfd3ec15b44c92085",
+    "metadata.json": "fd9fddcccf6c384707d03e7090acb50ad04d6b252f5f1755813830f37b164621",
+    "physics.mjs": "5d2a20a90482e17a3558d1f7c883350378ea16d1c3da9ab6c2746523d902a178",
+    "scene.mjs": "5e13aec1cf8e34a465b14ad7f9ddc91662e8a1442dcbd58c0673ffa572156ebc",
+    "verification.png": "eb60bb90452b4abd66d15ead29daf865d649899f95cf9bbb469e9c173556e94c"
+  }
+}

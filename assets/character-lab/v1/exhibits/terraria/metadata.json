@@ -1,0 +1,108 @@
+{
+  "id": "terraria",
+  "name": "Terraria · 裸装跑跳与单钩牵引",
+  "category": "side",
+  "sections": [
+    {
+      "id": "practice",
+      "label": "贯通练习场"
+    }
+  ],
+  "keys": [
+    "A / D 移动",
+    "Space / K 长短按跳",
+    "S / ↓ 木平台下穿",
+    "I / 右键 单钩发射与收回",
+    "鼠标 瞄准",
+    "Space 跳跃脱离"
+  ],
+  "bindings": {
+    "left": [
+      "KeyA",
+      "ArrowLeft"
+    ],
+    "right": [
+      "KeyD",
+      "ArrowRight"
+    ],
+    "up": [
+      "KeyW",
+      "ArrowUp"
+    ],
+    "down": [
+      "KeyS",
+      "ArrowDown"
+    ],
+    "jump": [
+      "Space",
+      "KeyK"
+    ],
+    "hook": [
+      "KeyI"
+    ],
+    "special": [
+      "MouseRight"
+    ]
+  },
+  "touch": [
+    {
+      "id": "left",
+      "label": "←"
+    },
+    {
+      "id": "right",
+      "label": "→"
+    },
+    {
+      "id": "down",
+      "label": "↓"
+    },
+    {
+      "id": "hook",
+      "label": "钩爪"
+    },
+    {
+      "id": "jump",
+      "label": "跳跃"
+    }
+  ],
+  "source": {
+    "type": "original_layered_textures_and_behavior_reconstruction",
+    "targetVersion": "Terraria Desktop 1.4.4.9, Classic; style 1, hair 1, default colors",
+    "assetCommit": "2dd37b20cdb68932626d8305ea3fc0ac088fd522",
+    "parameterCommit": "4f072c7a2aaad0c35ef7455f5195c526f2a9066a",
+    "character": "14 original Player_0 masks and Hair_1; independent leg, hair and composite arm selection",
+    "equipment": "Classic baseline movement; empty armor/accessories; fixed basic Grappling Hook available across the whole practice map",
+    "audio": "Short locally synthesized hook/impact cues; initially muted"
+  },
+  "links": [
+    {
+      "label": "角色动作查看器",
+      "url": "./character-review.html"
+    },
+    {
+      "label": "独立练习场",
+      "url": "./practice.html"
+    },
+    {
+      "label": "原作人物帧",
+      "url": "https://terraria.wiki.gg/wiki/Character_styles"
+    },
+    {
+      "label": "原作单钩演示",
+      "url": "https://terraria.wiki.gg/wiki/Hooks"
+    },
+    {
+      "label": "连续实机 · 造型参考",
+      "url": "https://www.youtube.com/watch?v=1dFX2BT43Os&t=298s"
+    }
+  ],
+  "readiness": "ready_for_review",
+  "knownDifferences": [
+    "分层素材来自公开提取转存，原始提取版本待核验。",
+    "目标基础参数锁定到 tModLoader stable 提交；相同输入的原版裸装跳跃与钩爪轨迹量测待补。",
+    "本次离散长按跳高 98.07 px；Wiki 连续公式约 100.32 px。差值 2.25 px，原版同输入校准待补。",
+    "本次用轴对齐台块重建碰撞与单格平滑抬步；复杂斜坡、半砖与动态地图属于后续范围。",
+    "原作身体、裤腿、头发与袖子使用实际独立帧；音效与铁链绘制由本次重建。"
+  ]
+}
