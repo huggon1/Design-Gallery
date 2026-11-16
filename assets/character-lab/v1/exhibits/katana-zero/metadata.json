@@ -1,0 +1,102 @@
+{
+  "id": "katana-zero",
+  "name": "Katana ZERO · Zero",
+  "category": "side",
+  "sections": [
+    {
+      "id": "course",
+      "label": "贯通练习场"
+    }
+  ],
+  "keys": [
+    [
+      "A D / ← →",
+      "移动"
+    ],
+    [
+      "Space / K",
+      "跳跃与墙跳"
+    ],
+    [
+      "L / Shift",
+      "翻滚"
+    ],
+    [
+      "J / 左键",
+      "刀击"
+    ],
+    [
+      "I / 右键",
+      "主动慢动作"
+    ],
+    [
+      "鼠标 / WASD",
+      "刀击方向"
+    ]
+  ],
+  "bindings": {
+    "KeyI": "slow",
+    "KeyL": "dash",
+    "ShiftLeft": "dash",
+    "ShiftRight": "dash",
+    "KeyJ": "attack",
+    "Space": "jump",
+    "KeyK": "jump",
+    "MouseLeft": "attack",
+    "MouseRight": "slow"
+  },
+  "touch": {
+    "jump": "跳",
+    "dash": "滚",
+    "attack": "斩",
+    "slow": "慢"
+  },
+  "source": "Zero公开原作提取帧：98张透明身体、刀光、尘与弹反帧；公开实机彩色操作段；跳、落地、翻滚、脚步、刀击、弹反和慢动作原音效。时序与位移按实机拟合。",
+  "links": [
+    [
+      "原作实机",
+      "https://www.youtube.com/watch?v=9XQ_GRRJ_2I&t=31s"
+    ],
+    [
+      "原帧公开入口",
+      "https://www.reddit.com/r/KatanaZero/comments/cfhk4v/katana_zero_sprite_dump/"
+    ],
+    [
+      "角色动作查看器",
+      "./exhibits/katana-zero/character-review.html"
+    ],
+    [
+      "独立练习场",
+      "./exhibits/katana-zero/practice.html"
+    ],
+    [
+      "官方页面",
+      "https://store.steampowered.com/app/460950/Katana_ZERO/"
+    ]
+  ],
+  "readiness": "ready_for_review",
+  "knownDifferences": [
+    "公开帧包来自2019年社区提取，具体游戏构建号待核验。",
+    "动作帧采用原图；每帧停留、物理、取消窗口和挂点按实机拟合。原版同输入量测仍待进行。",
+    "主动慢动作采用0.22倍率；能量按真实时间消耗与恢复。精确倍率和能量曲线属于本样本配置。",
+    "身体、头发、衣摆与刀鞘烘焙在原帧内；刀光、残影、尘和弹反火花独立推进。",
+    "刀光原图为双青色；运行版用衰减的lighter叠光拟合实机亮部，原作shader与精确混合值待取得。查看器可切回原图颜色。",
+    "空中斩击复用原作七帧身体组，刀光与位移跟随瞄准角；身体保留侧视姿态。",
+    "场地、练习靶和发弹节奏为本地训练布置；练习弹接触身体后显示反馈并消失。",
+    "灰色PLAY回放只在参考原片中出现；练习场慢动作由独立输入触发。"
+  ],
+  "characterReview": "character-review.html",
+  "harness": "practice.html",
+  "runtimeDependencies": "all relative to exhibits/katana-zero",
+  "updatedAt": "2026-11-16",
+  "map": {
+    "layout": "connected-v2",
+    "spawn": {
+      "x": 140,
+      "y": 300
+    },
+    "width": 1960,
+    "floor": 300,
+    "legacyAreas": "all reset to course spawn"
+  }
+}

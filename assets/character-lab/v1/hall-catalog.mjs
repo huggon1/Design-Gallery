@@ -184,6 +184,55 @@ export const EXHIBITS={
         "./exhibits/leap-day/README.md"
       ]
     ]
+  },
+  "katana-zero": {
+    "category": "side",
+    "work": "character-actions",
+    "name": "武士零",
+    "keys": [
+      [
+        "W A S D",
+        "方向"
+      ],
+      [
+        "Space / K",
+        "跳跃"
+      ],
+      [
+        "J / 左键",
+        "斩击"
+      ],
+      [
+        "L",
+        "翻滚"
+      ],
+      [
+        "I / 右键",
+        "慢动作"
+      ]
+    ],
+    "bindings": {
+      "KeyI": "slow"
+    },
+    "inputMode": "aim",
+    "mouse": {
+      "left": "attack",
+      "right": "slow"
+    },
+    "touch": {
+      "jump": "跳",
+      "attack": "斩",
+      "dash": "滚",
+      "slow": "慢"
+    },
+    "source": "身体、刀光与尘采用原始帧。跑跳、翻滚、刀反、慢动作的时间与位移为本次重建。",
+    "path": "./exhibits/katana-zero/scene.mjs",
+    "links": [
+      [
+        "参考与制作",
+        "./exhibits/katana-zero/README.md"
+      ]
+    ]
   }
 };
 export const WORKS={
