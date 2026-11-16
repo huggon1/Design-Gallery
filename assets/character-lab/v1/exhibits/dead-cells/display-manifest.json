@@ -1,0 +1,27 @@
+{
+  "game": "dead-cells",
+  "collected": "2026-11-16",
+  "files": {
+    "README.md": "800e14c025e08b04eca94e81249d328961579b8ef8fb286560426303a063833e",
+    "assets/character/SOURCE.md": "e6dff81997427bf4b1994a063e68978ec640d835a4a16894457786c7b8fbc411",
+    "assets/character/body.png": "81e6f4f1b57d272723ba6704e3eccdcbb01a316dd56510f34b28ceb27929faa4",
+    "assets/character/fx.png": "2845f88cee20f238bc8b90c935ce14517124b9606d040004af1566293e7ed57b",
+    "assets/character/glow.png": "b552c6765e51ff33d0fa1a1dd074320bd0836e292f67e9636455a3e724ed205f",
+    "assets/character/head-mass.png": "117d6a62211764f509711723a4b2d09769b411604872b02920c2070f7fc50499",
+    "assets/character/head.png": "e020132a1a6c928595b6fa87c624302918e8096ad63ac1532915dd72730fd58c",
+    "assets/character/manifest.json": "7a98316b7c6918f9b93078035870cd314fddaf38f4f91de8e429e32f12784b8a",
+    "assets/character/sounds/hit_blade.ogg": "c072e8bcf7a5da95f9dfd6c231cb172411f2d9a844134ddf88fd8afdd3763727",
+    "assets/character/sounds/jump.ogg": "c14175ef522e1dd9b1513b263c9b03a41067beaa5c8b6e2c17d7cd10450d7cd4",
+    "assets/character/sounds/roll.ogg": "6422bf6ad8d27e5f9b9c2bf83dd4f1c4707e118ad1d76f76cdac444cd42f5ea9",
+    "assets/character/sounds/weapon_saber_release1.ogg": "bff9bf43ca923d9a6bd296d90abbd7644cff0a502a55bb5d6155f1768e49815e",
+    "assets/character/sounds/weapon_saber_release2.ogg": "07edc7fecb805aeef9c93eb1aa181ec6484d819c19be729a8ed430837e8f2a88",
+    "assets/character/sounds/weapon_shortsw_release.ogg": "de639bd46bf66d46b3850afe417c1e9793f1eb968b544a62fb47c7137afc7d8f",
+    "assets/game-run-extraction.png": "c9f5c3a4474b39a05fabde23c37ddfc1d66b83ddf8492860a9c7f1eafc080cea",
+    "assets/game-run-metadata.json": "a229f20ecd8a8511b4b09d87a99b5a42cdcf02219bcb7e0025d604bd423c951a",
+    "assets/run-body.png": "a2b9a6a4b6c024b762b117df765153dd6c0b039c26c6845b31fad7c7328f3fd3",
+    "character.mjs": "99d8acaac8aa8ba3bd5e07ef7aab9c15d179614ee446ff0efafdcedaa7faa3c3",
+    "physics.mjs": "4d9a8ce8d0c9fcd77dc1fc6a83d35b17177c8b554e445dc0ceed219daf10f6dd",
+    "scene.mjs": "b6bca3a370b9cc198df0ed338ff8c8cc27f83962b4cdef8784198c2e5108cb2d",
+    "verification.png": "5e6d0287ab3930f8d7f343914bace776808b3d4860ce24a2fce745c667075532"
+  }
+}
