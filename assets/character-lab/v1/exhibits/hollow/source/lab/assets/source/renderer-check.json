@@ -1,0 +1,13 @@
+{
+  "sourceGitBlobSha": "5e83b7f549284cf00956dd8b06283e25cefb4e71",
+  "frames": 1309,
+  "atlasCount": 4,
+  "assertions": [
+    "all clip references resolve",
+    "Run LoopSection resumes at source frame 6",
+    "40fps slash effect ends at 150ms",
+    "blank lead frames retained",
+    "collider-derived foot origin 1.390625"
+  ],
+  "render": "renderer-contact.png"
+}

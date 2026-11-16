@@ -46,6 +46,42 @@ export const EXHIBITS={
         "./exhibits/terraria/README.md"
       ]
     ]
+  },
+  "hollow": {
+    "category": "side",
+    "work": "character-actions",
+    "name": "空洞骑士",
+    "path": "./exhibits/hollow/scene.mjs",
+    "keys": [
+      [
+        "W A S D",
+        "方向"
+      ],
+      [
+        "Space / K",
+        "跳跃"
+      ],
+      [
+        "L",
+        "冲刺"
+      ],
+      [
+        "J",
+        "挥刀"
+      ]
+    ],
+    "touch": {
+      "jump": "跳",
+      "dash": "冲",
+      "attack": "斩"
+    },
+    "source": "角色、动画与基础控制沿用现有空洞骑士研究。练习场为本展品新建。",
+    "links": [
+      [
+        "参考与制作",
+        "./exhibits/hollow/README.md"
+      ]
+    ]
   }
 };
 export const WORKS={
