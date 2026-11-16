@@ -161,6 +161,29 @@ export const EXHIBITS={
         "./exhibits/dead-cells/README.md"
       ]
     ]
+  },
+  "leap-day": {
+    "category": "side",
+    "work": "character-actions",
+    "name": "Leap Day",
+    "path": "./exhibits/leap-day/scene.mjs",
+    "keys": [
+      [
+        "Space / K / 点击",
+        "跳跃"
+      ]
+    ],
+    "inputMode": "tap",
+    "touch": {
+      "jump": "跳"
+    },
+    "source": "Yolk 角色姿势取自原版图片与实机帧。跳跃节奏按 Nitrome 官方连续实机测量重建。",
+    "links": [
+      [
+        "参考与制作",
+        "./exhibits/leap-day/README.md"
+      ]
+    ]
   }
 };
 export const WORKS={
