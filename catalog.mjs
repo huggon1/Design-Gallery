@@ -4,7 +4,7 @@ export const EXHIBITS = [
     date:'2026-11-20', version:'v1',
     preview:"assets/character-lab/v1/assets/covers/angled-actions.svg",
     entry:"assets/character-lab/v1/index.html#/work/angled-actions?game=hades",
-    tags:["游戏","斜俯视","角色动作","哈迪斯","风中行者"]
+    tags:["游戏","斜俯视","角色动作","哈迪斯","风中行者","饥荒"]
   },
   {
     id:"topdown-actions", title:"俯视移动与瞄准",

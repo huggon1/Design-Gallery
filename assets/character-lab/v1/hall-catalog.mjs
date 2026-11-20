@@ -457,6 +457,59 @@ export const EXHIBITS={
         "./exhibits/windblown/character-review.html"
       ]
     ]
+  },
+  "dont-starve": {
+    "category": "angled",
+    "work": "angled-actions",
+    "name": "饥荒",
+    "keys": [
+      [
+        "W A S D",
+        "移动"
+      ],
+      [
+        "J",
+        "攻击"
+      ],
+      [
+        "K",
+        "切换装备"
+      ],
+      [
+        "L / Space",
+        "工作 / 采集"
+      ],
+      [
+        "I",
+        "进食"
+      ]
+    ],
+    "bindings": {
+      "Space": "dash",
+      "ShiftLeft": null,
+      "ShiftRight": null,
+      "KeyI": "special"
+    },
+    "touch": {
+      "attack": "攻击",
+      "jump": "换装",
+      "dash": "工作",
+      "special": "进食"
+    },
+    "touchLabels": {
+      "jump": "切换装备",
+      "dash": "工作或采集",
+      "special": "进食"
+    },
+    "comparison": "./exhibits/dont-starve/comparison.html",
+    "source": "威尔逊的分层图像与动画来自 Klei 联机版专服。单机实机用于对照持斧跑动与砍树，工作动作按单机状态机衔接。",
+    "links": [
+      [
+        "Klei 原作",
+        "https://www.klei.com/games/dont-starve"
+      ]
+    ],
+    "path": "./exhibits/dont-starve/scene.mjs"
   }
 };
 export const WORKS={
