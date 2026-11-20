@@ -16,3 +16,5 @@
 
 /* Published player: the outer gallery supplies the exhibit heading and return. */
 .hall{min-height:0;padding:16px}.hall-heading{display:none}.hall-header{justify-content:flex-end;padding-bottom:12px}.hall-stage{height:clamp(440px,52vw,720px);min-height:440px}.hall:fullscreen .hall-stage{height:calc(100svh - 170px)}@media(max-width:760px){.hall{padding:10px}.hall-stage{height:clamp(290px,60vw,440px);min-height:290px}.hall:fullscreen .hall-stage{height:calc(100svh - 160px)}}
+
+.comparison-link{display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap}.comparison-link[hidden]{display:none}

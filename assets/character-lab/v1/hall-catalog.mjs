@@ -352,6 +352,58 @@ export const EXHIBITS={
         "./exhibits/isaac/README.md"
       ]
     ]
+  },
+  "hades": {
+    "category": "angled",
+    "work": "angled-actions",
+    "name": "哈迪斯",
+    "comparison": "./exhibits/hades/v3/comparison.html",
+    "keys": [
+      [
+        "W A S D",
+        "移动"
+      ],
+      [
+        "鼠标",
+        "瞄准"
+      ],
+      [
+        "J / 左键",
+        "攻击"
+      ],
+      [
+        "Space / L",
+        "冲刺"
+      ]
+    ],
+    "bindings": {
+      "Space": "dash",
+      "KeyK": "dash"
+    },
+    "inputMode": "aim",
+    "mouse": {
+      "left": "attack"
+    },
+    "touch": {
+      "attack": "斩",
+      "dash": "冲"
+    },
+    "source": "初代基础剑与双冲。用 Phan21 的同人模型重建持剑步态、三段剑招和冲刺攻击，横斩、下劈与冲刺前刺采用原作刀光帧。",
+    "links": [
+      [
+        "上一版试玩",
+        "./exhibits/hades/harness-v2.html"
+      ],
+      [
+        "制作记录",
+        "./exhibits/hades/README.md"
+      ],
+      [
+        "模型作者",
+        "https://sketchfab.com/3d-models/free-3d-model-zagreus-hades-5a9e2892807448cb9e9982fd8cfcdc33"
+      ]
+    ],
+    "path": "./exhibits/hades/scene.mjs"
   }
 };
 export const WORKS={
@@ -366,6 +418,12 @@ export const WORKS={
     "category": "top",
     "cover": "./assets/covers/topdown-actions.svg",
     "first": "brotato"
+  },
+  "angled-actions": {
+    "title": "斜俯视角色动作",
+    "category": "angled",
+    "cover": "./assets/covers/angled-actions.svg",
+    "first": "hades"
   }
 };
 export const REVIEWED_GAMES=new Set(Object.keys(EXHIBITS));

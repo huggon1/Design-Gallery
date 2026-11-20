@@ -1,0 +1,10 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>哈迪斯 · 基础剑连续对照</title>
+<style>*{box-sizing:border-box}body{max-width:1170px;margin:0 auto;padding:30px 20px 60px;background:#171e1d;color:#e6debd;font:15px/1.55 -apple-system,BlinkMacSystemFont,sans-serif}a{color:#e6ba76}header,nav{display:flex;gap:14px;align-items:center;flex-wrap:wrap}header a{margin-left:auto}h1{font:500 clamp(21px,3.2vw,36px) Georgia,serif}video{display:block;width:100%;background:#101513;margin:15px 0}button{color:#e9d6ae;background:#293531;border:1px solid #617263;padding:.5em .85em;cursor:pointer}p{max-width:85ch;color:#b7c3b8}details{margin-top:28px}small{color:#aab7a9}</style>
+<header><h1>哈迪斯 · 基础剑连续对照</h1><a href="../harness.html">返回试玩 ↗</a></header>
+<video id="film" src="evidence/reference-vs-play.mp4" controls playsinline preload="metadata" aria-label="原版和新版同一时钟的连续对照"></video>
+<nav><button data-at="0">冲刺前刺</button><button data-at="3.9">持剑跑步</button><button data-at="8">基础三击</button><a href="evidence/playtest.mp4">八向操作、空挥与命中录像</a></nav>
+<p>每段先以原速播放，再让两侧一起半速复看。左侧保留来源视频中的重复帧，右侧取自默认试玩的真实键盘输入。两侧按站立身高校准画幅，命中与步相允许出现偏差。</p>
+<details><summary>动作、素材和差异</summary><p>冲刺攻击参考带手柄输入的训练片。人物先压低前送，剑尖伸出后后脚拖住，再收脚立剑。该次原作记录使用满级 Zagreus 形态。冲刺攻击的尖形刀光使用原作 SwordSwipeC 十三帧及其 RailgunLineSword3 中央光线的前二十六帧。普通横扫与下劈分别使用原作 SwordSwipeAFlipped 和 SwordSwipeB。颜色、长度、关节连接和前景投影为本地拟合。默认全部朝向共用同一套新骨架动作。独立试玩的“固定角度实录取样”可以检查从训练片局部分离的身体，右上前刺采用镜像。</p>
+<p>Wyrds 的持剑跑步示范包含右下转向右方的过程。教程有剪辑和速度处理，比较保留本地视频时间。普通三击取自 Supergiant 官方五周年录像。角色网格为 Phan21 / RagerGokuda 同人网格，体型、剑形和原作光照仍有差异。练习桩、地面和音效由实验制作。</p>
+<p><a href="https://www.youtube.com/watch?v=raTDJjLd784">冲刺前刺训练片</a> · <a href="https://www.youtube.com/watch?v=k-pFhv3ucmg">Wyrds 持剑教程</a> · <a href="https://www.youtube.com/watch?v=NsIODbUXCmo&amp;t=264s">官方五周年实机</a> · <a href="../harness-v2.html">上轮可玩版</a></p></details>
+<script>const v=document.querySelector('#film');document.querySelectorAll('[data-at]').forEach(b=>b.onclick=()=>{v.currentTime=Number(b.dataset.at);v.play()});</script></html>

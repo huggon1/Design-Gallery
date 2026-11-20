@@ -1,0 +1,181 @@
+{
+  "tile": [
+    160,
+    164
+  ],
+  "cols": 5,
+  "clips": {
+    "swordRun": [
+      {
+        "tile": 0,
+        "sourceFrame": 1404,
+        "anchor": [
+          91,
+          112
+        ]
+      },
+      {
+        "tile": 1,
+        "sourceFrame": 1408,
+        "anchor": [
+          91,
+          112
+        ]
+      },
+      {
+        "tile": 2,
+        "sourceFrame": 1410,
+        "anchor": [
+          91,
+          113
+        ]
+      },
+      {
+        "tile": 3,
+        "sourceFrame": 1414,
+        "anchor": [
+          91,
+          115
+        ]
+      },
+      {
+        "tile": 4,
+        "sourceFrame": 1418,
+        "anchor": [
+          91,
+          117
+        ]
+      },
+      {
+        "tile": 5,
+        "sourceFrame": 1420,
+        "anchor": [
+          91,
+          116
+        ]
+      },
+      {
+        "tile": 6,
+        "sourceFrame": 1424,
+        "anchor": [
+          91,
+          114
+        ]
+      },
+      {
+        "tile": 7,
+        "sourceFrame": 1428,
+        "anchor": [
+          91,
+          112
+        ]
+      },
+      {
+        "tile": 8,
+        "sourceFrame": 1432,
+        "anchor": [
+          91,
+          110
+        ]
+      },
+      {
+        "tile": 9,
+        "sourceFrame": 1436,
+        "anchor": [
+          91,
+          106
+        ]
+      },
+      {
+        "tile": 10,
+        "sourceFrame": 1440,
+        "anchor": [
+          91,
+          101
+        ]
+      },
+      {
+        "tile": 11,
+        "sourceFrame": 1444,
+        "anchor": [
+          91,
+          99
+        ]
+      },
+      {
+        "tile": 12,
+        "sourceFrame": 1448,
+        "anchor": [
+          91,
+          96
+        ]
+      },
+      {
+        "tile": 13,
+        "sourceFrame": 1450,
+        "anchor": [
+          91,
+          99
+        ]
+      }
+    ],
+    "dashStrike": [
+      {
+        "tile": 14,
+        "sourceFrame": 303,
+        "anchor": [
+          110,
+          141
+        ]
+      },
+      {
+        "tile": 15,
+        "sourceFrame": 305,
+        "anchor": [
+          110,
+          141
+        ]
+      },
+      {
+        "tile": 16,
+        "sourceFrame": 306,
+        "anchor": [
+          110,
+          141
+        ]
+      },
+      {
+        "tile": 17,
+        "sourceFrame": 307,
+        "anchor": [
+          110,
+          141
+        ]
+      },
+      {
+        "tile": 18,
+        "sourceFrame": 309,
+        "anchor": [
+          110,
+          141
+        ]
+      },
+      {
+        "tile": 19,
+        "sourceFrame": 313,
+        "anchor": [
+          110,
+          141
+        ]
+      },
+      {
+        "tile": 20,
+        "sourceFrame": 315,
+        "anchor": [
+          110,
+          141
+        ]
+      }
+    ]
+  }
+}
