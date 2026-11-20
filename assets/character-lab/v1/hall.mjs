@@ -15,7 +15,7 @@ document.querySelector('#app').innerHTML=`<main id="content" tabindex="-1">
   </section>
   <section class="hall" aria-label="角色动作" hidden>
   <header class="hall-header"><div class="hall-heading"><a class="gallery-back" href="../../../index.html" target="_top" aria-label="返回 Design Gallery 首页"><span aria-hidden="true">←</span> Design Gallery</a><h1>角色动作</h1></div>
-    <div class="hall-tools" aria-label="场景控制"><button class="tool icon" data-command="reset" aria-label="复位" title="复位 · R">${svg('reset')}</button><button class="tool" data-command="pause" aria-pressed="false" title="暂停 · P">暂停</button><button class="tool" data-command="speed" aria-pressed="false" title="切换半速">1×</button><span class="tool-separator"></span><button class="tool desktop-tool" data-command="debug" aria-pressed="false">标尺</button><button class="tool icon" data-command="sound" aria-label="开启声音" title="开启声音" hidden>${svg('sound')}</button><button class="tool icon desktop-tool" data-command="link" aria-label="复制展品链接" title="复制展品链接">${svg('link')}</button><button class="tool icon desktop-tool" data-command="fullscreen" aria-label="全屏" title="全屏">${svg('fullscreen')}</button></div>
+    <div class="hall-tools" aria-label="场景控制"><a class="tool comparison-link" target="_blank" rel="noopener" hidden>原作对照 ↗</a><button class="tool icon" data-command="reset" aria-label="复位" title="复位 · R">${svg('reset')}</button><button class="tool" data-command="pause" aria-pressed="false" title="暂停 · P">暂停</button><button class="tool" data-command="speed" aria-pressed="false" title="切换半速">1×</button><span class="tool-separator"></span><button class="tool desktop-tool" data-command="debug" aria-pressed="false">标尺</button><button class="tool icon" data-command="sound" aria-label="开启声音" title="开启声音" hidden>${svg('sound')}</button><button class="tool icon desktop-tool" data-command="link" aria-label="复制展品链接" title="复制展品链接">${svg('link')}</button><button class="tool icon desktop-tool" data-command="fullscreen" aria-label="全屏" title="全屏">${svg('fullscreen')}</button></div>
   </header>
   <nav class="exhibit-tabs" role="tablist" aria-label="角色参考"></nav>
   <section class="hall-stage" id="exhibit-panel" role="tabpanel" aria-label="动作场景"><canvas tabindex="0" role="application" aria-label="角色动作场景"></canvas><div class="stage-overlay"><span class="loading-dot"></span><span>加载中</span></div><span class="stage-paused" hidden>已暂停</span></section>
@@ -71,12 +71,22 @@ async function loadRoute(){
   const exhibit=exhibits[currentId];currentWork=workForGame(currentId);const work=WORKS[currentWork];document.title=`${exhibit.name} · ${work.title}`;$('.hall-heading h1').textContent=work.title;$('.hall').setAttribute('aria-label',work.title);
   $('.exhibit-tabs').innerHTML=gamesForWork(currentWork,currentId).map(([id,e])=>`<button class="exhibit-tab" id="tab-${id}" role="tab" aria-selected="false" aria-controls="exhibit-panel" data-exhibit="${id}" tabindex="-1">${e.name}</button>`).join('');
   $$('.exhibit-tab').forEach(b=>{const selected=b.dataset.exhibit===currentId;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;});
-  stage.setAttribute('aria-labelledby',`tab-${currentId}`);canvas.setAttribute('aria-label',`${exhibit.name}角色动作场景`);
+  stage.setAttribute('aria-labelledby',`tab-${currentId}`);canvas.setAttribute('aria-label',`${exhibit.name}${exhibit.category==='table'?'桌前交互场景':'角色动作场景'}`);
+  const comparison=$('.comparison-link');
+  comparison.hidden=!exhibit.comparison;
+  if(exhibit.comparison)comparison.href=exhibit.comparison;
+  else comparison.removeAttribute('href');
   $('.key-guide').innerHTML=exhibit.keys.map(([key,label])=>`<span><kbd>${key}</kbd>${label}</span>`).join('');
   $('.source-details').open=false;$('.source-details>div').innerHTML=`<p>${exhibit.source}</p><p>${exhibit.links.map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener">${label} ↗</a>`).join(' · ')}</p>`;
   stage.classList.toggle('portrait',exhibit.inputMode==='tap');$('.touch-controls').classList.toggle('single-input',exhibit.inputMode==='tap');$('.touch-dpad').hidden=exhibit.inputMode==='tap';resize();
   $('.touch-firepad').hidden=exhibit.inputMode!=='four-way';
-  for(const key of ['attack','grab','dash','jump','hook','reload','slow','special']){const button=$(`[data-hold=${key}]`);button.hidden=!exhibit.touch[key];if(typeof exhibit.touch[key]==='string')button.textContent=exhibit.touch[key];}
+  for(const key of ['attack','grab','dash','jump','hook','reload','slow','special']){
+    const button=$(`[data-hold=${key}]`);
+    button.dataset.defaultLabel??=button.getAttribute('aria-label');
+    button.hidden=!exhibit.touch[key];
+    if(typeof exhibit.touch[key]==='string')button.textContent=exhibit.touch[key];
+    button.setAttribute('aria-label',exhibit.touchLabels?.[key]??button.dataset.defaultLabel);
+  }
   $('.stations').replaceChildren();$('.scene-options').replaceChildren();
   overlay.className='stage-overlay';overlay.innerHTML='<span class="loading-dot"></span><span>加载中</span>';overlay.hidden=false;
   try{
@@ -148,5 +158,5 @@ for(const b of $$('[data-command]'))on(b,'click',async()=>{
 on($('.skip-link'),'click',event=>{event.preventDefault();(currentView==='work'?canvas:$('.gallery-card-link')).focus();});
 on(window,'hashchange',loadRoute);
 on(window,'pagehide',()=>{cancelAnimationFrame(raf);closeScene();observer.disconnect();abort.abort();clearTimeout(toastTimer);generation++;});
-window.__gallery={get view(){return currentView;},get ready(){return ready;},get exhibit(){return currentId;},get area(){return currentArea;},get state(){return transport.scene?.getState?.()??null;},get input(){return input.snapshot();},get aim(){return input.aim;},get paused(){return transport.paused;},get time(){return transport.time;},get speed(){return transport.speed;},reset,pause:setPaused};
+window.__gallery={get view(){return currentView;},get ready(){return ready;},get exhibit(){return currentId;},get area(){return currentArea;},get state(){return transport.scene?.getState?.()??null;},get input(){return input.snapshot();},get aim(){return input.aim;},get paused(){return transport.paused;},get time(){return transport.time;},get speed(){return transport.speed;},captureStream(fps=60){const stream=canvas.captureStream(fps),audio=transport.scene?.getAudioStream?.();for(const track of audio?.getAudioTracks?.()||[])stream.addTrack(track);return stream;},reset,pause:setPaused};
 loadRoute();raf=requestAnimationFrame(frame);

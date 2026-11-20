@@ -2,15 +2,23 @@ const actions = ['left','right','up','down','jump','dash','attack','grab','speci
 const impulses=new Set(['jump','dash','attack','special','reload','hook']);
 export function createInput(){
   const held=new Map(),pending=new Set(),aim={x:.5,y:.5,active:false};
+  let specialPress=0;
   const snapshot=()=>{const active=new Set(held.values());return Object.fromEntries(actions.map(action=>[action,active.has(action)]));};
   return {
-    hold(id,action){if(actions.includes(action)){if(!held.has(id)&&impulses.has(action))pending.add(action);held.set(id,action);}},
+    hold(id,action){
+      if(!actions.includes(action))return;
+      if(!held.has(id)){
+        if(impulses.has(action))pending.add(action);
+        if(action==='special')specialPress++;
+      }
+      held.set(id,action);
+    },
     release(id){held.delete(id);},
-    clear(){held.clear();pending.clear();aim.active=false;},
+    clear(){held.clear();pending.clear();specialPress=0;aim.active=false;},
     setAim(x,y,active=true){aim.x=Math.max(0,Math.min(1,Number.isFinite(x)?x:.5));aim.y=Math.max(0,Math.min(1,Number.isFinite(y)?y:.5));aim.active=Boolean(active);},
     get aim(){return {...aim};},
     snapshot,
-    sample(){const state=snapshot();for(const action of pending)state[action]=true;pending.clear();return {...state,aim:{...aim}};},
+    sample(){const state=snapshot();for(const action of pending)state[action]=true;pending.clear();return {...state,specialPress,aim:{...aim}};},
   };
 }
 export function createTransport(input){
