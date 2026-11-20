@@ -510,6 +510,62 @@ export const EXHIBITS={
       ]
     ],
     "path": "./exhibits/dont-starve/scene.mjs"
+  },
+  "escapists-2": {
+    "category": "top",
+    "work": "topdown-actions",
+    "name": "脱逃者 2",
+    "keys": [
+      [
+        "W A S D",
+        "移动"
+      ],
+      [
+        "I",
+        "按住慢走"
+      ],
+      [
+        "J",
+        "轻点出拳 / 长按蓄力突进"
+      ],
+      [
+        "K",
+        "按住格挡"
+      ],
+      [
+        "L",
+        "锁定 / 解除"
+      ]
+    ],
+    "bindings": {
+      "KeyI": "slow",
+      "KeyK": "grab",
+      "KeyL": "special",
+      "Space": null,
+      "ShiftLeft": null,
+      "ShiftRight": null
+    },
+    "touch": {
+      "attack": "出拳",
+      "grab": "格挡",
+      "special": "锁定",
+      "slow": "慢走"
+    },
+    "touchLabels": {
+      "attack": "出拳",
+      "grab": "格挡",
+      "special": "锁定或解除",
+      "slow": "慢走"
+    },
+    "comparison": "./exhibits/escapists-2/comparison.html",
+    "source": "囚犯的四向移动与徒手攻防由二代移植资源中的骨骼和动画轨道生成。移动速度取自玩家组件，陪练与练习场为本次制作。",
+    "links": [
+      [
+        "官方操作指南",
+        "https://www.team17.com/news/escapists-2-guide"
+      ]
+    ],
+    "path": "./exhibits/escapists-2/scene.mjs"
   }
 };
 export const WORKS={
