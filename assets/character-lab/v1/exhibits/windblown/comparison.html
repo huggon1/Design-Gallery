@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>风中行者 · 原版与试玩动作对照</title>
+<link rel="stylesheet" href="./review.css">
+<style>
+main{max-width:1220px;margin:auto;padding:24px;display:block}
+h1{font-size:clamp(24px,4vw,40px);margin:14px 0 16px;color:#eaf0ef}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+video{width:100%;display:block;background:#121b29;aspect-ratio:16/7}
+.detail{color:#aabec9;line-height:1.65;margin:18px 0}
+.detail a{color:#b7edf5}header{gap:14px}
+</style>
+<header><a href="./harness.html">← 返回试玩</a><span>WINDBLOWN / MOTION STUDY</span></header>
+<main>
+<h1>原版与试玩动作对照</h1>
+<video controls playsinline preload="metadata" src="./artifacts/revision-3/source-and-playable.mp4"></video>
+<nav aria-label="选择片段"><button data-start="0">空手冲刺</button><button data-start="2.833333">持刀冲刺</button><button data-start="4.833333">空手跑步</button><button data-start="11.333333">Fish Knife 三连</button></nav>
+<p class="detail">左侧为 Motion Twin 的 2024 Closed Alpha 连续实机，右侧为本地练习场的键鼠输入。每段先播原速，再将两边同时放慢至四分之一。姿态以原片可见动作对时。脚下光圈和地面可用来判断角色实际移动了多远。</p>
+<p class="detail">冲刺的起点闪印取自原片 56.133 秒起，亮团与分叉尾束取自 69.350 秒起。人物、装备、动作、刀弧及灰盒试验场在本地重建。<a href="https://www.youtube.com/watch?v=-hBLnaZbEIk">Motion Twin 原片 ↗</a>　<a href="./artifacts/revision-3/source-and-playable.mp4">打开 MP4 ↗</a></p>
+</main>
+<script type="module">
+const movie=document.querySelector('video');
+for(const button of document.querySelectorAll('[data-start]'))button.addEventListener('click',()=>{movie.currentTime=Number(button.dataset.start);movie.play();});
+</script>
+</html>

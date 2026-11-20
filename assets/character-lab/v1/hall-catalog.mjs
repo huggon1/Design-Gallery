@@ -404,6 +404,59 @@ export const EXHIBITS={
       ]
     ],
     "path": "./exhibits/hades/scene.mjs"
+  },
+  "windblown": {
+    "category": "angled",
+    "work": "angled-actions",
+    "name": "风中行者",
+    "comparison": "./exhibits/windblown/comparison.html",
+    "keys": [
+      [
+        "W A S D",
+        "移动"
+      ],
+      [
+        "鼠标",
+        "瞄准"
+      ],
+      [
+        "J / 左键",
+        "攻击"
+      ],
+      [
+        "Space / L",
+        "突进"
+      ],
+      [
+        "I",
+        "持刀 / 空手"
+      ]
+    ],
+    "bindings": {
+      "Space": "dash",
+      "KeyK": "dash",
+      "KeyI": "special"
+    },
+    "inputMode": "aim",
+    "mouse": {
+      "left": "attack"
+    },
+    "touch": {
+      "attack": "斩",
+      "dash": "冲",
+      "special": "换装"
+    },
+    "touchLabels": {
+      "special": "持刀或空手"
+    },
+    "source": "Closed Alpha 2024 蝾螈与 Fish Knife 的参考重建：三维角色、动作与声音由本次制作，连续突进、跨缝和刀刃轨迹可操作。",
+    "path": "./exhibits/windblown/scene.mjs",
+    "links": [
+      [
+        "动作查看",
+        "./exhibits/windblown/character-review.html"
+      ]
+    ]
   }
 };
 export const WORKS={
