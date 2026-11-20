@@ -4,6 +4,8 @@ const games=new Set(Object.keys(EXHIBITS));
 export function readHallRoute(hash=''){
   const [path,query='']=hash.replace(/^#\/?/,'').split('?');
   const params=new URLSearchParams(query);
+  if(path==='work/angled-actions' && params.get('game')==='dont-starve')
+    return {view:'work',id:'dont-starve',area:params.get('area')||''};
   if(path.startsWith('work/')&&WORKS[path.slice(5)]){const work=path.slice(5),id=params.get('game');return {view:'work',id:games.has(id)&&workForGame(id)===work?id:WORKS[work].first,area:params.get('area')||''};}
   if(games.has(path))return {view:'work',id:path,area:params.get('area')||''};
   return {view:'home'};

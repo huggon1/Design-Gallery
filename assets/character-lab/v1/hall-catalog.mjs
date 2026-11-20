@@ -459,8 +459,8 @@ export const EXHIBITS={
     ]
   },
   "dont-starve": {
-    "category": "angled",
-    "work": "angled-actions",
+    "category": "top",
+    "work": "topdown-actions",
     "name": "饥荒",
     "keys": [
       [
