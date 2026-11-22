@@ -1,7 +1,5 @@
 import {exhibitById} from './catalog.mjs';
 
-export const legacyGroups = {'product-launch':['gsap-framecheck-cards','seek-t-morph-reel']};
-
 export function catalogUrl(query = '', tag = '') {
   const params = new URLSearchParams();
   if (query.trim()) params.set('q',query.trim());
@@ -35,14 +33,7 @@ export function resolveRoute(hash = '#/') {
     const query = (params.get('q') ?? '').trim(), tag = (params.get('tag') ?? '').trim();
     return {kind:'catalog',query,tag,url:catalogUrl(query,tag)};
   }
-  const oldTheme = path.match(/^\/(?:web|video|game|mobile)\/topic\/([^/]+)$/);
   let id = path.match(/^\/(?:exhibit|work)\/([^/]+)$/)?.[1];
-  if (oldTheme) {
-    const themeId = oldTheme[1], caseId = params.get('case');
-    id = legacyGroups[themeId]
-      ? (legacyGroups[themeId].includes(caseId) ? caseId : legacyGroups[themeId][0])
-      : themeId;
-  }
   if (!id && /^\/[^/]+$/.test(path)) id = path.slice(1);
   if (!exhibitById(id)) return {kind:'missing',url:hash};
   const back = listContext(params.get('from') ?? '/');

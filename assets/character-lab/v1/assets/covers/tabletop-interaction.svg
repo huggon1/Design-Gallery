@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" fill="none">
+<title>第一人称桌面交互</title>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" stroke="#c9c0cc" stroke-opacity=".045"/></pattern><linearGradient id="table" x1="600" y1="168" x2="600" y2="470" gradientUnits="userSpaceOnUse"><stop stop-color="#39323a"/><stop offset="1" stop-color="#28252f"/></linearGradient></defs>
+<rect width="1200" height="560" fill="#191b23"/><rect x="40" y="40" width="1120" height="480" fill="url(#grid)"/>
+<path d="M338 168H862L1072 438H128L338 168Z" fill="url(#table)" stroke="#99909e" stroke-opacity=".35"/><path d="M128 438v18h944v-18" fill="#1f1d27" stroke="#99909e" stroke-opacity=".2"/>
+<path d="M548 147v-27c0-32 104-32 104 0v27" stroke="#c7bbc9" stroke-opacity=".23" stroke-width="24" stroke-linecap="round"/>
+<circle cx="600" cy="74" r="23" fill="#c7bbc9" fill-opacity=".28"/>
+<g transform="translate(539 224) rotate(-12)"><rect width="54" height="76" rx="5" fill="#eaded3"/><path d="M12 15h30M12 22h20" stroke="#827079" stroke-width="3"/><path d="m27 36 12 15-12 15-12-15Z" fill="#b58f7f"/></g>
+<g transform="translate(608 220) rotate(9)"><rect width="54" height="76" rx="5" fill="#b79d92" fill-opacity=".4" stroke="#edbb95" stroke-opacity=".5"/><rect x="7" y="7" width="40" height="62" rx="2" stroke="#edbb95" stroke-opacity=".35"/></g>
+<path d="m735 281 32-18 31 18v35l-31 18-32-18Z" fill="#c0b2b1"/><path d="m735 281 32 18 31-18m-31 18v35" stroke="#6c626d"/><g fill="#514b58"><ellipse cx="768" cy="278" rx="4" ry="2"/><ellipse cx="747" cy="300" rx="2.5" ry="4"/><ellipse cx="783" cy="307" rx="2.5" ry="4"/></g>
+<path d="m335 507 89-115 43-32c14-10 28-7 30 2 2 9-8 19-19 31l-21 27 32-14c18-7 30 7 14 20l-62 49-22 32" fill="#d6c6c4"/><path d="m865 507-89-115-43-32c-14-10-28-7-30 2-2 9 8 19 19 31l21 27-32-14c-18-7-30 7-14 20l62 49 22 32" fill="#b5a7b8"/>
+<path d="M475 346c45-27 68-36 106-42m-13-3 13 3-8 11" stroke="#edbb95" stroke-opacity=".65" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 8"/>
+<path d="M654 344c26-17 46-19 62-16" stroke="#c6b9c9" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 8"/>
+</svg>

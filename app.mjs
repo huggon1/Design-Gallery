@@ -5,7 +5,7 @@ const main = document.querySelector('#main');
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 let route, stageCleanup = () => {}, currentKey = '';
 const scrolls = new Map();
-const legacyNative = new Set(['gsap-framecheck-cards','seek-t-morph-reel','editorial-kinetic-type','three-ink-linework','annotated-3d-cutaway']);
+
 function store(key,value) { try { sessionStorage.setItem('gallery-flat-'+key,String(value)); } catch {} }
 function read(key) { try { return sessionStorage.getItem('gallery-flat-'+key); } catch { return null; } }
 function rememberScroll() {
@@ -21,10 +21,10 @@ function tags(exhibit) {
   return (exhibit.tags ?? []).length ? `<div class="tags" aria-label="标签">${exhibit.tags.map(tag => `<a class="tag" href="${escape(catalogUrl('',tag))}">${escape(tag)}</a>`).join('')}</div>` : '';
 }
 function card(exhibit,index) {
-  return `<article class="work-card" data-exhibit="${escape(exhibit.id)}"><a class="work-card-link" href="${escape(exhibitUrl(exhibit.id,route.url))}"><div class="preview ${exhibit.embedSlug ? '' : 'native-preview'}"><img src="${escape(exhibit.preview)}" alt="${escape(exhibit.title)}预览" width="960" height="613" ${index < 3 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div><div class="work-card-title"><h2>${escape(exhibit.title)}</h2><span aria-hidden="true">↗</span></div></a>${tags(exhibit)}</article>`;
+  return `<article class="work-card" data-exhibit="${escape(exhibit.id)}"><a class="work-card-link" href="${escape(exhibitUrl(exhibit.id,route.url))}"><div class="preview native-preview"><img src="${escape(exhibit.preview)}" alt="${escape(exhibit.title)}预览" width="960" height="613" ${index < 3 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div><div class="work-card-title"><h2>${escape(exhibit.title)}</h2><span aria-hidden="true">↗</span></div></a>${tags(exhibit)}</article>`;
 }
 function catalogPage() {
-  return `<section aria-labelledby="catalog-title"><div class="collection-heading"><div><div class="eyebrow">THE COLLECTION</div><h1 id="catalog-title">设计方案</h1><p>收集具体的设计方案，随时打开、操作和借用。</p></div><span class="count">${EXHIBITS.length} 件展品</span></div><div class="catalog-toolbar"><div id="result-count" role="status" aria-live="polite"></div><label class="archive-search"><span aria-hidden="true">⌕</span><input id="search" type="search" autocomplete="off" aria-label="搜索展品" placeholder="搜索标题或标签" value="${escape(route.query)}"></label></div><div id="active-filter"></div><div class="work-grid" id="catalog-results"></div><div class="empty-state" id="empty-state" hidden><p>还没有匹配的展品。</p><button class="text-link" id="clear-search" type="button">清空条件</button></div></section>`;
+  return `<section aria-labelledby="catalog-title"><div class="collection-heading"><div><h1 id="catalog-title">游戏展厅</h1></div><span class="count">${EXHIBITS.length} 件展品</span></div><div class="catalog-toolbar"><div id="result-count" role="status" aria-live="polite"></div><label class="archive-search"><span aria-hidden="true">⌕</span><input id="search" type="search" autocomplete="off" aria-label="搜索展品" placeholder="搜索标题或标签" value="${escape(route.query)}"></label></div><div id="active-filter"></div><div class="work-grid" id="catalog-results"></div><div class="empty-state" id="empty-state" hidden><p>还没有匹配的展品。</p><button class="text-link" id="clear-search" type="button">清空条件</button></div></section>`;
 }
 function updateResults() {
   const list = sortedExhibits.filter(exhibit => matchesExhibit(exhibit,route.query) && (!route.tag || (exhibit.tags ?? []).some(tag => normalize(tag) === normalize(route.tag))));
@@ -52,22 +52,7 @@ function configureStage(exhibit) {
     try {
       const doc = frame.contentDocument;
       if (!doc?.body || doc.title === 'Error response') return fail();
-      let content;
-      if (exhibit.embedSlug) {
-        if (!doc.getElementById(exhibit.embedSlug)?.classList.contains('active')) return fail();
-        const style = doc.createElement('style');
-        style.textContent = '.reorder-inspector{display:none!important}.reorder-stage-body{grid-template-columns:minmax(0,1fr)!important}';
-        doc.head.append(style);
-        content = doc.querySelector('#monolith-frame');
-      } else {
-        if (legacyNative.has(exhibit.id)) {
-          if (!doc.querySelector('#frame,#stage')) return fail();
-          const style = doc.createElement('style');
-          style.textContent = 'main>header,.ban,.note{display:none!important}main{padding:24px!important}';
-          doc.head.append(style);
-        }
-        content = doc.querySelector('main') ?? doc.body;
-      }
+      const content = doc.querySelector('main') ?? doc.body;
       if (!content) return fail();
       const fit = () => {
         if (disposed) return;
@@ -105,7 +90,7 @@ function render() {
   route = resolveRoute(location.hash);
   if (route.url !== location.hash && route.kind !== 'missing') history.replaceState(null,'',route.url);
   currentKey = route.url;
-  let title = '设计方案';
+  let title = '游戏展厅';
   if (route.kind === 'catalog') {
     main.innerHTML = catalogPage();
     updateResults();
@@ -140,17 +125,6 @@ function render() {
   const saved = scrolls.get(currentKey) ?? Number(read('scroll-'+currentKey) ?? 0);
   requestAnimationFrame(() => window.scrollTo({top:Number.isFinite(saved) ? saved : 0,behavior:'instant'}));
 }
-window.addEventListener('message',event => {
-  const frame = document.querySelector('#exhibit-frame'), exhibit = route.kind === 'exhibit' && exhibitById(route.id);
-  if (!frame || event.source !== frame.contentWindow || event.origin !== location.origin || !exhibit?.embedSlug) return;
-  const data = event.data;
-  if (data?.type !== 'gallery:stage' || data.slug !== exhibit.embedSlug) return;
-  const height = Number(data.height);
-  if (Number.isFinite(height) && height >= 100 && height <= 15000) frame.style.height = Math.ceil(height)+'px';
-  for (const [field,name] of [['accent','--accent'],['auraA','--glow-a'],['auraB','--glow-b']]) {
-    if (data[field] && CSS.supports('color',data[field])) document.documentElement.style.setProperty(name,data[field]);
-  }
-});
 document.addEventListener('click',event => { if (event.target.closest('a')?.hash?.startsWith('#/')) rememberScroll(); });
 document.querySelector('.skip-link').addEventListener('click',event => { event.preventDefault(); main.focus(); main.scrollIntoView(); });
 window.addEventListener('hashchange',() => { render(); main.focus({preventScroll:true}); });

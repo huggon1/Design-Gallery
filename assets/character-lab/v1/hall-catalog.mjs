@@ -566,6 +566,114 @@ export const EXHIBITS={
       ]
     ],
     "path": "./exhibits/escapists-2/scene.mjs"
+  },
+  "buckshot-roulette": {
+    "category": "table",
+    "work": "tabletop-interaction",
+    "name": "恶魔轮盘",
+    "keys": [
+      [
+        "W A S D",
+        "观察"
+      ],
+      [
+        "鼠标",
+        "选择物件"
+      ],
+      [
+        "J / 左键",
+        "拿取 / 使用"
+      ],
+      [
+        "I / 右键",
+        "放回"
+      ],
+      [
+        "Space",
+        "确认"
+      ]
+    ],
+    "bindings": {
+      "KeyI": "special",
+      "KeyK": null,
+      "KeyL": null
+    },
+    "inputMode": "aim",
+    "mouse": {
+      "left": "attack",
+      "right": "special"
+    },
+    "touch": {
+      "attack": "取 / 用",
+      "special": "放回",
+      "jump": "确认"
+    },
+    "source": "固定单人桌前视角。角色、道具和关键帧从原作社区工程提取，桌面交互按连续参考适配。",
+    "links": [
+      [
+        "独立小样",
+        "./exhibits/buckshot-roulette/harness.html"
+      ],
+      [
+        "官方参考",
+        "https://mikeklubnika.itch.io/buckshot-roulette"
+      ]
+    ],
+    "path": "./exhibits/buckshot-roulette/scene.mjs"
+  },
+  "liars-bar": {
+    "category": "table",
+    "work": "tabletop-interaction",
+    "name": "骗子酒吧",
+    "keys": [
+      [
+        "W A S D",
+        "观察同桌"
+      ],
+      [
+        "鼠标",
+        "选择物件"
+      ],
+      [
+        "J / 左键",
+        "选牌 / 出牌"
+      ],
+      [
+        "I / 右键",
+        "放回"
+      ],
+      [
+        "Space",
+        "骰盅"
+      ]
+    ],
+    "bindings": {
+      "KeyI": "special",
+      "KeyK": null,
+      "KeyL": null
+    },
+    "inputMode": "aim",
+    "mouse": {
+      "left": "attack",
+      "right": "special"
+    },
+    "touch": {
+      "attack": "选 / 出",
+      "special": "放回",
+      "jump": "骰盅"
+    },
+    "source": "以座位为基点，观察手牌、公共桌面与同桌人物。Scubby及前景手部来自原作社区移植；猪、牛、桌面与动作按参考重建。",
+    "links": [
+      [
+        "独立小样",
+        "./exhibits/liars-bar/harness.html"
+      ],
+      [
+        "官方参考",
+        "https://store.steampowered.com/app/3097560/Liars_Bar/"
+      ]
+    ],
+    "path": "./exhibits/liars-bar/scene.mjs"
   }
 };
 export const WORKS={
@@ -586,6 +694,12 @@ export const WORKS={
     "category": "angled",
     "cover": "./assets/covers/angled-actions.svg",
     "first": "hades"
+  },
+  "tabletop-interaction": {
+    "title": "第一人称桌面交互",
+    "category": "table",
+    "cover": "./assets/covers/tabletop-interaction.svg",
+    "first": "buckshot-roulette"
   }
 };
 export const REVIEWED_GAMES=new Set(Object.keys(EXHIBITS));

@@ -1,0 +1,8 @@
+export async function createAudio(){
+ const events=await fetch(new URL('./assets/audio-events.json',import.meta.url)).then(r=>r.json());const extra=['check item_pickup.ogg','camera pan2.ogg','player use handcuffs.ogg','dealer check handcuffs.ogg','dealer break handcuffs.ogg','temp gunshot_blank.wav'];const names=[...new Set([...Object.values(events).flat().map(e=>e.source.split('/').at(-1)),...extra])],encoded=new Map(),buffers=new Map();
+ await Promise.all(names.map(async n=>encoded.set(n,await fetch(new URL('./assets/audio/'+encodeURIComponent(n),import.meta.url)).then(r=>r.arrayBuffer()))));let ac=null,master=null,capture=null,muted=true,sources=new Set();
+ async function unlock(){if(!ac){ac=new AudioContext();master=ac.createGain();master.gain.value=muted?0:.6;capture=ac.createMediaStreamDestination();master.connect(ac.destination);master.connect(capture);await Promise.all([...encoded].map(async([n,b])=>buffers.set(n,await ac.decodeAudioData(b.slice(0)))));}await ac.resume();}
+ function play(name,offset=0,gain=1){if(!ac||ac.state!=='running'||!buffers.has(name))return;const buffer=buffers.get(name);if(offset>=buffer.duration)return;const s=ac.createBufferSource(),g=ac.createGain();s.buffer=buffer;g.gain.value=gain;s.connect(g);g.connect(master);sources.add(s);s.onended=()=>{sources.delete(s);g.disconnect();};s.start(0,Math.max(0,offset));}
+ function stop(){for(const s of sources){try{s.stop();}catch{}}sources.clear();}
+ return {events,unlock,play,stop,get stream(){return capture?.stream;},get ready(){return !!ac;},get muted(){return muted;},setMuted(v){muted=!!v;if(master)master.gain.setValueAtTime(muted?0:.6,ac.currentTime);},dispose(){stop();ac?.close();}};
+}

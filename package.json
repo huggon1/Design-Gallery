@@ -1,0 +1,8 @@
+{
+  "name": "design-gallery",
+  "private": true,
+  "scripts": {
+    "start": "node serve.mjs",
+    "check": "node scripts/check.mjs"
+  }
+}

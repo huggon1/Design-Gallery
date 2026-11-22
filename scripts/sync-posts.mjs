@@ -1,6 +1,6 @@
 import {writeFile,readFile,mkdir} from 'node:fs/promises';
-import {EXHIBITS,exhibitById} from '../catalog.mjs';
-import {exhibitUrl,legacyGroups} from '../routes.mjs';
+import {EXHIBITS} from '../catalog.mjs';
+import {exhibitUrl} from '../routes.mjs';
 
 const check = process.argv.includes('--check');
 const files = new Map();
@@ -13,10 +13,6 @@ for (const exhibit of EXHIBITS) {
   if (exhibit.description) text += '\n'+exhibit.description+'\n';
   if (exhibit.reference) text += `\n[参考 ${exhibit.reference.title}](${exhibit.reference.url})\n`;
   files.set(exhibit.id+'.md',text);
-}
-for (const [id,children] of Object.entries(legacyGroups)) {
-  const exhibits = children.map(exhibitById).filter(Boolean);
-  files.set(id+'.md','# 发布短片\n\n'+exhibits.map(exhibit => `- [${exhibit.title}](${exhibit.id}.md)`).join('\n')+'\n');
 }
 if (!check) await mkdir(new URL('../posts/',import.meta.url),{recursive:true});
 let stale = 0;
