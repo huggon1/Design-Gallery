@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>茶杯头 · 跑跳与空中冲刺对照</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#111015;color:#ece6dc;font:15px/1.6 system-ui,sans-serif}
+main{max-width:1440px;margin:auto;padding:32px clamp(18px,4vw,52px) 48px}a{color:#d9b38c}header{margin:25px 0 18px}
+h1,h2{font-family:Georgia,"Songti SC",serif;font-weight:500}h1{font-size:clamp(26px,4vw,40px);margin:0}
+h2{font-size:20px;margin:0 0 10px}.players{display:grid;grid-template-columns:1fr 1fr;gap:20px}figure{margin:0}
+video{width:100%;aspect-ratio:16/9;background:#09080a;object-fit:contain;border:1px solid #363238}
+p,figcaption{color:#bab4b2;font-size:14px}figcaption{margin-top:6px}button{color:inherit;background:#27232a;border:1px solid #514954;border-radius:6px;padding:7px 14px;cursor:pointer;font:inherit}
+.controls{display:flex;gap:10px;align-items:center;margin:18px 0 26px}.links{display:flex;gap:22px;flex-wrap:wrap}button:focus-visible,a:focus-visible{outline:2px solid #e0b678;outline-offset:4px}
+@media(max-width:740px){.players{grid-template-columns:1fr}main{padding-top:18px}}
+</style>
+<main>
+<a href="../../index.html#/work/character-actions?game=cuphead">← 返回茶杯头练习场</a>
+<header><h1>跑跳与空中冲刺</h1></header>
+<div class="players">
+<figure><h2>原作实机</h2><video id="original" muted src="research/mdhr-33s.mp4" poster="research/original-dash.jpg" playsinline controls preload="auto"></video><figcaption>Studio MDHR 发售预告 33–36 秒。向左起跳、空冲、下落，随后转向右侧再次起跳。</figcaption></figure>
+<figure><h2>练习场实录</h2><video id="replica" src="evidence/jump-dash.mp4" poster="evidence/left-dash.jpg" playsinline controls preload="auto"></video><figcaption>在纸上练习场用键盘连续操作。重点观察收腿旋转、横向伸展、烟环和恢复下落。</figcaption></figure>
+</div>
+<div class="controls"><button id="play" type="button">同时从头播放</button><button id="rate" type="button" aria-pressed="false">半速</button></div>
+<p>两段录像各自保留原镜头。预告中的武器与练习场的初始豌豆枪不同，比较对象是杯头的身体动作和位移。</p>
+<div class="links"><a href="evidence/course.webm">完整练习录像 ↗</a><a href="research/mdhr-dash-sequence.jpg">原作冲刺分帧 ↗</a><a href="https://studiomdhr.com/press-kits/">官方来源 ↗</a></div>
+</main>
+<script type="module">
+const videos=[...document.querySelectorAll('video')],play=document.querySelector('#play'),rate=document.querySelector('#rate');
+async function rewind(video) {
+  video.pause();
+  if(video.readyState<3) await new Promise(resolve=>video.addEventListener('canplay',resolve,{once:true}));
+  if(video.currentTime>0) {
+    const complete=new Promise(resolve=>video.addEventListener('seeked',resolve,{once:true}));
+    video.currentTime=0;await complete;
+  }
+}
+play.onclick=async()=>{
+  play.disabled=true;
+  try {await Promise.all(videos.map(rewind));await Promise.all(videos.map(v=>v.play()));}
+  finally {play.disabled=false;}
+};
+rate.onclick=()=>{const slow=rate.getAttribute('aria-pressed')==='false';rate.setAttribute('aria-pressed',String(slow));rate.textContent=slow?'恢复原速':'半速';for(const v of videos)v.playbackRate=slow?.5:1;};
+</script>
+</html>

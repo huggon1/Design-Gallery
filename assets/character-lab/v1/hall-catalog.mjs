@@ -1,4 +1,74 @@
 export const EXHIBITS={
+  "cuphead": {
+  "category": "side",
+  "work": "character-actions",
+  "name": "茶杯头",
+  "keys": [
+    [
+      "A / D",
+      "移动"
+    ],
+    [
+      "W / S",
+      "抬手 / 下蹲"
+    ],
+    [
+      "Space / K",
+      "跳跃 · 空中再按拍击"
+    ],
+    [
+      "S + 跳",
+      "平台下穿"
+    ],
+    [
+      "J",
+      "按住连射"
+    ],
+    [
+      "L / Shift",
+      "冲刺"
+    ],
+    [
+      "I + 方向",
+      "定点瞄准"
+    ],
+    [
+      "U",
+      "豌豆枪 EX"
+    ]
+  ],
+  "bindings": {
+    "KeyI": "grab",
+    "KeyU": "special"
+  },
+  "touch": {
+    "jump": "跳 / 拍",
+    "attack": "射",
+    "dash": "冲",
+    "grab": "瞄",
+    "special": "EX"
+  },
+  "touchLabels": {
+    "jump": "跳跃或空中拍击",
+    "attack": "持续射击",
+    "dash": "冲刺",
+    "grab": "定点瞄准",
+    "special": "豌豆枪 EX"
+  },
+  "comparison": "./exhibits/cuphead/comparison.html",
+  "source": "初代红杯头与 Peashooter。角色、特效和声音取自社区整理的游戏素材，运动与教程纸景按实机和动作资料重建。",
+  "links": [
+    [
+      "制作记录",
+      "./exhibits/cuphead/README.md"
+    ],
+    [
+      "Studio MDHR 原作",
+      "https://studiomdhr.com/press-kits/"
+    ]
+  ],
+  "path": "./exhibits/cuphead/scene.mjs"
+},
   "terraria": {
     "category": "side",
     "work": "character-actions",

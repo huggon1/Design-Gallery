@@ -18,7 +18,7 @@ export function createInput(){
     setAim(x,y,active=true){aim.x=Math.max(0,Math.min(1,Number.isFinite(x)?x:.5));aim.y=Math.max(0,Math.min(1,Number.isFinite(y)?y:.5));aim.active=Boolean(active);},
     get aim(){return {...aim};},
     snapshot,
-    sample(){const state=snapshot();for(const action of pending)state[action]=true;pending.clear();return {...state,specialPress,aim:{...aim}};},
+    sample(){const state=snapshot(),jumpPressed=pending.has("jump");for(const action of pending)state[action]=true;pending.clear();return {...state,jumpPressed,specialPress,aim:{...aim}};},
   };
 }
 export function createTransport(input){
